@@ -1,0 +1,829 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E356F31AD99517003FC87E /* LiegasteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LiegasteTests.m */; };
+		0C80B921A6F3F58F76C31292 /* libPods-Liegaste.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Liegaste.a */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		7699B88040F8A987B510C191 /* libPods-Liegaste-LiegasteTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Liegaste-LiegasteTests.a */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		CAD9BDC95C1F45AB8C9DA329 /* TTCommons-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBDCCCA468A242998E658979 /* TTCommons-Black.ttf */; };
+		9979D8BE0F5543CA9F8B4DA7 /* TTCommons-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72145ADB08894A7795AB9524 /* TTCommons-BlackItalic.ttf */; };
+		D20C9B1D18B54DB887C6733A /* TTCommons-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03D25B7D6FD64729AEBF3471 /* TTCommons-Bold.ttf */; };
+		0A6B13F484304502B8368803 /* TTCommons-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0B2AC8B53B14AF78D0B032D /* TTCommons-BoldItalic.ttf */; };
+		B56F803AF6344399941DBE27 /* TTCommons-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A70D2C35226F44CC80F81D1E /* TTCommons-DemiBold.ttf */; };
+		0654442143ED42ACBD91A121 /* TTCommons-DemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4819C84CCA86410B946CADBF /* TTCommons-DemiBoldItalic.ttf */; };
+		B87B970D5B904C2DAD8446F5 /* TTCommons-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB7ECE8C4D58486A8588C5E7 /* TTCommons-ExtraBold.ttf */; };
+		FA965024AFF644BD96C59D4F /* TTCommons-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EB330934CBF42BE87CB4A52 /* TTCommons-ExtraBoldItalic.ttf */; };
+		4EB01759DC8B44EDAF646027 /* TTCommons-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97F0090DA0C84ADF91220375 /* TTCommons-ExtraLight.ttf */; };
+		B802B90161FD458BB1916786 /* TTCommons-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A5F560DF14C4B62B67A6D2C /* TTCommons-ExtraLightItalic.ttf */; };
+		31E733A2D73B437F88ECD517 /* TTCommons-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE64F92B27784489BA4E63B9 /* TTCommons-Italic.ttf */; };
+		A104384547F642B7A1B11B76 /* TTCommons-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB8DCE64C35A485495EA3C0E /* TTCommons-Light.ttf */; };
+		8EB323DFA012490685D71551 /* TTCommons-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 170E575BCD3F4D1AAAF1C2CF /* TTCommons-LightItalic.ttf */; };
+		702767E501A54188800162DA /* TTCommons-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16D958B1AD3B447F88C6BEA7 /* TTCommons-Medium.ttf */; };
+		FC205566B5ED470DAFD85B38 /* TTCommons-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B4826F7A35941F5BF3F5356 /* TTCommons-MediumItalic.ttf */; };
+		B900165FB14540429A374B69 /* TTCommons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7968084EC453448589422396 /* TTCommons-Regular.ttf */; };
+		77EB1B95AAB24C93999D7507 /* TTCommons-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E59B911BCE9F4F03BCC5DF17 /* TTCommons-Thin.ttf */; };
+		29F0B4B5DCAD43A2A56A84FD /* TTCommons-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E8C5D129E7C4FDFAB5600D4 /* TTCommons-ThinItalic.ttf */; };
+		063D779ED1664AE6A1A1AFB4 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93448266D6714F18849DA8C5 /* License.txt */; };
+		2C125B1C21724B2786D45FCD /* More Free Fonts on fontshmonts.com.url in Resources */ = {isa = PBXBuildFile; fileRef = 1BD2054165C040F990834F0D /* More Free Fonts on fontshmonts.com.url */; };
+		543402687B3149E1AB715A7A /* T8916_00.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B8EEE957805747598B5186CF /* T8916_00.jpg */; };
+		55F41866CB56468BAC0292C3 /* T8916_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90C47D1C82BA47F5B967CE4E /* T8916_01.jpg */; };
+		3467FE53F9774C8382C1E0B8 /* T8916_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E720DAAB82064DB69077895F /* T8916_03.jpg */; };
+		9945BC3EC3584DCC9002D637 /* T8916_04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5088BBE78ED74267978E6F79 /* T8916_04.jpg */; };
+		5CF8BA4708E44E16BB95F84B /* T8916_05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0B72C2781C8B4F429F0C6712 /* T8916_05.jpg */; };
+		903FB632C07D42F7ADE32E3F /* T8916_06.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7252CFF5E23749AD928D9E44 /* T8916_06.jpg */; };
+		B0EE42F43D4C4747BFF86721 /* T8916_07.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F258B76D440A43B8BEF3321F /* T8916_07.jpg */; };
+		37C729E1B02F40DFA950AAD0 /* T8916_08.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62963029B76E4E30BFA4CA80 /* T8916_08.jpg */; };
+		679337080BE64E6CBE1F7B6E /* T8916_09.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DA6A3BFD21E4A9793A14780 /* T8916_09.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = Liegaste;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00E356EE1AD99517003FC87E /* LiegasteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiegasteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* LiegasteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiegasteTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Liegaste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Liegaste.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Liegaste/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Liegaste/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Liegaste/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Liegaste/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Liegaste/main.m; sourceTree = "<group>"; };
+		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Liegaste-LiegasteTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Liegaste-LiegasteTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4392A12AC88292D35C810B /* Pods-Liegaste.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Liegaste.debug.xcconfig"; path = "Target Support Files/Pods-Liegaste/Pods-Liegaste.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-Liegaste.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Liegaste.release.xcconfig"; path = "Target Support Files/Pods-Liegaste/Pods-Liegaste.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-Liegaste-LiegasteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Liegaste-LiegasteTests.debug.xcconfig"; path = "Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-Liegaste.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Liegaste.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Liegaste/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-Liegaste-LiegasteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Liegaste-LiegasteTests.release.xcconfig"; path = "Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests.release.xcconfig"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		BBDCCCA468A242998E658979 /* TTCommons-Black.ttf */ = {isa = PBXFileReference; name = "TTCommons-Black.ttf"; path = "../assets/fonts/TTCommons-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		72145ADB08894A7795AB9524 /* TTCommons-BlackItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-BlackItalic.ttf"; path = "../assets/fonts/TTCommons-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		03D25B7D6FD64729AEBF3471 /* TTCommons-Bold.ttf */ = {isa = PBXFileReference; name = "TTCommons-Bold.ttf"; path = "../assets/fonts/TTCommons-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F0B2AC8B53B14AF78D0B032D /* TTCommons-BoldItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-BoldItalic.ttf"; path = "../assets/fonts/TTCommons-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A70D2C35226F44CC80F81D1E /* TTCommons-DemiBold.ttf */ = {isa = PBXFileReference; name = "TTCommons-DemiBold.ttf"; path = "../assets/fonts/TTCommons-DemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4819C84CCA86410B946CADBF /* TTCommons-DemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-DemiBoldItalic.ttf"; path = "../assets/fonts/TTCommons-DemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AB7ECE8C4D58486A8588C5E7 /* TTCommons-ExtraBold.ttf */ = {isa = PBXFileReference; name = "TTCommons-ExtraBold.ttf"; path = "../assets/fonts/TTCommons-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7EB330934CBF42BE87CB4A52 /* TTCommons-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-ExtraBoldItalic.ttf"; path = "../assets/fonts/TTCommons-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		97F0090DA0C84ADF91220375 /* TTCommons-ExtraLight.ttf */ = {isa = PBXFileReference; name = "TTCommons-ExtraLight.ttf"; path = "../assets/fonts/TTCommons-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8A5F560DF14C4B62B67A6D2C /* TTCommons-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-ExtraLightItalic.ttf"; path = "../assets/fonts/TTCommons-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FE64F92B27784489BA4E63B9 /* TTCommons-Italic.ttf */ = {isa = PBXFileReference; name = "TTCommons-Italic.ttf"; path = "../assets/fonts/TTCommons-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FB8DCE64C35A485495EA3C0E /* TTCommons-Light.ttf */ = {isa = PBXFileReference; name = "TTCommons-Light.ttf"; path = "../assets/fonts/TTCommons-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		170E575BCD3F4D1AAAF1C2CF /* TTCommons-LightItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-LightItalic.ttf"; path = "../assets/fonts/TTCommons-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		16D958B1AD3B447F88C6BEA7 /* TTCommons-Medium.ttf */ = {isa = PBXFileReference; name = "TTCommons-Medium.ttf"; path = "../assets/fonts/TTCommons-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2B4826F7A35941F5BF3F5356 /* TTCommons-MediumItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-MediumItalic.ttf"; path = "../assets/fonts/TTCommons-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7968084EC453448589422396 /* TTCommons-Regular.ttf */ = {isa = PBXFileReference; name = "TTCommons-Regular.ttf"; path = "../assets/fonts/TTCommons-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E59B911BCE9F4F03BCC5DF17 /* TTCommons-Thin.ttf */ = {isa = PBXFileReference; name = "TTCommons-Thin.ttf"; path = "../assets/fonts/TTCommons-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0E8C5D129E7C4FDFAB5600D4 /* TTCommons-ThinItalic.ttf */ = {isa = PBXFileReference; name = "TTCommons-ThinItalic.ttf"; path = "../assets/fonts/TTCommons-ThinItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		93448266D6714F18849DA8C5 /* License.txt */ = {isa = PBXFileReference; name = "License.txt"; path = "../assets/fonts/License.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1BD2054165C040F990834F0D /* More Free Fonts on fontshmonts.com.url */ = {isa = PBXFileReference; name = "More Free Fonts on fontshmonts.com.url"; path = "../assets/fonts/More Free Fonts on fontshmonts.com.url"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B8EEE957805747598B5186CF /* T8916_00.jpg */ = {isa = PBXFileReference; name = "T8916_00.jpg"; path = "../assets/fonts/T8916_00.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		90C47D1C82BA47F5B967CE4E /* T8916_01.jpg */ = {isa = PBXFileReference; name = "T8916_01.jpg"; path = "../assets/fonts/T8916_01.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E720DAAB82064DB69077895F /* T8916_03.jpg */ = {isa = PBXFileReference; name = "T8916_03.jpg"; path = "../assets/fonts/T8916_03.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5088BBE78ED74267978E6F79 /* T8916_04.jpg */ = {isa = PBXFileReference; name = "T8916_04.jpg"; path = "../assets/fonts/T8916_04.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0B72C2781C8B4F429F0C6712 /* T8916_05.jpg */ = {isa = PBXFileReference; name = "T8916_05.jpg"; path = "../assets/fonts/T8916_05.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7252CFF5E23749AD928D9E44 /* T8916_06.jpg */ = {isa = PBXFileReference; name = "T8916_06.jpg"; path = "../assets/fonts/T8916_06.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F258B76D440A43B8BEF3321F /* T8916_07.jpg */ = {isa = PBXFileReference; name = "T8916_07.jpg"; path = "../assets/fonts/T8916_07.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		62963029B76E4E30BFA4CA80 /* T8916_08.jpg */ = {isa = PBXFileReference; name = "T8916_08.jpg"; path = "../assets/fonts/T8916_08.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8DA6A3BFD21E4A9793A14780 /* T8916_09.jpg */ = {isa = PBXFileReference; name = "T8916_09.jpg"; path = "../assets/fonts/T8916_09.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00E356EB1AD99517003FC87E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7699B88040F8A987B510C191 /* libPods-Liegaste-LiegasteTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C80B921A6F3F58F76C31292 /* libPods-Liegaste.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E356EF1AD99517003FC87E /* LiegasteTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* LiegasteTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = LiegasteTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* Liegaste */ = {
+			isa = PBXGroup;
+			children = (
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = Liegaste;
+			sourceTree = "<group>";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-Liegaste.a */,
+				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Liegaste-LiegasteTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07FAE1A68108700A75B9A /* Liegaste */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* LiegasteTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				A73B8A6AF57D4B45B7B01BB5 /* Resources */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* Liegaste.app */,
+				00E356EE1AD99517003FC87E /* LiegasteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B4392A12AC88292D35C810B /* Pods-Liegaste.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-Liegaste.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-Liegaste-LiegasteTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-Liegaste-LiegasteTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A73B8A6AF57D4B45B7B01BB5 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				BBDCCCA468A242998E658979 /* TTCommons-Black.ttf */,
+				72145ADB08894A7795AB9524 /* TTCommons-BlackItalic.ttf */,
+				03D25B7D6FD64729AEBF3471 /* TTCommons-Bold.ttf */,
+				F0B2AC8B53B14AF78D0B032D /* TTCommons-BoldItalic.ttf */,
+				A70D2C35226F44CC80F81D1E /* TTCommons-DemiBold.ttf */,
+				4819C84CCA86410B946CADBF /* TTCommons-DemiBoldItalic.ttf */,
+				AB7ECE8C4D58486A8588C5E7 /* TTCommons-ExtraBold.ttf */,
+				7EB330934CBF42BE87CB4A52 /* TTCommons-ExtraBoldItalic.ttf */,
+				97F0090DA0C84ADF91220375 /* TTCommons-ExtraLight.ttf */,
+				8A5F560DF14C4B62B67A6D2C /* TTCommons-ExtraLightItalic.ttf */,
+				FE64F92B27784489BA4E63B9 /* TTCommons-Italic.ttf */,
+				FB8DCE64C35A485495EA3C0E /* TTCommons-Light.ttf */,
+				170E575BCD3F4D1AAAF1C2CF /* TTCommons-LightItalic.ttf */,
+				16D958B1AD3B447F88C6BEA7 /* TTCommons-Medium.ttf */,
+				2B4826F7A35941F5BF3F5356 /* TTCommons-MediumItalic.ttf */,
+				7968084EC453448589422396 /* TTCommons-Regular.ttf */,
+				E59B911BCE9F4F03BCC5DF17 /* TTCommons-Thin.ttf */,
+				0E8C5D129E7C4FDFAB5600D4 /* TTCommons-ThinItalic.ttf */,
+				93448266D6714F18849DA8C5 /* License.txt */,
+				1BD2054165C040F990834F0D /* More Free Fonts on fontshmonts.com.url */,
+				B8EEE957805747598B5186CF /* T8916_00.jpg */,
+				90C47D1C82BA47F5B967CE4E /* T8916_01.jpg */,
+				E720DAAB82064DB69077895F /* T8916_03.jpg */,
+				5088BBE78ED74267978E6F79 /* T8916_04.jpg */,
+				0B72C2781C8B4F429F0C6712 /* T8916_05.jpg */,
+				7252CFF5E23749AD928D9E44 /* T8916_06.jpg */,
+				F258B76D440A43B8BEF3321F /* T8916_07.jpg */,
+				62963029B76E4E30BFA4CA80 /* T8916_08.jpg */,
+				8DA6A3BFD21E4A9793A14780 /* T8916_09.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00E356ED1AD99517003FC87E /* LiegasteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "LiegasteTests" */;
+			buildPhases = (
+				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				00E356EA1AD99517003FC87E /* Sources */,
+				00E356EB1AD99517003FC87E /* Frameworks */,
+				00E356EC1AD99517003FC87E /* Resources */,
+				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
+				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00E356F51AD99517003FC87E /* PBXTargetDependency */,
+			);
+			name = LiegasteTests;
+			productName = LiegasteTests;
+			productReference = 00E356EE1AD99517003FC87E /* LiegasteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		13B07F861A680F5B00A75B9A /* Liegaste */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Liegaste" */;
+			buildPhases = (
+				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				FD10A7F022414F080027D42C /* Start Packager */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
+				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Liegaste;
+			productName = Liegaste;
+			productReference = 13B07F961A680F5B00A75B9A /* Liegaste.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1210;
+				TargetAttributes = {
+					00E356ED1AD99517003FC87E = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1120;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Liegaste" */;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* Liegaste */,
+				00E356ED1AD99517003FC87E /* LiegasteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00E356EC1AD99517003FC87E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				CAD9BDC95C1F45AB8C9DA329 /* TTCommons-Black.ttf in Resources */,
+				9979D8BE0F5543CA9F8B4DA7 /* TTCommons-BlackItalic.ttf in Resources */,
+				D20C9B1D18B54DB887C6733A /* TTCommons-Bold.ttf in Resources */,
+				0A6B13F484304502B8368803 /* TTCommons-BoldItalic.ttf in Resources */,
+				B56F803AF6344399941DBE27 /* TTCommons-DemiBold.ttf in Resources */,
+				0654442143ED42ACBD91A121 /* TTCommons-DemiBoldItalic.ttf in Resources */,
+				B87B970D5B904C2DAD8446F5 /* TTCommons-ExtraBold.ttf in Resources */,
+				FA965024AFF644BD96C59D4F /* TTCommons-ExtraBoldItalic.ttf in Resources */,
+				4EB01759DC8B44EDAF646027 /* TTCommons-ExtraLight.ttf in Resources */,
+				B802B90161FD458BB1916786 /* TTCommons-ExtraLightItalic.ttf in Resources */,
+				31E733A2D73B437F88ECD517 /* TTCommons-Italic.ttf in Resources */,
+				A104384547F642B7A1B11B76 /* TTCommons-Light.ttf in Resources */,
+				8EB323DFA012490685D71551 /* TTCommons-LightItalic.ttf in Resources */,
+				702767E501A54188800162DA /* TTCommons-Medium.ttf in Resources */,
+				FC205566B5ED470DAFD85B38 /* TTCommons-MediumItalic.ttf in Resources */,
+				B900165FB14540429A374B69 /* TTCommons-Regular.ttf in Resources */,
+				77EB1B95AAB24C93999D7507 /* TTCommons-Thin.ttf in Resources */,
+				29F0B4B5DCAD43A2A56A84FD /* TTCommons-ThinItalic.ttf in Resources */,
+				063D779ED1664AE6A1A1AFB4 /* License.txt in Resources */,
+				2C125B1C21724B2786D45FCD /* More Free Fonts on fontshmonts.com.url in Resources */,
+				543402687B3149E1AB715A7A /* T8916_00.jpg in Resources */,
+				55F41866CB56468BAC0292C3 /* T8916_01.jpg in Resources */,
+				3467FE53F9774C8382C1E0B8 /* T8916_03.jpg in Resources */,
+				9945BC3EC3584DCC9002D637 /* T8916_04.jpg in Resources */,
+				5CF8BA4708E44E16BB95F84B /* T8916_05.jpg in Resources */,
+				903FB632C07D42F7ADE32E3F /* T8916_06.jpg in Resources */,
+				B0EE42F43D4C4747BFF86721 /* T8916_07.jpg in Resources */,
+				37C729E1B02F40DFA950AAD0 /* T8916_08.jpg in Resources */,
+				679337080BE64E6CBE1F7B6E /* T8916_09.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+		};
+		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste/Pods-Liegaste-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste/Pods-Liegaste-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Liegaste/Pods-Liegaste-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Liegaste-LiegasteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Liegaste-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste/Pods-Liegaste-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste/Pods-Liegaste-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Liegaste/Pods-Liegaste-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Liegaste-LiegasteTests/Pods-Liegaste-LiegasteTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00E356EA1AD99517003FC87E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E356F31AD99517003FC87E /* LiegasteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* Liegaste */;
+			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00E356F61AD99517003FC87E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Liegaste-LiegasteTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LiegasteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Liegaste.app/Liegaste";
+			};
+			name = Debug;
+		};
+		00E356F71AD99517003FC87E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Liegaste-LiegasteTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = LiegasteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Liegaste.app/Liegaste";
+			};
+			name = Release;
+		};
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Liegaste.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = Liegaste/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Liegaste;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Liegaste.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Liegaste/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Liegaste;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SDKROOT)/usr/lib/swift\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "LiegasteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00E356F61AD99517003FC87E /* Debug */,
+				00E356F71AD99517003FC87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Liegaste" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Liegaste" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}

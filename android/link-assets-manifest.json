@@ -1,0 +1,121 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/License.txt",
+      "sha1": "b60530880a1c9189aed20b4937a1645f60674300"
+    },
+    {
+      "path": "assets/fonts/More Free Fonts on fontshmonts.com.url",
+      "sha1": "fb5423803fb574b028119e61feae6a9384781bed"
+    },
+    {
+      "path": "assets/fonts/T8916_00.jpg",
+      "sha1": "0a47e1532cf8c7512edccfd7db9bd6ea0b2c6c01"
+    },
+    {
+      "path": "assets/fonts/T8916_01.jpg",
+      "sha1": "4e500b41f9d786477aee7d29a23e1f6dd6e92177"
+    },
+    {
+      "path": "assets/fonts/T8916_03.jpg",
+      "sha1": "b77da7fe555989d4f6c7057614aac8766dd04d71"
+    },
+    {
+      "path": "assets/fonts/T8916_04.jpg",
+      "sha1": "c062198bdebf8f352371a694efdbb1574a10f70a"
+    },
+    {
+      "path": "assets/fonts/T8916_05.jpg",
+      "sha1": "588deb6844fea9337187c4e3017c4b35e66d9739"
+    },
+    {
+      "path": "assets/fonts/T8916_06.jpg",
+      "sha1": "8c71fc7c20cd5ba36fbea6159def52438b5f66f3"
+    },
+    {
+      "path": "assets/fonts/T8916_07.jpg",
+      "sha1": "897d7eb06f24c3ee85df0843a8ab2a3253b36ca9"
+    },
+    {
+      "path": "assets/fonts/T8916_08.jpg",
+      "sha1": "1ae49323c4cf250cca3a407d5b1fd48e9f0305de"
+    },
+    {
+      "path": "assets/fonts/T8916_09.jpg",
+      "sha1": "6ea813c1b2ee52376a06e2654cecf313436b54c9"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Black.ttf",
+      "sha1": "7ce0a14c29175f209842c31361167bbe6240a01c"
+    },
+    {
+      "path": "assets/fonts/TTCommons-BlackItalic.ttf",
+      "sha1": "7f26848c8dfc076ca1e66c7d050b4202b3e6fe94"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Bold.ttf",
+      "sha1": "cfc4abafcf83839b5e58664d1b9f566a75e4b003"
+    },
+    {
+      "path": "assets/fonts/TTCommons-BoldItalic.ttf",
+      "sha1": "f9ce3df90db96eb7fc9cac67b7fad6cdf9107510"
+    },
+    {
+      "path": "assets/fonts/TTCommons-DemiBold.ttf",
+      "sha1": "dffd4a76e03676fefd68e8c2f167191f4a45016b"
+    },
+    {
+      "path": "assets/fonts/TTCommons-DemiBoldItalic.ttf",
+      "sha1": "26eecd29dc992b01b0de8cc0d62a5ca61fe6a9f2"
+    },
+    {
+      "path": "assets/fonts/TTCommons-ExtraBold.ttf",
+      "sha1": "815d55382fcff581a4036762f203907eb225dd47"
+    },
+    {
+      "path": "assets/fonts/TTCommons-ExtraBoldItalic.ttf",
+      "sha1": "fdd151992c7bd34767945f720d36c29e50ae95ec"
+    },
+    {
+      "path": "assets/fonts/TTCommons-ExtraLight.ttf",
+      "sha1": "fab1a4dedd9b9292f3961e16522d602cea8da940"
+    },
+    {
+      "path": "assets/fonts/TTCommons-ExtraLightItalic.ttf",
+      "sha1": "f0a302212ecc36c8afe6a2caa7d717c8d60da7e4"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Italic.ttf",
+      "sha1": "240139cee58e6731c06b9918d8502e22eba9891b"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Light.ttf",
+      "sha1": "c608acc811e2d46c0bef6520923a995c1fb24b70"
+    },
+    {
+      "path": "assets/fonts/TTCommons-LightItalic.ttf",
+      "sha1": "2f9e470bc4924521700b8126553b57ede8b31eca"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Medium.ttf",
+      "sha1": "f887a61e6375e45c0fecfcdc9ccc0a7ef350c842"
+    },
+    {
+      "path": "assets/fonts/TTCommons-MediumItalic.ttf",
+      "sha1": "b947ab21a8a35ae64461d241ebf7f5887ef32b3e"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Regular.ttf",
+      "sha1": "305a99b26d1f6287ce14e13f583d7bf645962a93"
+    },
+    {
+      "path": "assets/fonts/TTCommons-Thin.ttf",
+      "sha1": "74553075605526d09a77f2f7401c3cee770f8027"
+    },
+    {
+      "path": "assets/fonts/TTCommons-ThinItalic.ttf",
+      "sha1": "bbb098a2cce2bcb41a0a69fd4edee5bdc59a71e2"
+    }
+  ]
+}
