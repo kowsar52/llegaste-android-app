@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Switch,TouchableOpacity, Modal,TextInput,Pressable } from 'react-native';
+import { StyleSheet, Text, View, Switch,TouchableOpacity, Modal,Alert,Pressable } from 'react-native';
 import { appStyle, ColorSet,FamilySet } from '../../styles';
 import Button from '../../components/default/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,12 +12,22 @@ import {
   BluetoothEscposPrinter,
 } from "react-native-thermal-receipt-printer";
 import { ShowToast } from '../../utils/ShowToast';
+import {useDispatch} from 'react-redux';
+import {setIsLoading} from '../../redux/reducers/loadingSlice/LoadingSlice';
+import {setUserType} from '../../redux/reducers/authSlice/AuthServices';
+import {setUserData} from '../../redux/reducers/userSlice/UserServices';
+import {logoutUser } from '../../networking/authServices/AuthAPIServices';
+import {removeData} from '../../utils/Storage';
+import {Keys} from '../../constants';
+import {StackActions} from '@react-navigation/native';
+
 
 const CheckoutSuccess = ({navigation,route}) => {
-  const {txn_id,message} = route.params;
+  const {txn_id,message,amount} = route.params;
   //printer
   const [printers, setPrinters] = useState([]);
   const [currentPrinter, setCurrentPrinter] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     BLEPrinter.init().then(()=> {
@@ -65,6 +75,31 @@ const CheckoutSuccess = ({navigation,route}) => {
     
   }
 
+    //logoutHandler
+    const logoutHandler = () => {
+      Alert.alert("Logout", "Are you sure you want to logout?",[
+        {
+          text: "No",
+          style: "cancel"
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            dispatch(setIsLoading(true));
+            const response = await logoutUser();
+            console.log('response', response)
+            if (response) {
+              await removeData(Keys.user);
+              dispatch(setUserData(null));
+              dispatch(setUserType(null));
+              dispatch(setIsLoading(false));
+              navigation.dispatch(StackActions.replace('Login'));
+            } 
+          }
+        }
+      ])
+    }
+
 
   return (
     <View style={styles.container}>
@@ -74,7 +109,7 @@ const CheckoutSuccess = ({navigation,route}) => {
           <Icon name="arrow-back" size={20} color="#333" />
         </Pressable>
         <Text style={styles.navTitle}>Transactions</Text>
-        <Pressable onPress={() => navigation.navigate("Account")}>
+        <Pressable onPress={() => logoutHandler()}>
         <Icon name="log-out-outline" size={20} color="#333" />
         </Pressable>
       </View>
@@ -120,7 +155,7 @@ const CheckoutSuccess = ({navigation,route}) => {
             justifyContent: 'center',
             
           }}>
-            {`Device: ${printer.device_name}`}
+            <Text>{`Device: ${printer.device_name}`}</Text>
           </TouchableOpacity>
           ))
       }

@@ -77,15 +77,13 @@ const NumberPad = ({ onPress, amount}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: ColorSet.theme,
-      position: 'absolute',
-      bottom: 0,
-        left: 0,
-        right: 0,
+      flex: 1,
+      marginBottom:20
     },
     row: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: 12,
+      marginBottom: 0,
       paddingHorizontal: 30,
     },
     button: {

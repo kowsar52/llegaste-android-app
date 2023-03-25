@@ -5,7 +5,10 @@ import ResetPassword from "./auth/ResetPassword";
 import OtpVerify from "./auth/OtpVerify";
 //after login screens
 import Home from "./user/Home";
-import Setting from "./user/Setting";
+import Setting from "./user/Setting/Setting";
+import TerminalSetting from "./user/Setting/TerminalSetting";
+import PrinterSetting from "./user/Setting/PrinterSetting";
+import ProfileSetting from "./user/Setting/ProfileSetting";
 import Profile from "./user/Profile";
 import Checkout from "./user/Checkout";
 import ManualCheckout from "./user/ManualCheckout";
@@ -21,6 +24,9 @@ export {
     ResetPassword,
     Home,
     Setting,
+    TerminalSetting,
+    PrinterSetting,
+    ProfileSetting,
     Profile,
     SetupTerminal,
     Checkout,

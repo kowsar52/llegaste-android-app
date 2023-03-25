@@ -11,7 +11,7 @@ const Loader = props => {
 
   return visible || isLoading ? (
     <View style={styles.loaderView}>
-      <ActivityIndicator size="large" color={ColorSet.theme} />
+      <ActivityIndicator size="large" color={ColorSet.white} style={{}} />
     </View>
   ) : null;
 };
@@ -19,23 +19,14 @@ const Loader = props => {
 const styles = StyleSheet.create({
   loaderView: {
     position: 'absolute',
-    top: screenHeight.height50,
-    left: screenWidth.width45,
+    top: 0,
+    left: 0,
     zIndex: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: ColorSet.white,
-    borderRadius: 10,
-    width: verticalScale(80),
-    height: verticalScale(80),
-    shadowColor: ColorSet.shadow,
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 24,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.5)'
   },
 });
 

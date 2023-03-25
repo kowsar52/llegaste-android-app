@@ -14,7 +14,7 @@ export default function Splash({ navigation }) {
       //   message : "Payment Successful",
       //   txn_id : '223232323'
       // })
-      navigation.navigate(Screens.home)
+      navigation.navigate('Home')
     }else{
       navigation.navigate(Screens.login)
     }

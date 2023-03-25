@@ -26,6 +26,7 @@ import {setUserData} from '../../redux/reducers/userSlice/UserServices';
 import { Keys,Screens } from '../../constants';
 import { ShowToast } from '../../utils/ShowToast';
 import { ColorSet } from '../../styles';
+import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 
 const SIMULATED_UPDATE_PLANS = [
   'random',
@@ -60,7 +61,7 @@ export default function SetupTerminal({route, navigation}) {
     }
     getUser();
 
-  }, [handleDiscoverReaders, simulateReaderUpdate,setTerminalSetting]);
+  }, [handleDiscoverReaders, simulateReaderUpdate,setTerminalSetting,cancelDiscovering]);
 
   const {
     cancelDiscovering,
@@ -74,7 +75,7 @@ export default function SetupTerminal({route, navigation}) {
       if (finishError) {
         ShowToast(`${finishError.code}, ${finishError.message}`)
       } else {
-        ShowToast('onFinishDiscoveringReaders success');
+        ShowToast('Reader connected successfully');
         if (navigation.canGoBack()) {
           navigation.goBack();
         }
@@ -103,7 +104,7 @@ export default function SetupTerminal({route, navigation}) {
     async action => {
       await cancelDiscovering();
       if (navigation.canGoBack()) {
-        navigation.dispatch(action);
+        navigation.goBack();
       }
     },
     [cancelDiscovering, navigation],
@@ -125,6 +126,7 @@ export default function SetupTerminal({route, navigation}) {
 
   const handleDiscoverReaders = useCallback(async (resStripe) => {
    let terminal_setting = resStripe;
+   console.log(terminal_setting)
     setDiscoveringLoading(true);
     // List of discovered readers will be available within useStripeTerminal hook
     let device_type = terminal_setting.device_type;
@@ -142,9 +144,8 @@ export default function SetupTerminal({route, navigation}) {
 
     if (discoverReadersError) {
       const {code, message} = discoverReadersError;
-      if (navigation.canGoBack()) {
-        navigation.goBack();
-      }
+      ShowToast(`${message}`);
+      handleGoBack();
     }
   }, [navigation, terminal_setting]);
 

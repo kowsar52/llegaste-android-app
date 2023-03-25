@@ -5,6 +5,9 @@ import {
     Login,
     Home,
     Setting,
+    TerminalSetting,
+    PrinterSetting,
+    ProfileSetting,
     Profile,
     Checkout,
     ManualCheckout,
@@ -34,6 +37,9 @@ const AppNavigator = () => {
             <AppStack.Screen name={Screens.resetPassword} component={ResetPassword} />
             <AppStack.Screen name={Screens.home} component={Home} />
             <AppStack.Screen name={Screens.setting} component={Setting} />
+            <AppStack.Screen name={Screens.terminalSetting} component={TerminalSetting} />
+            <AppStack.Screen name={Screens.printerSetting} component={PrinterSetting} />
+            <AppStack.Screen name={Screens.profileSetting} component={ProfileSetting} />
             <AppStack.Screen name={Screens.profile} component={Profile} />
             <AppStack.Screen name={Screens.checkout} component={Checkout} />
             <AppStack.Screen name={Screens.manualCheckout} component={ManualCheckout} />

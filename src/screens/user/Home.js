@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet, Pressable, TextInput, Alert} from 'react-native'
+import { View, Text,StyleSheet, Pressable, Dimensions, Alert} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import {FamilySet,ColorSet} from '../../styles';
@@ -7,10 +7,12 @@ import NumberPad from '../../components/default/NumberPad';
 import { ShowToast } from '../../utils/ShowToast';
 import { getUserData } from '../../utils/Storage';
 import {useStripeTerminal} from '@stripe/stripe-terminal-react-native';
+const screenHeight = Dimensions.get('window').height;
 
 export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
   const {connectedReader, initialize} = useStripeTerminal();
+
   const handlePress = (key) => {
    
     switch (key) {
@@ -78,15 +80,11 @@ export default function Home({navigation}) {
       <View style={styles.body}>
        <Text style={styles.amount}>${parseFloat(amount)}</Text>
       </View>
-      <View style={{
-        paddingHorizontal: 25,
-        paddingVertical: 10,
-      }}>
-   
-        <NumberPad onPress={handlePress} amount={amount} />
-        <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
-          amount: amount
-        })} disabled={true}  buttonStyle={styles.buttonStyle}/>
+      <View style={styles.numberBar}>
+          <NumberPad onPress={handlePress} amount={amount} />
+          <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
+            amount: amount
+          })} disabled={true}  buttonStyle={styles.buttonStyle}/>
       
         </View>
     </View>
@@ -112,7 +110,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     body:{
-      flex: 1,
+      flex: 3,
+    },
+    numberBar:{
+      flex: 6,
+      backgroundColor: ColorSet.theme,
+      position: 'relative',
     },
     navbar:{
       flex: 1,
@@ -141,11 +144,11 @@ const styles = StyleSheet.create({
           
     },
     buttonStyle:{
-      width: '100%',
       textAlign: 'center',
       alignContent: 'center',
       justifyContent: 'center',
-      marginTop: 15,
+      marginHorizontal: 20,
+      marginVertical: 10,
       backgroundColor: ColorSet.redDeleteColor,
     },
     buttonStyleOutline:{
@@ -161,7 +164,7 @@ const styles = StyleSheet.create({
       fontFamily: FamilySet.bold,
       color: ColorSet.textColorDark,
       textAlign: 'center',
-      marginTop: "30%",
+      marginTop: "10%",
 
     }
 })
