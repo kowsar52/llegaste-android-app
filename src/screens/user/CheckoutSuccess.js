@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { StyleSheet, Text, View, Switch,TouchableOpacity, Modal,Alert,Pressable } from 'react-native';
 import { appStyle, ColorSet,FamilySet } from '../../styles';
 import Button from '../../components/default/Button';
@@ -12,42 +13,29 @@ import {
   BluetoothEscposPrinter,
 } from "react-native-thermal-receipt-printer";
 import { ShowToast } from '../../utils/ShowToast';
-import {useDispatch} from 'react-redux';
 import {setIsLoading} from '../../redux/reducers/loadingSlice/LoadingSlice';
 import {setUserType} from '../../redux/reducers/authSlice/AuthServices';
 import {setUserData} from '../../redux/reducers/userSlice/UserServices';
 import {logoutUser } from '../../networking/authServices/AuthAPIServices';
 import {removeData} from '../../utils/Storage';
-import {Keys} from '../../constants';
+import {Keys, Screens} from '../../constants';
 import {StackActions} from '@react-navigation/native';
 
 
 const CheckoutSuccess = ({navigation,route}) => {
   const {txn_id,message,amount} = route.params;
   //printer
-  const [printers, setPrinters] = useState([]);
-  const [currentPrinter, setCurrentPrinter] = useState();
+  const currentPrinter = useSelector(state => state.auth.userPrinter);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    BLEPrinter.init().then(()=> {
-      BLEPrinter.getDeviceList().then(setPrinters);
-    });
-  }, []);
-
-  const _connectPrinter = ((printer) => {
-    console.log("printer==", printer);
-    //connect printer
-    BLEPrinter.connectPrinter(printer.inner_mac_address).then(
-      setCurrentPrinter,
-      error => console.warn(error))
-  })
 
   const printBill = () => {
+    console.log('currentPrinter',currentPrinter)
     if(!currentPrinter) {
       ShowToast("Please connect printer first");
-      return;
+      navigation.navigate(Screens.printerSetting)
     }
+    BLEPrinter.connectPrinter(currentPrinter.inner_mac_address)
     //template design for llegaste receipt
     let receipt_template = ``;
     receipt_template += `<C> <B> Llegaste Tech</B> </C>\n`;
@@ -57,7 +45,7 @@ const CheckoutSuccess = ({navigation,route}) => {
     receipt_template += `<C> www.llegaste.com </C>\n`;
     receipt_template += `<C> -------------------------------- </C>\n`;
     receipt_template += `<L> Approval No # ${txn_id} </L>\n`;
-    receipt_template += `<L>Total Amount: $${amount} </L>\n`;
+    receipt_template += `<L>Total Amount: $${parseFloat(amount).toFixed(2)} </L>\n`;
     receipt_template += `<L> Date: ${new Date().toLocaleDateString()} </L>\n`;
     receipt_template += `<L> Time: ${new Date().toLocaleTimeString()} </L>\n`;
     receipt_template += `<C> -------------------------------- </C>\n`;
@@ -69,6 +57,7 @@ const CheckoutSuccess = ({navigation,route}) => {
     //check if message length is less than 5000
     if(receipt_template.length < 5000) {
      BLEPrinter.printBill(receipt_template);
+     ShowToast("Print successfully completed.")
     } else {
       ShowToast("Message length is greater than 5000");
     }
@@ -141,28 +130,9 @@ const CheckoutSuccess = ({navigation,route}) => {
      </View>
 
      <View style={styles.button}>
-     {
-        printers.map(printer => (
-          <TouchableOpacity key={printer.inner_mac_address} onPress={() => _connectPrinter(printer)} style={{
-            backgroundColor: '#fff',
-            padding: 10,
-            margin: 10,
-            borderRadius: 5,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            width: '100%',
-            textAlign: 'center',
-            justifyContent: 'center',
-            
-          }}>
-            <Text>{`Device: ${printer.device_name}`}</Text>
-          </TouchableOpacity>
-          ))
-      }
- 
-
        <Button title="Print Receipt"  onPress={() => printBill()} icon="print-outline" disabled={true}  buttonStyle={styles.buttonStyle}/>
-       </View >
+       <Button title="Go to Checkout"  onPress={() => navigation.navigate(Screens.home)}  buttonStyle={styles.buttonStyle_2}/>
+      </View >
 
     </View>
   );
@@ -210,6 +180,12 @@ buttonStyle: {
     textAlign: 'center',
     justifyContent: 'center',
 },
+buttonStyle_2:{
+  textAlign: 'center',
+  justifyContent: 'center',
+  marginTop: 5,
+  backgroundColor : ColorSet.redDeleteColor
+}
   
 });
 

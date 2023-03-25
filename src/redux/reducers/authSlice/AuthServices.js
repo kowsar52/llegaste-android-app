@@ -7,6 +7,7 @@ export const AuthSlice = createSlice({
     initialState: {
         user: null,
         userType: null,
+        userPrinter: null,
         token: null,
         isLogin: false,
         isLoading: false,
@@ -16,6 +17,10 @@ export const AuthSlice = createSlice({
         setUserType: (state, action) => {
             state.userType = action.payload;
             storeData(Keys.userType, action.payload);
+        },
+        setUserPrinter: (state, action) => {
+            state.userPrinter = action.payload;
+            storeData(Keys.userPrinter, action.payload);
         },
         login: (state, action) => {
             state.user = action.payload;
@@ -28,7 +33,7 @@ export const AuthSlice = createSlice({
     }
 })
 
-export const { setUserType, login, setWelcomeCheck } = AuthSlice.actions;
+export const { setUserType, login, setWelcomeCheck, setUserPrinter } = AuthSlice.actions;
 
 export default AuthSlice.reducer;
 

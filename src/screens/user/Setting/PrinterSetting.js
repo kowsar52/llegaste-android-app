@@ -14,11 +14,11 @@ import {
 import {appStyle, ColorSet, FamilySet} from '../../../styles';
 import Button from '../../../components/default/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {StackActions} from '@react-navigation/native';
 import {Screens} from '../../../constants';
 import {setIsLoading} from '../../../redux/reducers/loadingSlice/LoadingSlice';
-import {setUserType} from '../../../redux/reducers/authSlice/AuthServices';
+import {setUserType,setUserPrinter} from '../../../redux/reducers/authSlice/AuthServices';
 import {setUserData} from '../../../redux/reducers/userSlice/UserServices';
 import {
   logoutUser,
@@ -30,7 +30,7 @@ import {ShowToast} from '../../../utils/ShowToast';
 import {removeData} from '../../../utils/Storage';
 import {Keys} from '../../../constants';
 import SelectDropdown from 'react-native-select-dropdown'
-
+import { getData } from '../../../utils/Storage';
 import {
     USBPrinter,
     NetPrinter,
@@ -45,21 +45,29 @@ const PrinterSetting = ({navigation}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+   
     BLEPrinter.init().then(()=> {
-      BLEPrinter.getDeviceList().then((list) => {
-        console.log("list==", list);
-        //connect printer
-        _connectPrinter(list[0]);
-      });
+      BLEPrinter.getDeviceList().then(setPrinters);
+      getCurrentPrinter()
     });
-  }, []);
+  }, [getCurrentPrinter]);
+
+  const getCurrentPrinter = async () => {
+    const res = await getData(Keys.userPrinter)
+    console.log('res',res)
+    if(res){
+     setCurrentPrinter(res)
+    }
+   }
 
   const _connectPrinter = ((printer) => {
-    console.log("printer==", printer);
+    dispatch(setUserPrinter(printer))
     //connect printer
     BLEPrinter.connectPrinter(printer.inner_mac_address).then(
       setCurrentPrinter,
       error => console.warn(error))
+
+    ShowToast("Printer connected successfully.")
   })
 
   useEffect(() => {
@@ -109,30 +117,7 @@ const PrinterSetting = ({navigation}) => {
       dispatch(setIsLoading(false));
     }
   };
-  //pinCheck
-  const pinCheck = async () => {
-    setPinCheckModalVisible(true);
-  };
-  const handleConfirmPin = async () => {
-    if (admin_pin === '') {
-      ShowToast('Please enter pin');
-      return;
-    }
-    dispatch(setIsLoading(true));
-    const response = await checkAdminPin({
-      admin_pin: admin_pin,
-    });
-    if (response?.success) {
-      setPinCheckModalVisible(false);
-      setAdminPin('');
-      updateSetting(settings);
-      dispatch(setIsLoading(false));
-    } else {
-      dispatch(setIsLoading(false));
-      setAdminPin('');
-      ShowToast(response.message);
-    }
-  };
+  
 
   return (
     <View style={styles.container}>
@@ -180,36 +165,25 @@ const PrinterSetting = ({navigation}) => {
             selectedRowTextStyle={{ color: ColorSet.theme, fontFamily: FamilySet.bold, fontSize: 16 }}
             onSelect={(selectedItem, index) => {
                 console.log(selectedItem, index)
+                _connectPrinter(selectedItem)
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
                 // if data array is an array of objects then return selectedItem.property to render after item is selected
-                return selectedItem
+                return selectedItem.device_name
             }}
             rowTextForSelection={(item, index) => {
                 // text represented for each item in dropdown
                 // if data array is an array of objects then return item.property to represent item in dropdown
-                return item
+                return item.device_name
             }}
+            defaultValue={currentPrinter}
         />
       </View>
 
 
       <View style={styles.logoutContainer}>
-        {/* {connectedReader ? (
-            <Button title={`Disconnect ${connectedReader?.label || connectedReader?.serialNumber}`} onPress={() => handleDisconnectReader(connectedReader.id)} buttonStyle={{
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}/>
-        ): (
-            <Button title="Connect Terminal" onPress={() => navigation.navigate(Screens.setupTerminal)} buttonStyle={{
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}/>
-        )} */}
-        <Button title="Connect Printer" onPress={() => navigation.navigate(Screens.setupTerminal)} buttonStyle={{
+        <Button title="Go to checkout" onPress={() => navigation.navigate(Screens.home)} buttonStyle={{
                 textAlign: 'center',
                 alignItems: 'center',
                 justifyContent: 'center',

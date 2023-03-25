@@ -197,7 +197,7 @@ export default function Checkout({navigation,route}) {
       navigation.navigate('CheckoutSuccess', {
         message: 'Payment completed successfully',
         amount: amount,
-        txn_id : paymentIntentId
+        txn_id : resp.txn_id
       });
     }
   };
