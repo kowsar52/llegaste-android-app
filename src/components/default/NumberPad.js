@@ -59,8 +59,8 @@ const NumberPad = ({ onPress, amount}) => {
             paddingHorizontal: 30,
             marginBottom: 60,
         }}>
-            <TouchableOpacity style={styles.button} onPress={() => onPress('clean')}>
-                <Icon name="close-outline"  style={styles.buttonText} />
+            <TouchableOpacity style={styles.button} onPress={() => onPress('.')}>
+            <Text style={styles.buttonText}>.</Text>
             </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => onPress('0')}>
             <Text style={styles.buttonText}>0</Text>

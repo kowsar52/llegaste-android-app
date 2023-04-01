@@ -31,7 +31,7 @@ const AppNavigator = () => {
     return (
       <NavigationContainer>
         <AppStack.Navigator screenOptions={{ headerShown: false }}>
-            <AppStack.Screen name={Screens.splash} component={Splash} />
+            <AppStack.Screen name={Screens.splash} component={Home} />
             <AppStack.Screen name={Screens.login} component={Login} />
             <AppStack.Screen name={Screens.forgetPassword} component={ForgetPassword} />
             <AppStack.Screen name={Screens.resetPassword} component={ResetPassword} />

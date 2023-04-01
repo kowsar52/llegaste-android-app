@@ -1424,9 +1424,9 @@
     fastq "^1.6.0"
 
 "@react-native-async-storage/async-storage@^1.17.11":
-  version "1.17.11"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz#7ec329c1b9f610e344602e806b04d7c928a2341d"
-  integrity sha512-bzs45n5HNcDq6mxXnSsOHysZWn1SbbebNxldBXCQs8dSvF8Aor9KCdpm+TpnnGweK3R6diqsT8lFhX77VX0NFw==
+  version "1.18.0"
+  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.18.0.tgz"
+  integrity sha512-E1KYIXlJTm4NUw1bRPdYueRdp8e//7pLb2i8JY+YIYSOxFi0usycFDXkkGgPqvfn7nW6o2G2TZvXUYpBVHenWA==
   dependencies:
     merge-options "^3.0.4"
 
@@ -1639,9 +1639,9 @@
   integrity sha512-+zDZ20NUnSWghj7Ku5aFphMzuM9JulqCW+aPXT6IfIXFbb8tzYTTOSeRFOtuekJ99ibW2fUCSsjuKNlwDIbHFg==
 
 "@react-native-picker/picker@^2.4.8":
-  version "2.4.8"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.8.tgz#a1a21f3d6ecadedbc3f0b691a444ddd7baa081f8"
-  integrity sha512-5NQ5XPo1B03YNqKFrV6h9L3CQaHlB80wd4ETHUEABRP2iLh7FHLVObX2GfziD+K/VJb8G4KZcZ23NFBFP1f7bg==
+  version "2.4.9"
+  resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.4.9.tgz"
+  integrity sha512-Bo1yIliSxDuCp42Q1CXNo+DAk8NfqTp/eQI/6kkzsTit/k1LWYYYDhiZd7AO9113IuXbHb7PyJwyqprFMPSB/A==
 
 "@react-native/assets@1.0.0":
   version "1.0.0"
@@ -1707,7 +1707,7 @@
 
 "@reduxjs/toolkit@^1.9.3":
   version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.9.3.tgz#27e1a33072b5a312e4f7fa19247fec160bbb2df9"
+  resolved "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.9.3.tgz"
   integrity sha512-GU2TNBQVofL09VGmuSioNPQIu6Ml0YLf4EJhgj0AvBadRlCGzUWet8372LjvO4fqKZF2vH1xU0htAa7BrK9pZg==
   dependencies:
     immer "^9.0.16"
@@ -1753,12 +1753,12 @@
 
 "@stripe/stripe-react-native@^0.25.0":
   version "0.25.0"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-react-native/-/stripe-react-native-0.25.0.tgz#f82c1cb7149712e0eed3dd0309ccd1f8e998ad33"
+  resolved "https://registry.npmjs.org/@stripe/stripe-react-native/-/stripe-react-native-0.25.0.tgz"
   integrity sha512-ZyOUzm1++cZqMWlkR4TKAgfWQ8gaxs1MOHd12fHTXufIUWCdGqSn5HLmZLsPof45O7wdwGROU06Od6D2ryspaQ==
 
 "@stripe/stripe-terminal-react-native@^0.0.1-beta.11":
   version "0.0.1-beta.11"
-  resolved "https://registry.yarnpkg.com/@stripe/stripe-terminal-react-native/-/stripe-terminal-react-native-0.0.1-beta.11.tgz#c661daccde52524447c70bd3bddbb2db27dbf123"
+  resolved "https://registry.npmjs.org/@stripe/stripe-terminal-react-native/-/stripe-terminal-react-native-0.0.1-beta.11.tgz"
   integrity sha512-/8iHvqfmC/iffh9vgfeZLbLl+qSNb7u0dM2hsWQG7O7Wd63DtY4eiOIoXan+bPl3mHOoLN6opHLF+qFNBOn2OQ==
   dependencies:
     base-64 "^1.0.0"
@@ -1810,7 +1810,7 @@
 
 "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+  resolved "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
   integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
   dependencies:
     "@types/react" "*"
@@ -1896,7 +1896,7 @@
 
 "@types/use-sync-external-store@^0.0.3":
   version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz#b6725d5f4af24ace33b36fafd295136e75509f43"
+  resolved "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
   integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
 
 "@types/yargs-parser@*":
@@ -2357,7 +2357,7 @@ balanced-match@^1.0.0:
 
 base-64@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/base-64/-/base-64-1.0.0.tgz#09d0f2084e32a3fd08c2475b973788eee6ae8f4a"
+  resolved "https://registry.npmjs.org/base-64/-/base-64-1.0.0.tgz"
   integrity sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==
 
 base64-js@^1.1.2, base64-js@^1.3.1:
@@ -2804,7 +2804,7 @@ csstype@^3.0.2:
 
 date-and-time@0.9.0:
   version "0.9.0"
-  resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.9.0.tgz#1524579e56dc07675c640b41735a7665c0659240"
+  resolved "https://registry.npmjs.org/date-and-time/-/date-and-time-0.9.0.tgz"
   integrity sha512-4JybB6PbR+EebpFx/KyR5Ybl+TcdXMLIJkyYsCx3P4M4CWGMuDyFF19yh6TyasMAIF5lrsgIxiSHBXh2FFc7Fg==
 
 dayjs@^1.8.15:
@@ -3829,7 +3829,7 @@ hermes-profile-transformer@^0.0.6:
 
 hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
+  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   dependencies:
     react-is "^16.7.0"
@@ -3857,7 +3857,7 @@ human-signals@^2.1.0:
 
 iconv-lite@^0.6.2:
   version "0.6.3"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
+  resolved "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz"
   integrity sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==
   dependencies:
     safer-buffer ">= 2.1.2 < 3.0.0"
@@ -3878,9 +3878,9 @@ image-size@^0.6.0:
   integrity sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==
 
 immer@^9.0.16:
-  version "9.0.19"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.19.tgz#67fb97310555690b5f9cd8380d38fc0aabb6b38b"
-  integrity sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ==
+  version "9.0.21"
+  resolved "https://registry.npmjs.org/immer/-/immer-9.0.21.tgz"
+  integrity sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==
 
 import-fresh@^2.0.0:
   version "2.0.0"
@@ -4124,7 +4124,7 @@ is-path-inside@^3.0.3:
 
 is-plain-obj@^2.1.0:
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
+  resolved "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-2.1.0.tgz"
   integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
 
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
@@ -4996,7 +4996,7 @@ memoize-one@^5.0.0:
 
 merge-options@^3.0.4:
   version "3.0.4"
-  resolved "https://registry.yarnpkg.com/merge-options/-/merge-options-3.0.4.tgz#84709c2aa2a4b24c1981f66c179fe5565cc6dbb7"
+  resolved "https://registry.npmjs.org/merge-options/-/merge-options-3.0.4.tgz"
   integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
   dependencies:
     is-plain-obj "^2.1.0"
@@ -5592,7 +5592,7 @@ nullthrows@^1.1.1:
 
 numeral@^2.0.6:
   version "2.0.6"
-  resolved "https://registry.yarnpkg.com/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
+  resolved "https://registry.npmjs.org/numeral/-/numeral-2.0.6.tgz"
   integrity sha512-qaKRmtYPZ5qdw4jWJD6bxEf1FJEqllJrwxCLIm0sQU/A7v2/czigzOb+C2uSiFsa9lBUzeH7M1oK+Q+OLxL3kA==
 
 ob1@0.73.7:
@@ -6078,7 +6078,7 @@ react-native-gradle-plugin@^0.71.15:
 
 react-native-masked-text@^1.13.0:
   version "1.13.0"
-  resolved "https://registry.yarnpkg.com/react-native-masked-text/-/react-native-masked-text-1.13.0.tgz#533fde8c45ccbaa1d6b0df30bf19b84b4ace3de3"
+  resolved "https://registry.npmjs.org/react-native-masked-text/-/react-native-masked-text-1.13.0.tgz"
   integrity sha512-iMku5Ky6DP4fTRosjsYNJOhH8yoBQCzRALBdv1wVDKmCBQhhVE8RHr5EW4SNUjkYTZL473sDdEKl4NI948q9FQ==
   dependencies:
     date-and-time "0.9.0"
@@ -6098,23 +6098,23 @@ react-native-screens@^3.20.0:
     warn-once "^0.1.0"
 
 react-native-select-dropdown@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-select-dropdown/-/react-native-select-dropdown-3.3.0.tgz#4816594f139abb3784c9f7f47a01406f58d46a95"
-  integrity sha512-gDUeVt9oPXpjkboc/PZiavbYpo4bNIpl7OgKmOOaa4pJjjIBIDkb2LcQquG5bjXn3J6P6nr7YUlHvne2Xb29Xw==
+  version "3.3.2"
+  resolved "https://registry.npmjs.org/react-native-select-dropdown/-/react-native-select-dropdown-3.3.2.tgz"
+  integrity sha512-2rsPgAzeZ4Pdsf/kCuwYyzmLd5OO+cT3yZ0gAvVZ9C+5xkchiY7iE9u5M5F0DCgMqmwJjBBsiBEvULJ/Eaxpng==
 
 react-native-simple-toast@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-2.0.0.tgz#08f664acaaf1018fe0386aed5b3b38462ba09f83"
+  resolved "https://registry.npmjs.org/react-native-simple-toast/-/react-native-simple-toast-2.0.0.tgz"
   integrity sha512-x++CvxTLSTv+o5zaC8lv5W37VH0qMDs31wQPV1DH8OMHo1EJ3cMY0Nwblha1lwA9PK1ASuGLvHmumoVFQvnLkg==
 
 react-native-text-ticker@^1.14.0:
   version "1.14.0"
-  resolved "https://registry.yarnpkg.com/react-native-text-ticker/-/react-native-text-ticker-1.14.0.tgz#dc537d2c587efc18ef19db9a85dc678a28aa8c57"
+  resolved "https://registry.npmjs.org/react-native-text-ticker/-/react-native-text-ticker-1.14.0.tgz"
   integrity sha512-8TNGTcW43dfnCqIuXVA7F1Ny8SKGrw0pIrNS5nM7eda+6AsuPTZh3JQ2CwmSRYfsrlnS4QFrpyo5ykpI8nvtCw==
 
 react-native-thermal-receipt-printer@^1.2.0-rc.1:
   version "1.2.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react-native-thermal-receipt-printer/-/react-native-thermal-receipt-printer-1.2.0-rc.1.tgz#ec80bc94bb5299493f97b1319c4426111dd75ca5"
+  resolved "https://registry.npmjs.org/react-native-thermal-receipt-printer/-/react-native-thermal-receipt-printer-1.2.0-rc.1.tgz"
   integrity sha512-buahV7n7u9W+V0HAtwyCWRmXYeJ8H1nbR0IRwD83CvsGy/2FLHz/XaNlT9mncmdQjF3p7MVnpGbrG1ybBNqv+w==
   dependencies:
     buffer "^5.6.0"
@@ -6171,7 +6171,7 @@ react-native@0.71.3:
 
 react-redux@^8.0.5:
   version "8.0.5"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.0.5.tgz#e5fb8331993a019b8aaf2e167a93d10af469c7bd"
+  resolved "https://registry.npmjs.org/react-redux/-/react-redux-8.0.5.tgz"
   integrity sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==
   dependencies:
     "@babel/runtime" "^7.12.1"
@@ -6249,12 +6249,12 @@ recast@^0.20.4:
 
 redux-thunk@^2.4.2:
   version "2.4.2"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.4.2.tgz#b9d05d11994b99f7a91ea223e8b04cf0afa5ef3b"
+  resolved "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.4.2.tgz"
   integrity sha512-+P3TjtnP0k/FEjcBL5FZpoovtvrTNT/UXd4/sluaSyrURlSlhLSzEdfsTBW7WsKB6yPvgd7q/iZPICFjW4o57Q==
 
 redux@^4.2.0, redux@^4.2.1:
   version "4.2.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.2.1.tgz#c08f4306826c49b5e9dc901dee0452ea8fce6197"
+  resolved "https://registry.npmjs.org/redux/-/redux-4.2.1.tgz"
   integrity sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==
   dependencies:
     "@babel/runtime" "^7.9.2"
@@ -6346,7 +6346,7 @@ require-main-filename@^2.0.0:
 
 reselect@^4.1.7:
   version "4.1.7"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.1.7.tgz#56480d9ff3d3188970ee2b76527bd94a95567a42"
+  resolved "https://registry.npmjs.org/reselect/-/reselect-4.1.7.tgz"
   integrity sha512-Zu1xbUt3/OPwsXL46hvOOoQrap2azE7ZQbokq61BQfiXvhewsKDwhMeZjTX9sX0nvw1t/U5Audyn1I9P/m9z0A==
 
 resolve-cwd@^3.0.0:
@@ -6471,7 +6471,7 @@ safe-regex@^1.1.0:
 
 "safer-buffer@>= 2.1.2 < 3.0.0":
   version "2.1.2"
-  resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+  resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 scheduler@^0.23.0:
@@ -6949,7 +6949,7 @@ through2@^2.0.1:
 
 tinymask@1.0.2:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/tinymask/-/tinymask-1.0.2.tgz#df3775a94087b0d3d056c256e8923c01b7ec0941"
+  resolved "https://registry.npmjs.org/tinymask/-/tinymask-1.0.2.tgz"
   integrity sha512-2FjNINAMq0s3e94ns2PuElOQZOt9QVgnrv0JZ8yNblwecyQDhVsSre6Rs+WJj/IHEcgdfYbDMP7zvECTfV/Xnw==
 
 tmpl@1.0.5:
