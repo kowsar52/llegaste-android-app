@@ -62,11 +62,11 @@ export default function SuccessScreen({route, navigation}) {
         const BOLD_OFF = COMMANDS.TEXT_FORMAT.TXT_BOLD_OFF;
         const CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_CT;
         const OFF_CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_LT;
-        const logo = require('../../assets/logo.jpeg');
-        Printer.printImage(logo, {
-          imageWidth: 200,
-          imageHeight: 200,
-        });
+        // const logo = require('../../assets/logo.jpeg');
+        // Printer.printImage(logo, {
+        //   imageWidth: 200,
+        //   imageHeight: 200,
+        // });
         
           let textTemplate = `<C> LLegaste H,DD </C>\n`;
           textTemplate += `<C> New York, USA </C>\n`;
