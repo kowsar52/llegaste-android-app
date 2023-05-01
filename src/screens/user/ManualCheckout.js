@@ -35,7 +35,8 @@ export default function CheckoutManually({navigation, route}) {
           ShowToast(res.message);
           navigation.navigate('CheckoutSuccess', {
             message: 'Payment completed successfully',
-            txn_id : res.txn_id
+            txn_id : res.txn_id,
+            total_amount : amount
           });
         }else{
           ShowToast('Payment failed');

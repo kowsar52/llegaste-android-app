@@ -196,7 +196,7 @@ export default function Checkout({navigation,route}) {
 
       navigation.navigate('CheckoutSuccess', {
         message: 'Payment completed successfully',
-        amount: amount,
+        total_amount: amount,
         txn_id : resp.txn_id
       });
     }
@@ -218,7 +218,7 @@ export default function Checkout({navigation,route}) {
        <Text style={styles.amount}>${parseFloat(amount).toFixed(2)}</Text>
 
         <Image
-         style={{width: '100%', height: 300,alignSelf:'center'}}
+         style={{width: '100%', height: 200,alignSelf:'center'}}
           source={{
             uri: 'https://media2.giphy.com/media/TDyxBGZcViZnoye8iN/giphy.gif',
           }}

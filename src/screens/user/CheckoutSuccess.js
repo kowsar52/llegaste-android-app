@@ -1,4 +1,4 @@
-import {View, Text, StatusBar} from 'react-native';
+import {View, Text, StatusBar, Alert} from 'react-native';
 import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Lottie from 'lottie-react-native';
@@ -7,9 +7,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch,useSelector} from 'react-redux';
  
 import { ShowToast } from '../../utils/ShowToast';
-import RNThermalPrinter, { BLEPrinter } from 'react-native-thermal-receipt-printer-image-qr';
+import {
+  BLEPrinter,
+  NetPrinter,
+  USBPrinter,
+  IUSBPrinter,
+  IBLEPrinter,
+  INetPrinter,
+  ColumnAlignment,
+  COMMANDS,
+} from 'react-native-thermal-receipt-printer-image-qr';
 import { ColorSet, appStyle } from '../../styles';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
+import { getData } from '../../utils/Storage';
+import { Keys } from '../../constants';
 
 
 export default function SuccessScreen({route, navigation}) {
@@ -17,7 +28,7 @@ export default function SuccessScreen({route, navigation}) {
    const dispatch = useDispatch();
   const [enable_auto_print, setEnableAutoPrint] = React.useState(0);
   const [currentPrinter, setCurrentPrinter] = React.useState();
-  trx_id total_amount
+  const {txn_id , total_amount} = route.params
 
   const getCurrentPrinter = async () => {
     //enable_auto_print
@@ -27,6 +38,7 @@ export default function SuccessScreen({route, navigation}) {
     }
     
     const res = await getData(Keys.userPrinter);
+    console.log('printer',res)
     if (res) {
       setCurrentPrinter(res);
     }
@@ -61,7 +73,7 @@ export default function SuccessScreen({route, navigation}) {
           textTemplate += `<C> +34434534543 </C>\n`;
           textTemplate += `Host : POS\n`;
           textTemplate += `Date : ${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}\n`;
-          textTemplate += `Trx ID - #${trx_id}\n`;
+          textTemplate += `Trx ID - #${txn_id}\n`;
           textTemplate += `Payment Status - PAID\n`;
           textTemplate += `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`;
           Printer.printText(textTemplate, {
@@ -69,18 +81,22 @@ export default function SuccessScreen({route, navigation}) {
             cut: false,
           });
   
-        let orderList = [];
-  
+      
+          let columnAlignment = [
+              ColumnAlignment.LEFT,
+              ColumnAlignment.RIGHT,
+            ];
+            let columnWidth = [30 -  8,  8];
      
   
         Printer.printColumnsText(
-          ['TAX', '','$0.00'],
+          ['TAX', '$0.00'],
           columnWidth,
           columnAlignment,
           [`${BOLD_OFF}`, '',''],
         );
         Printer.printColumnsText(
-          ['Subtotal', '', `$${parseFloat(total_amount).toFixed(2)}`],
+          ['Total Amount',  `$${parseFloat(total_amount).toFixed(2)}`],
           columnWidth,
           columnAlignment,
           [`${BOLD_OFF}`, '',''],
@@ -103,7 +119,7 @@ export default function SuccessScreen({route, navigation}) {
         Printer.printText(
           "<C>How're we doing? Let us know at llegaste.tech</C>",
         );
-        Printer.printBill(`${CENTER} Thank you!\n`, {
+        Printer.printBill("<C>Thank You!</C>\n", {
           beep: false,
         });
         ShowToast('Print successfully completed.');
@@ -113,7 +129,7 @@ export default function SuccessScreen({route, navigation}) {
           goBack()
         }, 2000);
       } catch (error) {
-        Alert.alert("Failed",error.message)
+       Alert.alert("Failed",error.message)
       }
     }
   };
