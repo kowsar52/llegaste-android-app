@@ -10,6 +10,7 @@ import {
   Pressable,
   Alert,
   StatusBar,
+  ScrollView,
 } from 'react-native';
 import {appStyle, ColorSet, FamilySet} from '../../../styles';
 import Button from '../../../components/default/Button';
@@ -153,7 +154,7 @@ const TerminalSetting = ({navigation}) => {
       </View>
       {/* mavbar end  */}
     {/* body start  */}
-    <View style={styles.body}>
+    <ScrollView style={styles.body}>
 
       <View style={styles.setting}>
         <Text style={styles.settingLabel}>Enable Terminal</Text>
@@ -329,7 +330,7 @@ const TerminalSetting = ({navigation}) => {
        
         </View>
 
-    </View>
+    </ScrollView>
     {/* body end  */}
     </View>
   );

@@ -36,7 +36,7 @@ import {
     NetPrinter,
     BLEPrinter,
     BluetoothEscposPrinter,
-  } from "react-native-thermal-receipt-printer";
+  } from "react-native-thermal-receipt-printer-image-qr"
 
 const PrinterSetting = ({navigation}) => {
   const [settings, setSettings] = useState([]);

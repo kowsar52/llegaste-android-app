@@ -29,7 +29,6 @@
     "react-native-select-dropdown": "^3.3.0",
     "react-native-simple-toast": "^2.0.0",
     "react-native-text-ticker": "^1.14.0",
-    "react-native-thermal-receipt-printer": "^1.2.0-rc.1",
     "react-native-thermal-receipt-printer-image-qr": "^0.1.11",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",

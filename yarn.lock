@@ -6126,15 +6126,6 @@ react-native-thermal-receipt-printer-image-qr@^0.1.11:
     iconv-lite "^0.6.2"
     string_decoder "^1.3.0"
 
-react-native-thermal-receipt-printer@^1.2.0-rc.1:
-  version "1.2.0-rc.1"
-  resolved "https://registry.npmjs.org/react-native-thermal-receipt-printer/-/react-native-thermal-receipt-printer-1.2.0-rc.1.tgz"
-  integrity sha512-buahV7n7u9W+V0HAtwyCWRmXYeJ8H1nbR0IRwD83CvsGy/2FLHz/XaNlT9mncmdQjF3p7MVnpGbrG1ybBNqv+w==
-  dependencies:
-    buffer "^5.6.0"
-    iconv-lite "^0.6.2"
-    string_decoder "^1.3.0"
-
 react-native-vector-icons@^9.2.0:
   version "9.2.0"
   resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-9.2.0.tgz"

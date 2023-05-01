@@ -3,6 +3,26 @@ import { ColorSet } from './colors'
 import { screenWidth, screenHeight } from './screenSize'
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: ColorSet.white,
+},
+container_center: {
+    flex: 1,
+    backgroundColor: ColorSet.white,
+    justifyContent: "center",
+    alignItems: "center",
+},
+row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+},
+justify_between: {
+    justifyContent: 'space-between',
+},
+justify_center: {
+    justifyContent: 'center',
+},
   // all appStyle  style here
   p0: {
     padding: 0,
@@ -478,5 +498,11 @@ export default StyleSheet.create({
     paddingVertical: 10,
     color: ColorSet.textColorGrayNew
 
-  }
+  },
+  title:{
+    fontFamily: "TTCommons-Bold",
+  },
+  sub_title:{
+      fontFamily: "TTCommons-Regular",
+  },
 })
