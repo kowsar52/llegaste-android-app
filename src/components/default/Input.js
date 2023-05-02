@@ -32,7 +32,7 @@ const Input = props => {
 
   return (
     <View style={styles.styleGroup}>
-     {icon && <Icon style={styles.icon} name={icon} size={22} color="#000"/>}
+     {icon && <Icon style={styles.icon} name={icon} size={19} color="#000"/>}
    
     <TextInput
       onPressIn={onPressIn}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     width:"100%",
     height: verticalScale(70),
     fontFamily: FamilySet.medium,
-    fontSize: 16,
+    fontSize: 15,
     alignItems: 'center',
     color: ColorSet.textColorDark,
     marginBottom: verticalScale(10),
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    top: 15,
-    left: 15,
+    top: 14,
+    left: 12,
     color: ColorSet.theme,
 
   }

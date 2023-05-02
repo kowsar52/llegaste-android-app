@@ -148,7 +148,7 @@ export default function SuccessScreen({route, navigation}) {
         <Text style={[appStyle.title,{
           fontSize: 20,
         }]}>
-          Your Order Id: 345
+          Your Payment Id: #{txn_id}
         </Text>
         <Lottie
           source={require('../../assets/lottie/success.json')}

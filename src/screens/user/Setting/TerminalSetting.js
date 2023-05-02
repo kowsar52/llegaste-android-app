@@ -31,6 +31,7 @@ import {ShowToast} from '../../../utils/ShowToast';
 import {removeData} from '../../../utils/Storage';
 import {Keys} from '../../../constants';
 import { useStripeTerminal} from '@stripe/stripe-terminal-react-native';
+import NavBar from '../../../components/default/NavBar';
 
 const TerminalSetting = ({navigation}) => {
   const [settings, setSettings] = useState([]);
@@ -82,30 +83,7 @@ const TerminalSetting = ({navigation}) => {
     setModalVisible(false);
   };
 
-  //logoutHandler
-  const logoutHandler = () => {
-    Alert.alert('Logout', 'Are you sure you want to logout?', [
-      {
-        text: 'No',
-        style: 'cancel',
-      },
-      {
-        text: 'Yes',
-        onPress: async () => {
-          dispatch(setIsLoading(true));
-          const response = await logoutUser();
-          console.log('response', response);
-          if (response) {
-            await removeData(Keys.user);
-            dispatch(setUserData(null));
-            dispatch(setUserType(null));
-            dispatch(setIsLoading(false));
-            navigation.dispatch(StackActions.replace('Login'));
-          }
-        },
-      },
-    ]);
-  };
+
 
   //updateSetting
   const updateSetting = async data => {
@@ -142,17 +120,7 @@ const TerminalSetting = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      {/* mavbar start  */}
-      <View style={styles.navbar}>
-        <Pressable style={styles.leftIcon} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back" size={20} color="#333" />
-        </Pressable>
-        <Text style={styles.navTitle}>Terminal Setting</Text>
-        <Pressable onPress={() => logoutHandler()}>
-          <Icon name="log-out-outline" size={20} color="#333" />
-        </Pressable>
-      </View>
-      {/* mavbar end  */}
+      <NavBar navigation={navigation} title="Terminal Setting" logoutBtn={true}/>
     {/* body start  */}
     <ScrollView style={styles.body}>
 
@@ -339,7 +307,6 @@ const TerminalSetting = ({navigation}) => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    marginTop: 50,
     padding: 20,
     backgroundColor: ColorSet.white,
   },

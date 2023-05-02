@@ -7,11 +7,14 @@ import NumberPad from '../../components/default/NumberPad';
 import { ShowToast } from '../../utils/ShowToast';
 import { getUserData } from '../../utils/Storage';
 import {useStripeTerminal} from '@stripe/stripe-terminal-react-native';
+import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 const screenHeight = Dimensions.get('window').height;
+import { useDispatch,useSelector } from 'react-redux';
 
 export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
   const {connectedReader, initialize} = useStripeTerminal();
+  const dispatch = useDispatch();
 
   const handlePress = (key) => {
    
@@ -28,37 +31,40 @@ export default function Home({navigation}) {
         break;
       default:
         setAmount(`${amount}${key}`);
-        break;
+      break;
     }
   };
   useEffect(() => {
     async function getUser(){
+     dispatch(setIsLoading(true))
       const userData = await getUserData();
       if(userData){
         const {reader} = await initialize();
-        console.log('reader', reader);
         if(reader){
           ShowToast('Reader Connected');
         }else{
-          Alert.alert(
-            "Reader not connected",
-            "Please connect reader",
-            [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel"
-              },
-              { text: "OK", onPress: () => navigation.navigate('SetupTerminal') }
-            ]
-          );
+          // Alert.alert(
+          //   "Reader not connected",
+          //   "Please connect reader",
+          //   [
+          //     {
+          //       text: "Cancel",
+          //       onPress: () => console.log("Cancel Pressed"),
+          //       style: "cancel"
+          //     },
+          //     { text: "OK", onPress: () => navigation.navigate('SetupTerminal') }
+          //   ]
+          // );
           // //go to setupterinal screen
-          // navigation.navigate('SetupTerminal');
+          navigation.navigate('SetupTerminal');
         }
+        dispatch(setIsLoading(false))
       }else{
+        dispatch(setIsLoading(false))
         //go to login screen
         navigation.navigate('Login');
       }
+      
     }
     getUser();
 
@@ -82,9 +88,22 @@ export default function Home({navigation}) {
       </View>
       <View style={styles.numberBar}>
           <NumberPad onPress={handlePress} amount={amount} />
-          <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
-            amount: amount
-          })} disabled={true}  buttonStyle={styles.buttonStyle}/>
+          <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            bottom: 0,
+            position: 'absolute',
+          }}>
+            <Button title="Manual Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("ManualCheckout",{
+              amount: amount
+            })} disabled={true}  buttonStyle={styles.buttonStyle}/>
+            <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
+              amount: amount
+            })} disabled={true}  buttonStyle={styles.buttonStyle}/>
+          </View>
+   
       
         </View>
     </View>
@@ -93,7 +112,7 @@ export default function Home({navigation}) {
 
 const styles = StyleSheet.create({  
   amountInputStyle:{
-    fontSize: 80,
+    fontSize: 50,
     height: "70%",
     fontFamily: FamilySet.bold,
     borderWidth: 0,
@@ -147,8 +166,9 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       alignContent: 'center',
       justifyContent: 'center',
-      marginHorizontal: 20,
-      marginVertical: 10,
+      width: '44%',
+      margin: 10,
+      padding: 10,
       backgroundColor: ColorSet.redDeleteColor,
     },
     buttonStyleOutline:{
@@ -160,9 +180,9 @@ const styles = StyleSheet.create({
       backgroundColor: ColorSet.redDeleteColor,
     },
     amount:{
-      fontSize: 80,
+      fontSize: 50,
       fontFamily: FamilySet.bold,
-      color: ColorSet.textColorDark,
+      color: ColorSet.theme,
       textAlign: 'center',
       marginTop: "10%",
 

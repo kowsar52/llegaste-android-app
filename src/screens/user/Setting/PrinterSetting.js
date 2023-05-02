@@ -183,7 +183,7 @@ const PrinterSetting = ({navigation}) => {
 
 
       <View style={styles.logoutContainer}>
-        <Button title="Go to checkout" onPress={() => navigation.navigate(Screens.home)} buttonStyle={{
+        <Button title="Save & Go Next" onPress={() => navigation.navigate(Screens.home)} buttonStyle={{
                 textAlign: 'center',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   logoutContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   logoutButton: {
     backgroundColor: ColorSet.redDeleteColor,

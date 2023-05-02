@@ -8,18 +8,7 @@ const NumberPad = ({ onPress, amount}) => {
   const navigation = useNavigation();
     return (
       <View style={styles.container}>
-           <Pressable onPress={() => navigation.navigate("ManualCheckout",{amount: amount})} style={{
-          backgroundColor: 'black',
-          bottom: 0,
-        }}>
-          <Text style={{
-            fontSize: 18,
-            color: 'white',
-            fontFamily: FamilySet.medium,
-            textAlign: 'center',
-            padding: 10,
-          }}>Manual Checkout</Text>
-        </Pressable>
+
         <View style={styles.row}>
           <TouchableOpacity style={styles.button} onPress={() => onPress('1')}>
             <Text style={styles.buttonText}>1</Text>
@@ -59,8 +48,8 @@ const NumberPad = ({ onPress, amount}) => {
             paddingHorizontal: 30,
             marginBottom: 60,
         }}>
-            <TouchableOpacity style={styles.button} onPress={() => onPress('.')}>
-            <Text style={styles.buttonText}>.</Text>
+            <TouchableOpacity style={styles.button} onPress={() => onPress('clean')}>
+            <Icon name="close-outline"  style={styles.buttonText} />
             </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => onPress('0')}>
             <Text style={styles.buttonText}>0</Text>

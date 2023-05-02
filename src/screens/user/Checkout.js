@@ -1,7 +1,7 @@
 import { View, Text,StyleSheet,Pressable,Image } from 'react-native'
 import React,{useState,useEffect,useContext} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ColorSet,FamilySet } from '../../styles';
+import { ColorSet,FamilySet, Size, appStyle } from '../../styles';
 import Button from '../../components/default/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TextTicker from 'react-native-text-ticker';
@@ -13,6 +13,7 @@ import {
   StripeError,
   CommonError,
 } from '@stripe/stripe-terminal-react-native';
+import NavBar from '../../components/default/NavBar';
 
 export default function Checkout({navigation,route}) {
  
@@ -206,27 +207,25 @@ export default function Checkout({navigation,route}) {
   return (
     <View style={styles.container}>
       {/* mavbar start  */}
-      <View style={styles.navbar}>
-        <Pressable style={styles.leftIcon} onPress={() => navigation.goBack()}> 
-          <Icon name="arrow-back" size={20} color="#333" />
-        </Pressable>
-        <Text style={styles.navTitle}>Checkout</Text>
-        <View></View>
-      </View>
+      <NavBar navigation={navigation} title="Payment" />
       {/* mavbar end  */}
-      <View style={styles.body}>
+      <View style={[appStyle.container_center]}>
        <Text style={styles.amount}>${parseFloat(amount).toFixed(2)}</Text>
 
         <Image
-         style={{width: '100%', height: 200,alignSelf:'center'}}
+         style={{
+            width: 200,
+            height: 200,
+            resizeMode: 'contain',
+         }}
           source={{
             uri: 'https://media2.giphy.com/media/TDyxBGZcViZnoye8iN/giphy.gif',
           }}
         />
       
        
-        <Text style={styles.subTitle}>
-        Please tap, swipe or enter card on reader
+        <Text style={[styles.subTitle,Size.normal]}>
+          Please swap your card and complete the payment.
         </Text>
 
       <TextTicker
@@ -257,32 +256,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  body:{
-    flex: 1,
-    width: '100%',
-    textAlign: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-      
-  },
-  navbar:{
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    maxHeight: 70,
-    padding: 20,
-      
-  },
-  leftIcon:{
-      width: 20,
-  },
-  navTitle:{
-      fontSize: 20,
-      fontFamily: FamilySet.bold,
-      color: ColorSet.textColorDark,
-  } ,
+
   amount:{
-    fontSize: 70,
+    fontSize: 40,
     fontFamily: FamilySet.bold,
     borderWidth: 0,
     color: ColorSet.textColorDark,
@@ -296,6 +272,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,
+    borderRadius: 10,
   },
   success:{
     backgroundColor: ColorSet.lightGreenBg,
@@ -305,6 +282,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,
+    borderRadius: 10,
   },
   subTitle:{
     fontSize: 20,

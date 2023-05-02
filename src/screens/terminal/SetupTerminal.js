@@ -27,6 +27,7 @@ import { Keys,Screens } from '../../constants';
 import { ShowToast } from '../../utils/ShowToast';
 import { ColorSet } from '../../styles';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
+import NavBar from '../../components/default/NavBar';
 
 const SIMULATED_UPDATE_PLANS = [
   'random',
@@ -76,9 +77,6 @@ export default function SetupTerminal({route, navigation}) {
         ShowToast(`${finishError.code}, ${finishError.message}`)
       } else {
         ShowToast('Reader connected successfully');
-        if (navigation.canGoBack()) {
-          navigation.goBack();
-        }
       }
       setDiscoveringLoading(false);
     },
@@ -178,10 +176,7 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       setConnectingReader(undefined);
       Alert.alert(error.code, error.message);
-    } else if (selectedUpdatePlan !== 'required' && navigation.canGoBack()) {
-      // navigation.navigate('TerminalPayment');
-      navigation.goBack();
-    }
+    } 
   };
 
   const handleConnectBluetoothReader = async reader => {
@@ -195,6 +190,7 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       console.log('connectBluetoothReader error:', error);
     } else {
+      navigation.navigate(Screens.printerSetting);
       console.log('Reader connected successfully', connectedReader);
     }
     return {error};
@@ -202,7 +198,6 @@ export default function SetupTerminal({route, navigation}) {
 
   const handleConnectInternetReader = async reader => {
     setConnectingReader(reader);
-
     const {reader: connectedReader, error} = await connectInternetReader({
       reader,
     });
@@ -210,74 +205,20 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       console.log('connectInternetReader error:', error);
     } else {
+      navigation.navigate(Screens.printerSetting);
       console.log('Reader connected successfully', connectedReader);
     }
     return {error};
   };
 
-  //logoutHandler
-  const logoutHandler = () => {
-    Alert.alert("Logout", "Are you sure you want to logout?",[
-      {
-        text: "No",
-        style: "cancel"
-      },
-      {
-        text: "Yes",
-        onPress: async () => {
-          dispatch(setIsLoading(true));
-          const response = await logoutUser();
-          if (response.success) {
-            await removeData(Keys.user);
-            dispatch(setUserData(null));
-            dispatch(setUserType(null));
-            dispatch(setIsLoading(false));
-            navigation.dispatch(StackActions.replace(Screens.auth));
-          } else {
-            dispatch(setIsLoading(false));
-          }
-        }
-      }
-    ])
-  }
+
 
   return (
     <ScrollView
       className="relative"
       testID="discovery-readers-screen"
       contentContainerStyle={styles.container}>
-      {/* <List title="SELECT LOCATION">
-        <ListItem
-          onPress={() => {
-            if (!simulated) {
-              navigation.navigate('LocationListScreen', {
-                onSelect: () => setSelectedLocation(location),
-              });
-            }
-          }}
-          disabled={simulated}
-          title={
-            simulated
-              ? 'Mock simulated reader location'
-              : selectedLocation?.displayName || 'No location selected'
-          }
-        />
-
-        {simulated ? (
-          <Text style={styles.infoText}>
-            Simulated readers are always registered to the mock simulated
-            location.
-          </Text>
-        ) : (
-          <Text style={styles.infoText}>
-            Bluetooth readers must be registered to a location during the
-            connection process. If you do not select a location, the reader will
-            attempt to register to the same location it was registered to during
-            the previous connection.
-          </Text>
-        )}
-      </List> */}
-
+      <NavBar title="Discovery Readers" navigation={navigation} logoutBtn={true}/>
       <List
         title="NEARBY READERS"
         loading={discoveringLoading}
@@ -292,35 +233,12 @@ export default function SetupTerminal({route, navigation}) {
         ))}
       </List>
 
-      <Modal visible={showPicker} transparent>
-        <TouchableWithoutFeedback
-          testID="close-picker"
-          onPress={() => setShowPicker(false)}>
-          <View style={styles.modalOverlay} />
-        </TouchableWithoutFeedback>
 
-        <View style={styles.pickerContainer} testID="picker-container">
-          <Picker
-            selectedValue={selectedUpdatePlan}
-            style={styles.picker}
-            itemStyle={styles.pickerItem}
-            onValueChange={itemValue => handleChangeUpdatePlan(itemValue)}>
-            {SIMULATED_UPDATE_PLANS.map(plan => (
-              <Picker.Item
-                key={plan}
-                label={mapToPlanDisplayName(plan)}
-                testID={plan}
-                value={plan}
-              />
-            ))}
-          </Picker>
-        </View>
-      </Modal>
 
       <Button
         onPress={() => logoutHandler()}
         buttonStyle={styles.bottomButton}
-        textStyle={styles.bottomButtonText}
+        textStyle={styles.bottomButton}
         title="Logout"
       />
     </ScrollView>

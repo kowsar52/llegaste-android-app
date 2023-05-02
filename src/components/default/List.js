@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   description: {
-    color: colors.dark_gray,
+    color: colors.borderColorGray,
     paddingRight: 16,
   },
   titleContainer: {
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   topSpacing: {
-    marginTop: 22,
+    marginTop: 0,
   },
 });
