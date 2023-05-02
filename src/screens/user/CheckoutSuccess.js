@@ -51,7 +51,7 @@ export default function SuccessScreen({route, navigation}) {
   const printReceipt = () => {
 
       try {
-        setIsLoading(true);
+        dispatch(setIsLoading(true));
         const Printer = BLEPrinter;
         Printer.init().then(() => {
           //list printers
@@ -124,9 +124,10 @@ export default function SuccessScreen({route, navigation}) {
                   beep: false,
                 });
                 ShowToast('Print successfully completed.');
-          
+                
                 //wait 2 seconds
                 setTimeout(() => {
+                  dispatch(setIsLoading(false));
                   goBack()
                 }, 2000);   
               });
