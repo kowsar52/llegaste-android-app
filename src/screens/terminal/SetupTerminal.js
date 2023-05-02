@@ -190,7 +190,7 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       console.log('connectBluetoothReader error:', error);
     } else {
-      navigation.navigate(Screens.printerSetting);
+      navigation.navigate(Screens.home);
       console.log('Reader connected successfully', connectedReader);
     }
     return {error};
@@ -205,7 +205,7 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       console.log('connectInternetReader error:', error);
     } else {
-      navigation.navigate(Screens.printerSetting);
+      navigation.navigate(Screens.home);
       console.log('Reader connected successfully', connectedReader);
     }
     return {error};

@@ -37,11 +37,11 @@ export default function SuccessScreen({route, navigation}) {
       setEnableAutoPrint(enable_auto_print);
     }
     
-    const res = await getData(Keys.userPrinter);
-    console.log('printer',res)
-    if (res) {
-      setCurrentPrinter(res);
-    }
+    // const res = await getData(Keys.userPrinter);
+    // console.log('printer',res)
+    // if (res) {
+    //   setCurrentPrinter(res);
+    // }
   };
 
   useEffect(() => {
@@ -49,89 +49,94 @@ export default function SuccessScreen({route, navigation}) {
   }, []);
 
   const printReceipt = () => {
-    if (!currentPrinter) {
-      ShowToast('Please connect printer first');
-      navigation.navigate('PrinterSetting');
-    } else {
+
       try {
         setIsLoading(true);
         const Printer = BLEPrinter;
-        console.log('currentPrinter', currentPrinter);
-        Printer.connectPrinter(currentPrinter?.inner_mac_address)
-        const BOLD_ON = COMMANDS.TEXT_FORMAT.TXT_BOLD_ON;
-        const BOLD_OFF = COMMANDS.TEXT_FORMAT.TXT_BOLD_OFF;
-        const CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_CT;
-        const OFF_CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_LT;
-        // const logo = require('../../assets/logo.jpeg');
-        Printer.printImage('https://lavillitawpb.com/public/logo-black.jpg', {
-          imageWidth: 200,
-          imageHeight: 200,
-        });
-        
-          let textTemplate = `<C> LLegaste H,DD </C>\n`;
-          textTemplate += `<C> New York, USA </C>\n`;
-          textTemplate += `<C> +34434534543 </C>\n`;
-          textTemplate += `Host : POS\n`;
-          textTemplate += `Date : ${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}\n`;
-          textTemplate += `Trx ID - #${txn_id}\n`;
-          textTemplate += `Payment Status - PAID\n`;
-          textTemplate += `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`;
-          Printer.printText(textTemplate, {
-            beep: false,
-            cut: false,
+        Printer.init().then(() => {
+          //list printers
+          Printer.getDeviceList().then(printers => {
+            console.log('kitchen Printers', printers);
+            if (printers.length > 0) {
+              Printer.connectPrinter(printers[1].inner_mac_address).then( () => {
+                const BOLD_ON = COMMANDS.TEXT_FORMAT.TXT_BOLD_ON;
+                const BOLD_OFF = COMMANDS.TEXT_FORMAT.TXT_BOLD_OFF;
+                const CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_CT;
+                const OFF_CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_LT;
+                // const logo = require('../../assets/logo.jpeg');
+                Printer.printImage('https://lavillitawpb.com/public/logo-black.jpg', {
+                  imageWidth: 200,
+                  imageHeight: 200,
+                });
+                
+                  let textTemplate = `<C> LLegaste H,DD </C>\n`;
+                  textTemplate += `<C> New York, USA </C>\n`;
+                  textTemplate += `<C> +34434534543 </C>\n`;
+                  textTemplate += `Host : POS\n`;
+                  textTemplate += `Date : ${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}\n`;
+                  textTemplate += `Trx ID - #${txn_id}\n`;
+                  textTemplate += `Payment Status - PAID\n`;
+                  textTemplate += `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`;
+                  Printer.printText(textTemplate, {
+                    beep: false,
+                    cut: false,
+                  });
+          
+              
+                  let columnAlignment = [
+                      ColumnAlignment.LEFT,
+                      ColumnAlignment.RIGHT,
+                    ];
+                    let columnWidth = [30 -  8,  8];
+            
+          
+                Printer.printColumnsText(
+                  ['TAX', '$0.00'],
+                  columnWidth,
+                  columnAlignment,
+                  [`${BOLD_OFF}`, '',''],
+                );
+                Printer.printColumnsText(
+                  ['Total Amount',  `$${parseFloat(total_amount).toFixed(2)}`],
+                  columnWidth,
+                  columnAlignment,
+                  [`${BOLD_OFF}`, '',''],
+                );
+              
+                Printer.printText(
+                  `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`
+                );
+                Printer.printText('<C>QR Code</C>');
+                Printer.printImage(
+                  'https://blog.hubspot.com/hs-fs/hubfs/Google%20Drive%20Integration/DRAFT%20how%20to%20get%20a%20qr%20code-Nov-16-2022-06-26-37-4642-PM.jpeg?width=381&height=378&name=DRAFT%20how%20to%20get%20a%20qr%20code-Nov-16-2022-06-26-37-4642-PM.jpeg',
+                  {
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    paddingX: 10,
+                    cut: false,
+                  },
+                );
+          
+                Printer.printText(
+                  "<C>How're we doing? Let us know at llegaste.tech</C>",
+                );
+                Printer.printBill("<C>Thank You!</C>\n", {
+                  beep: false,
+                });
+                ShowToast('Print successfully completed.');
+          
+                //wait 2 seconds
+                setTimeout(() => {
+                  goBack()
+                }, 2000);   
+              });
+            }
           });
-  
-      
-          let columnAlignment = [
-              ColumnAlignment.LEFT,
-              ColumnAlignment.RIGHT,
-            ];
-            let columnWidth = [30 -  8,  8];
-     
-  
-        Printer.printColumnsText(
-          ['TAX', '$0.00'],
-          columnWidth,
-          columnAlignment,
-          [`${BOLD_OFF}`, '',''],
-        );
-        Printer.printColumnsText(
-          ['Total Amount',  `$${parseFloat(total_amount).toFixed(2)}`],
-          columnWidth,
-          columnAlignment,
-          [`${BOLD_OFF}`, '',''],
-        );
-      
-        Printer.printText(
-          `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`
-        );
-        Printer.printText('<C>QR Code</C>');
-        Printer.printImage(
-          'https://blog.hubspot.com/hs-fs/hubfs/Google%20Drive%20Integration/DRAFT%20how%20to%20get%20a%20qr%20code-Nov-16-2022-06-26-37-4642-PM.jpeg?width=381&height=378&name=DRAFT%20how%20to%20get%20a%20qr%20code-Nov-16-2022-06-26-37-4642-PM.jpeg',
-          {
-            imageWidth: 200,
-            imageHeight: 200,
-            paddingX: 10,
-            cut: false,
-          },
-        );
-  
-        Printer.printText(
-          "<C>How're we doing? Let us know at llegaste.tech</C>",
-        );
-        Printer.printBill("<C>Thank You!</C>\n", {
-          beep: false,
         });
-        ShowToast('Print successfully completed.');
-  
-        //wait 2 seconds
-        setTimeout(() => {
-          goBack()
-        }, 2000);
       } catch (error) {
        Alert.alert("Failed",error.message)
       }
-    }
+
   };
 
   const goBack = () => {
