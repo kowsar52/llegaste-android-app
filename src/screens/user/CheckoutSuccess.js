@@ -63,16 +63,11 @@ export default function SuccessScreen({route, navigation}) {
                 const BOLD_OFF = COMMANDS.TEXT_FORMAT.TXT_BOLD_OFF;
                 const CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_CT;
                 const OFF_CENTER = COMMANDS.TEXT_FORMAT.TXT_ALIGN_LT;
-                // const logo = require('../../assets/logo.jpeg');
-                Printer.printImage('https://lavillitawpb.com/public/logo-black.jpg', {
-                  imageWidth: 200,
-                  imageHeight: 200,
-                });
+          
                 
                   let textTemplate = `<C> LLegaste H,DD </C>\n`;
                   textTemplate += `<C> New York, USA </C>\n`;
                   textTemplate += `<C> +34434534543 </C>\n`;
-                  textTemplate += `Host : POS\n`;
                   textTemplate += `Date : ${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}\n`;
                   textTemplate += `Trx ID - #${txn_id}\n`;
                   textTemplate += `Payment Status - PAID\n`;
@@ -90,12 +85,7 @@ export default function SuccessScreen({route, navigation}) {
                     let columnWidth = [30 -  8,  8];
             
           
-                Printer.printColumnsText(
-                  ['TAX', '$0.00'],
-                  columnWidth,
-                  columnAlignment,
-                  [`${BOLD_OFF}`, '',''],
-                );
+        
                 Printer.printColumnsText(
                   ['Total Amount',  `$${parseFloat(total_amount).toFixed(2)}`],
                   columnWidth,
@@ -106,17 +96,7 @@ export default function SuccessScreen({route, navigation}) {
                 Printer.printText(
                   `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`
                 );
-                Printer.printText('<C>QR Code</C>');
-                Printer.printImage(
-                  'https://blog.hubspot.com/hs-fs/hubfs/Google%20Drive%20Integration/DRAFT%20how%20to%20get%20a%20qr%20code-Nov-16-2022-06-26-37-4642-PM.jpeg?width=381&height=378&name=DRAFT%20how%20to%20get%20a%20qr%20code-Nov-16-2022-06-26-37-4642-PM.jpeg',
-                  {
-                    imageWidth: 200,
-                    imageHeight: 200,
-                    paddingX: 10,
-                    cut: false,
-                  },
-                );
-          
+           
                 Printer.printText(
                   "<C>How're we doing? Let us know at llegaste.tech</C>",
                 );
