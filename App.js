@@ -75,6 +75,8 @@ const App = ({navigator}) => {
     const handlePermissionsSuccess = useCallback(async () => {
         setHasPerms(true);
       }, []);
+
+      
     return (
     <SafeAreaProvider style={styles.container}>
         <StatusBar hidden />

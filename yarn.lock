@@ -6084,6 +6084,11 @@ react-native-masked-text@^1.13.0:
     date-and-time "0.9.0"
     tinymask "1.0.2"
 
+react-native-pin-view@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-pin-view/-/react-native-pin-view-3.0.3.tgz#2294369db926b39a6b1288f26254683c168413c0"
+  integrity sha512-0xCQBpwrP06wDjUlfwViFMzi1ph+9Y1ytYWkGtdIcy9XcR5RK94DOGDisNUb8LrvHjVIoeuoDIkYPVcvv43GGA==
+
 react-native-ping@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/react-native-ping/-/react-native-ping-1.2.7.tgz#3fa4cb71a2f4990154e655bd294c2e65fd2a24b7"

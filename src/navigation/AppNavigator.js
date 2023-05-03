@@ -8,6 +8,7 @@ import {
     TerminalSetting,
     PrinterSetting,
     ProfileSetting,
+    PinSetting,
     Profile,
     Checkout,
     ManualCheckout,
@@ -15,7 +16,8 @@ import {
     SetupTerminal,
     Splash,
     ForgetPassword,
-    ResetPassword
+    ResetPassword,
+    Pin
 } from "../screens";
 
 import {Screens} from '../constants';
@@ -32,6 +34,7 @@ const AppNavigator = () => {
       <NavigationContainer>
         <AppStack.Navigator screenOptions={{ headerShown: false }}>
             <AppStack.Screen name={Screens.splash} component={Home} />
+            <AppStack.Screen name={Screens.pin} component={Pin} />
             <AppStack.Screen name={Screens.login} component={Login} />
             <AppStack.Screen name={Screens.forgetPassword} component={ForgetPassword} />
             <AppStack.Screen name={Screens.resetPassword} component={ResetPassword} />
@@ -40,6 +43,7 @@ const AppNavigator = () => {
             <AppStack.Screen name={Screens.terminalSetting} component={TerminalSetting} />
             <AppStack.Screen name={Screens.printerSetting} component={PrinterSetting} />
             <AppStack.Screen name={Screens.profileSetting} component={ProfileSetting} />
+            <AppStack.Screen name={Screens.pinSetting} component={PinSetting} />
             <AppStack.Screen name={Screens.profile} component={Profile} />
             <AppStack.Screen name={Screens.checkout} component={Checkout} />
             <AppStack.Screen name={Screens.manualCheckout} component={ManualCheckout} />

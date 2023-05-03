@@ -5,11 +5,12 @@ import {FamilySet,ColorSet} from '../../styles';
 import Button from '../../components/default/Button';
 import NumberPad from '../../components/default/NumberPad';
 import { ShowToast } from '../../utils/ShowToast';
-import { getUserData } from '../../utils/Storage';
+import { getData, getUserData } from '../../utils/Storage';
 import {useStripeTerminal} from '@stripe/stripe-terminal-react-native';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 const screenHeight = Dimensions.get('window').height;
 import { useDispatch,useSelector } from 'react-redux';
+import { Screens } from '../../constants';
 
 export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
@@ -71,11 +72,13 @@ export default function Home({navigation}) {
 
   }, []);
 
+
+
   return (
     <View style={styles.container}>
       {/* mavbar start  */}
       <View style={styles.navbar}>
-        <Pressable style={styles.leftIcon} onPress={() => navigation.goBack()}> 
+        <Pressable style={styles.leftIcon} onPress={() => navigation.navigate(Screens.splash)}> 
           <Icon name="arrow-back" size={20} color="#333" />
         </Pressable>
         <Text style={styles.navTitle}>Payment</Text>
@@ -99,7 +102,7 @@ export default function Home({navigation}) {
           }}>
             <Button title="Manual Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("ManualCheckout",{
               amount: amount
-            })} disabled={true}  buttonStyle={styles.buttonStyle}/>
+            })} disabled={true}  buttonStyle={styles.buttonStyleOutline}/>
             <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
               amount: amount
             })} disabled={true}  buttonStyle={styles.buttonStyle}/>
@@ -173,12 +176,13 @@ const styles = StyleSheet.create({
       backgroundColor: ColorSet.redDeleteColor,
     },
     buttonStyleOutline:{
-      width: '100%',
       textAlign: 'center',
       alignContent: 'center',
       justifyContent: 'center',
-      marginTop: 15,
-      backgroundColor: ColorSet.redDeleteColor,
+      width: '44%',
+      margin: 10,
+      padding: 10,
+      backgroundColor: ColorSet.black,
     },
     amount:{
       fontSize: 50,

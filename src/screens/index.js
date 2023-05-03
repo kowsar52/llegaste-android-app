@@ -14,6 +14,8 @@ import Checkout from "./user/Checkout";
 import ManualCheckout from "./user/ManualCheckout";
 import CheckoutSuccess from "./user/CheckoutSuccess";
 import SetupTerminal from "./terminal/SetupTerminal";
+import PinSetting from "./user/Setting/PinSetting";
+import Pin from "./auth/Pin";
 
 // export default all screen 
 export {
@@ -27,10 +29,12 @@ export {
     TerminalSetting,
     PrinterSetting,
     ProfileSetting,
+    PinSetting,
     Profile,
     SetupTerminal,
     Checkout,
     ManualCheckout,
-    CheckoutSuccess
+    CheckoutSuccess,
+    Pin
     
 }

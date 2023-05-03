@@ -1,10 +1,13 @@
 import {StripeTerminalProvider} from '@stripe/stripe-terminal-react-native';
 import App from './App';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { URL } from './src/constants';
+import { getData } from './src/utils/Storage';
 
 function Root() {
-    console.log('22',URL.stripeConnectionToken)
+
+
+
   const fetchTokenProvider = async () => {
 
     const response = await fetch(

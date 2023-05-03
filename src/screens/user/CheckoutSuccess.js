@@ -35,13 +35,12 @@ export default function SuccessScreen({route, navigation}) {
     const enable_auto_print = await getData('enable_auto_print');
     if (enable_auto_print) {
       setEnableAutoPrint(enable_auto_print);
+      printReceipt()
+    }else{
+      setTimeout(() => {
+        navigation.navigate("Home")
+      },30000)
     }
-    
-    // const res = await getData(Keys.userPrinter);
-    // console.log('printer',res)
-    // if (res) {
-    //   setCurrentPrinter(res);
-    // }
   };
 
   useEffect(() => {

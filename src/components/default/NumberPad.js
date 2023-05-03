@@ -45,8 +45,8 @@ const NumberPad = ({ onPress, amount}) => {
         <View style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingHorizontal: 30,
-            marginBottom: 60,
+            paddingHorizontal: 20,
+            marginBottom: 50,
         }}>
             <TouchableOpacity style={styles.button} onPress={() => onPress('clean')}>
             <Icon name="close-outline"  style={styles.buttonText} />
@@ -73,11 +73,11 @@ const NumberPad = ({ onPress, amount}) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginBottom: 0,
-      paddingHorizontal: 30,
+      paddingHorizontal: 20,
     },
     button: {
-      width: 80,
-      height: 80,
+      width: 75,
+      height: 75,
       alignItems: 'center',
       justifyContent: 'center',
     },

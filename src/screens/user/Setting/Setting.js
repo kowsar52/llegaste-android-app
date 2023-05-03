@@ -55,7 +55,7 @@ const Setting = ({navigation}) => {
       id: 5,
       title: 'Change Pin',
       icon: require('../../../assets/images/password.png'),
-      screen: Screens.profileSetting,
+      screen: Screens.pinSetting,
     }
     
   ]
