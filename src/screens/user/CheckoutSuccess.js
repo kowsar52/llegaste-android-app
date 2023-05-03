@@ -77,28 +77,15 @@ export default function SuccessScreen({route, navigation}) {
                     cut: false,
                   });
           
-              
-                  let columnAlignment = [
-                      ColumnAlignment.LEFT,
-                      ColumnAlignment.RIGHT,
-                    ];
-                    let columnWidth = [30 -  8,  8];
-            
-          
-        
-                Printer.printColumnsText(
-                  ['Total Amount',  `$${parseFloat(total_amount).toFixed(2)}`],
-                  columnWidth,
-                  columnAlignment,
-                  [`${BOLD_OFF}`, '',''],
-                );
-              
-                Printer.printText(
-                  `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`
-                );
+              Printer.printBill(`Total Amount $${parseFloat(total_amount).toFixed(2)}`,{
+                cut : false
+              })
            
-                Printer.printText(
+                Printer.printBill(
                   "<C>How're we doing? Let us know at llegaste.tech</C>",
+                  {
+                    cut: false
+                  }
                 );
                 Printer.printBill("<C>Thank You!</C>\n", {
                   beep: false,

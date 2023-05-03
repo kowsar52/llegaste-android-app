@@ -35,6 +35,7 @@ export default function Home({navigation}) {
     }
   };
   useEffect(() => {
+    setAmount(0)
     async function getUser(){
      dispatch(setIsLoading(true))
       const userData = await getUserData();
