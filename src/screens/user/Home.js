@@ -69,6 +69,16 @@ export default function Home({navigation}) {
 
   }, []);
 
+  const goNext = () => {
+    if(amount == 0){
+      ShowToast('Please enter amount');
+      return;
+    }
+    navigation.navigate("Checkout",{
+      amount: amount
+    })
+  }
+
 
 
   return (
@@ -103,9 +113,7 @@ export default function Home({navigation}) {
             <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
               amount: amount
             })} disabled={true}  buttonStyle={styles.buttonStyle}/>
-          </View> : <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
-              amount: amount
-            })} disabled={true}  buttonStyle={styles.buttonStyleFull}/>}
+          </View> : <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => goNext()} disabled={true}  buttonStyle={styles.buttonStyleFull}/>}
           
    
       

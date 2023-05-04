@@ -120,7 +120,6 @@ const buttons = [
   {
     text: 'No',
     onPress: () => {
-      dispatch(clearCart());
       clearTimeout(timerId.current);
       clearTimeout(timerId2.current);
       navigation.navigate('Home');
