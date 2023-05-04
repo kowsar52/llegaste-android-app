@@ -28,10 +28,12 @@ export default function SuccessScreen({route, navigation}) {
 
    const dispatch = useDispatch();
   const [enable_auto_print, setEnableAutoPrint] = React.useState(0);
+  const [enableScreensaver, setEnableScreensaver] = React.useState(false);
   const [currentPrinter, setCurrentPrinter] = React.useState();
   const {txn_id , total_amount} = route.params
 
   const getCurrentPrinter = async () => {
+   
     //enable_auto_print
     const enable_auto_print = await getData('enable_auto_print');
     if (enable_auto_print) {
@@ -127,7 +129,15 @@ const buttons = [
 ];
 
 useEffect(() => {
-  resetInactivityTimeout();
+  const getOldData = async () => {
+    const res = await getData("enableScreensaver")
+    if(res){
+      resetInactivityTimeout();
+    }
+  }
+
+  getOldData()  
+  
 }, []);
 
 const panResponder = React.useRef(

@@ -28,7 +28,7 @@ import {
   checkAdminPin,
 } from '../../../networking/authServices/AuthAPIServices';
 import {ShowToast} from '../../../utils/ShowToast';
-import {removeData} from '../../../utils/Storage';
+import {getData, removeData, storeData} from '../../../utils/Storage';
 import {Keys} from '../../../constants';
 import { useStripeTerminal} from '@stripe/stripe-terminal-react-native';
 import NavBar from '../../../components/default/NavBar';
@@ -36,6 +36,7 @@ import NavBar from '../../../components/default/NavBar';
 const TerminalSetting = ({navigation}) => {
   const [settings, setSettings] = useState([]);
   const [pinCheckModalVisible, setPinCheckModalVisible] = useState(false);
+  const [enableScreensaver, setEnableScreensaver] = useState(false);
   const [admin_pin, setAdminPin] = useState('');
   const { connectedReader,disconnectReader } = useStripeTerminal();
   const [isEnabledManualCheckout, setIsEnabledManualCheckout] = useState(false);
@@ -45,8 +46,11 @@ const TerminalSetting = ({navigation}) => {
     async function getSetting() {
       const resStripe = await stripeSetting();
       if (resStripe) {
-        console.log(resStripe);
         setSettings(resStripe);
+        const res = await getData("enableScreensaver")
+        if(res){
+          setEnableScreensaver(res)
+        }
         dispatch(setIsLoading(false));
       }
     }
@@ -127,6 +131,18 @@ const TerminalSetting = ({navigation}) => {
     {/* body start  */}
     <ScrollView style={styles.body}>
 
+      <View style={styles.setting}>
+        <Text style={styles.settingLabel}>Enable Screensaver</Text>
+        <Switch
+          value={enableScreensaver ? true : false}
+          onValueChange={(value) => {
+            setEnableScreensaver(value)
+            storeData('enableScreensaver', value)
+          }}
+          trackColor={{true: ColorSet.theme}}
+          thumbColor={enableScreensaver ? ColorSet.theme : '#f4f3f4'}
+        />
+      </View>
       <View style={styles.setting}>
         <Text style={styles.settingLabel}>Enable Terminal</Text>
         <Switch

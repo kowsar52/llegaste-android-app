@@ -6,11 +6,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Input from '../../../components/default/Input';
 import { getData, storeData } from '../../../utils/Storage';
 import { ShowToast } from '../../../utils/ShowToast';
+import { checkAdminPin } from '../../../networking/authServices/AuthAPIServices';
 
 const PinSetting = ({navigation}) => {
     const [isEnabledManualCheckout, setIsEnabledManualCheckout] = useState(false);
     const [admin_pin, setAdminPin] = useState('');
-    const [confirmPin, setConfirmPin] = useState('');
+    const [new_pin, setNewPin] = useState('');
+    const [confirm_pin, setConfirmPin] = useState('');
 
     useEffect(() => {
         const getOldData = async () => {
@@ -20,20 +22,23 @@ const PinSetting = ({navigation}) => {
 
         getOldData()
     },[])
-    const handleSubmit = () => {
-        if(isEnabledManualCheckout){
-            if(admin_pin == ''){
-                ShowToast("Please enter pin!")
-                return;
-            }
-        }
-        if (admin_pin === confirmPin) {
-            storeData("admin_pin", admin_pin)
+    const handleSubmit = async () => {
+      const response = await checkAdminPin({
+        admin_pin: admin_pin,
+      });
+      if(response.success){
+        if (new_pin === confirm_pin) {
+            storeData("admin_pin", new_pin)
+              await checkAdminPin({
+              new_pin: new_pin,
+              confirm_pin: confirm_pin,
+            });
             ShowToast("Pin has been changed!")
             navigation.navigate("Setting")
         } else {
             ShowToast("Pin does not match")
         }
+      }
     }
 
   return (
@@ -54,14 +59,20 @@ const PinSetting = ({navigation}) => {
  
        <View>
         <View>
-            <Text style={appStyle.label}>New Pin</Text>
+            <Text style={appStyle.label}>Current Pin</Text>
             <Input placeholder="12345" keyboardType="numeric" value={admin_pin} onChangeText={ (text) => {
                 setAdminPin(text)
             }} />
         </View>
         <View>
-            <Text style={appStyle.label}>Confirm Pin</Text>
-            <Input placeholder="12345" keyboardType="numeric" value={confirmPin} onChangeText={ (text) => {
+            <Text style={appStyle.label}>New Pin</Text>
+            <Input placeholder="12345" keyboardType="numeric" value={new_pin} onChangeText={ (text) => {
+                setNewPin(text)
+            }} />
+        </View>
+        <View>
+            <Text style={appStyle.label}>Confirm New Pin</Text>
+            <Input placeholder="12345" keyboardType="numeric" value={confirm_pin} onChangeText={ (text) => {
                 setConfirmPin(text)
             }}/>
         </View>

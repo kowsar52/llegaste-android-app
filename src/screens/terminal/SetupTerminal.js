@@ -238,7 +238,6 @@ export default function SetupTerminal({route, navigation}) {
       <Button
         onPress={() => logoutHandler()}
         buttonStyle={styles.bottomButton}
-        textStyle={styles.bottomButton}
         title="Logout"
       />
     </ScrollView>
