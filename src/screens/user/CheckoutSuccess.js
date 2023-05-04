@@ -74,18 +74,17 @@ export default function SuccessScreen({route, navigation}) {
                   });
           
               Printer.printBill(`Total Amount $${parseFloat(total_amount).toFixed(2)}`,{
-                cut : false
+                cut : false,
+                beep: false
               })
            
                 Printer.printBill(
-                  "<C>How're we doing? Let us know at llegaste.tech</C>",
+                  "<C>How're we doing? Let us know at llegaste.tech</C>\n<C>Thank You!</C>\n",
                   {
-                    cut: false
+                    beep: false
                   }
                 );
-                Printer.printBill("<C>Thank You!</C>\n", {
-                  beep: false,
-                });
+              
                 ShowToast('Print successfully completed.');
                 
                 //wait 2 seconds
@@ -168,7 +167,9 @@ const resetAutoInactivityTimeout = () => {
 
   const goBack = () => {
     setVisible(false);
-    navigation.navigate('Home')
+    clearTimeout(timerId.current);
+      clearTimeout(timerId2.current);
+      navigation.navigate('Home');
   }
 
 // idle screen part end
