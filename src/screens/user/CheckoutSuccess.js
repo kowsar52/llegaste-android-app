@@ -1,5 +1,5 @@
-import {View, Text, StatusBar, Alert} from 'react-native';
-import React, {useEffect} from 'react';
+import {View, Text, StatusBar, Alert, PanResponder} from 'react-native';
+import React, {useEffect,useRef,useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Lottie from 'lottie-react-native';
 import Button from '../../components/default/Button';
@@ -21,6 +21,7 @@ import { ColorSet, appStyle } from '../../styles';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 import { getData } from '../../utils/Storage';
 import { Keys } from '../../constants';
+import CustomAlert from '../../components/default/CustomAlert';
 
 
 export default function SuccessScreen({route, navigation}) {
@@ -36,10 +37,6 @@ export default function SuccessScreen({route, navigation}) {
     if (enable_auto_print) {
       setEnableAutoPrint(enable_auto_print);
       printReceipt()
-    }else{
-      setTimeout(() => {
-        navigation.navigate("Home")
-      },30000)
     }
   };
 
@@ -106,11 +103,85 @@ export default function SuccessScreen({route, navigation}) {
 
   };
 
+  // idle screen part start
+const timerId = useRef(false);
+const timerId2 = useRef(false);
+const [timeForInactivityInSecond, setTimeForInactivityInSecond] = useState(15);
+const [timeForAutoInactivityInSecond, setTimeForAutoInactivityInSecond] = useState(10);
+const [visible, setVisible] = useState(false);
+const buttons = [
+  {
+    text: 'Yes',
+    onPress: () => {
+      clearTimeout(timerId.current);
+      clearTimeout(timerId2.current);
+    },
+  },
+  {
+    text: 'No',
+    onPress: () => {
+      dispatch(clearCart());
+      clearTimeout(timerId.current);
+      clearTimeout(timerId2.current);
+      navigation.navigate('Home');
+    },
+  },
+];
+
+useEffect(() => {
+  resetInactivityTimeout();
+}, []);
+
+const panResponder = React.useRef(
+  PanResponder.create({
+    onStartShouldSetPanResponderCapture: () => {
+      resetInactivityTimeout();
+      resetAutoInactivityTimeout();
+    },
+  }),
+).current;
+
+const resetInactivityTimeout = () => {
+ console.log('timerId.current',timerId.current)
+  clearTimeout(timerId.current);
+  timerId.current = setTimeout(() => {
+   console.log("Show the alert message 2")
+    setVisible(true);
+    resetAutoInactivityTimeout();
+  }, timeForInactivityInSecond * 1000);
+
+  return () => {
+    clearTimeout(timerId.current);
+  };
+};
+
+const resetAutoInactivityTimeout = () => {
+  clearTimeout(timerId2.current);
+  timerId2.current = setTimeout(() => {
+      goBack();
+
+  }, timeForAutoInactivityInSecond * 1000);
+
+  return () => {
+    clearTimeout(timerId2.current);
+  };
+};
+
   const goBack = () => {
+    setVisible(false);
     navigation.navigate('Home')
   }
+
+// idle screen part end
   return (
-    <SafeAreaView style={appStyle.container_center} >
+    <SafeAreaView style={appStyle.container_center} {...panResponder.panHandlers}>
+       <CustomAlert
+            visible={visible}
+            setVisible={setVisible}
+            title="Do you need more time?"
+            message="Press yes to continue order or press no to cancel."
+            buttons={buttons}
+          />
       <View
         style={{
           alignContent: 'center',
