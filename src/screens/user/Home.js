@@ -15,6 +15,7 @@ import { Screens } from '../../constants';
 export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
   const {connectedReader, initialize} = useStripeTerminal();
+  const [isEnabledManualCheckout,setIsEnabledManualCheckout] = useState(false)
   const dispatch = useDispatch();
 
   const handlePress = (key) => {
@@ -35,6 +36,8 @@ export default function Home({navigation}) {
       break;
     }
   };
+
+
   useEffect(() => {
     setAmount(0)
     async function getUser(){
@@ -45,19 +48,6 @@ export default function Home({navigation}) {
         if(reader){
           ShowToast('Reader Connected');
         }else{
-          // Alert.alert(
-          //   "Reader not connected",
-          //   "Please connect reader",
-          //   [
-          //     {
-          //       text: "Cancel",
-          //       onPress: () => console.log("Cancel Pressed"),
-          //       style: "cancel"
-          //     },
-          //     { text: "OK", onPress: () => navigation.navigate('SetupTerminal') }
-          //   ]
-          // );
-          // //go to setupterinal screen
           navigation.navigate('SetupTerminal');
         }
         dispatch(setIsLoading(false))
@@ -69,6 +59,13 @@ export default function Home({navigation}) {
       
     }
     getUser();
+
+    const getOldData = async () => {
+        const data = await getData('isEnabledManualCheckout')
+        console.log('isEnabledManualCheckout',data)
+        setIsEnabledManualCheckout(data)
+    }
+    getOldData()
 
   }, []);
 
@@ -92,7 +89,7 @@ export default function Home({navigation}) {
       </View>
       <View style={styles.numberBar}>
           <NumberPad onPress={handlePress} amount={amount} />
-          <View style={{
+          {isEnabledManualCheckout ? <View style={{
             flex: 1,
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -106,7 +103,10 @@ export default function Home({navigation}) {
             <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
               amount: amount
             })} disabled={true}  buttonStyle={styles.buttonStyle}/>
-          </View>
+          </View> : <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => navigation.navigate("Checkout",{
+              amount: amount
+            })} disabled={true}  buttonStyle={styles.buttonStyleFull}/>}
+          
    
       
         </View>
@@ -174,6 +174,14 @@ const styles = StyleSheet.create({
       margin: 10,
       padding: 10,
       backgroundColor: ColorSet.redDeleteColor,
+    },
+    buttonStyleFull:{
+      textAlign: 'center',
+      alignContent: 'center',
+      justifyContent: 'center',
+      margin: 10,
+      padding: 10,
+      backgroundColor: ColorSet.black,
     },
     buttonStyleOutline:{
       textAlign: 'center',

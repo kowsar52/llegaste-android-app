@@ -8,27 +8,27 @@ import { getData, storeData } from '../../../utils/Storage';
 import { ShowToast } from '../../../utils/ShowToast';
 
 const PinSetting = ({navigation}) => {
-    const [isEnabledPin, setIsEnabledPin] = useState(false);
-    const [pin, setPin] = useState('');
+    const [isEnabledManualCheckout, setIsEnabledManualCheckout] = useState(false);
+    const [admin_pin, setAdminPin] = useState('');
     const [confirmPin, setConfirmPin] = useState('');
 
     useEffect(() => {
         const getOldData = async () => {
-            const data = await getData('isEnabledPin')
-            setIsEnabledPin(data)
+            const data = await getData('isEnabledManualCheckout')
+            setIsEnabledManualCheckout(data)
         }
 
         getOldData()
     },[])
     const handleSubmit = () => {
-        if(isEnabledPin){
-            if(pin == ''){
+        if(isEnabledManualCheckout){
+            if(admin_pin == ''){
                 ShowToast("Please enter pin!")
                 return;
             }
         }
-        if (pin === confirmPin) {
-            storeData("pin", pin)
+        if (admin_pin === confirmPin) {
+            storeData("admin_pin", admin_pin)
             ShowToast("Pin has been changed!")
             navigation.navigate("Setting")
         } else {
@@ -43,7 +43,7 @@ const PinSetting = ({navigation}) => {
         <Pressable style={styles.leftIcon} onPress={() => navigation.goBack()}> 
           <Icon name="arrow-back" size={20} color="#333" />
         </Pressable>
-        <Text style={styles.navTitle}>Account info</Text>
+        <Text style={styles.navTitle}>Admin Pin</Text>
         <Pressable onPress={() => navigation.navigate("Account")}>
         <Icon name="log-out-outline" size={20} color="#333" />
         </Pressable>
@@ -51,23 +51,12 @@ const PinSetting = ({navigation}) => {
       {/* mavbar end  */}
 
       <View>
-      <View style={styles.setting}>
-        <Text style={appStyle.label}>Enable Pin</Text>
-        <Switch
-          value={isEnabledPin ? true : false}
-          onValueChange={(value) => {
-            storeData('isEnabledPin', value)
-            setIsEnabledPin(value);
-          }}
-          trackColor={{true: ColorSet.theme}}
-          thumbColor={isEnabledPin ? ColorSet.theme : '#f4f3f4'}
-        />
-      </View>
-      {isEnabledPin && <View>
+ 
+       <View>
         <View>
-            <Text style={appStyle.label}>Pin</Text>
-            <Input placeholder="12345" keyboardType="numeric" value={pin} onChangeText={ (text) => {
-                setPin(text)
+            <Text style={appStyle.label}>New Pin</Text>
+            <Input placeholder="12345" keyboardType="numeric" value={admin_pin} onChangeText={ (text) => {
+                setAdminPin(text)
             }} />
         </View>
         <View>
@@ -76,7 +65,7 @@ const PinSetting = ({navigation}) => {
                 setConfirmPin(text)
             }}/>
         </View>
-        </View>}
+        </View>
         
       </View>
  

@@ -38,6 +38,7 @@ const TerminalSetting = ({navigation}) => {
   const [pinCheckModalVisible, setPinCheckModalVisible] = useState(false);
   const [admin_pin, setAdminPin] = useState('');
   const { connectedReader,disconnectReader } = useStripeTerminal();
+  const [isEnabledManualCheckout, setIsEnabledManualCheckout] = useState(false);
 
   useEffect(() => {
     dispatch(setIsLoading(true));
@@ -110,6 +111,8 @@ const TerminalSetting = ({navigation}) => {
       setPinCheckModalVisible(false);
       setAdminPin('');
       updateSetting(settings);
+      storeData('isEnabledManualCheckout', true)
+      setIsEnabledManualCheckout(true);
       dispatch(setIsLoading(false));
     } else {
       dispatch(setIsLoading(false));
