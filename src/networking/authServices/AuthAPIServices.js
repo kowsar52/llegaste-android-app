@@ -59,7 +59,6 @@ export const updateStripeSetting = async (data) => {
 export const checkAdminPin = async (data) => {
     try{
         const result = await callPostApiWithToken(URL.checkAdminPin, data);
-        ShowToast(result.success === true ? result.message : `${result.message}`);
         return result;
     }catch(error){
         ShowToast(error.message)

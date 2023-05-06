@@ -28,8 +28,6 @@ export default function SuccessScreen({route, navigation}) {
 
    const dispatch = useDispatch();
   const [enable_auto_print, setEnableAutoPrint] = React.useState(0);
-  const [enableScreensaver, setEnableScreensaver] = React.useState(false);
-  const [currentPrinter, setCurrentPrinter] = React.useState();
   const {txn_id , total_amount} = route.params
 
   const getCurrentPrinter = async () => {
@@ -74,11 +72,24 @@ export default function SuccessScreen({route, navigation}) {
                     beep: false,
                     cut: false,
                   });
-          
-              Printer.printBill(`Total Amount $${parseFloat(total_amount).toFixed(2)}`,{
-                cut : false,
-                beep: false
-              })
+                  let columnAlignment = [
+                    ColumnAlignment.LEFT,
+                    ColumnAlignment.RIGHT,
+                  ];
+                  let columnWidth = [30 -  8,  8];
+
+                  Printer.printColumnsText(
+                    ['TAX', '$0.00'],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
+                  Printer.printColumnsText(
+                    ['Subtotal',  `$${parseFloat(total_amount).toFixed(2)}`],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
            
                 Printer.printBill(
                   "<C>How're we doing? Let us know at llegaste.tech</C>\n<C>Thank You!</C>\n",
@@ -123,7 +134,7 @@ const buttons = [
     onPress: () => {
       clearTimeout(timerId.current);
       clearTimeout(timerId2.current);
-      navigation.navigate('Home');
+      navigation.push('Home');
     },
   },
 ];
@@ -153,7 +164,6 @@ const resetInactivityTimeout = () => {
  console.log('timerId.current',timerId.current)
   clearTimeout(timerId.current);
   timerId.current = setTimeout(() => {
-   console.log("Show the alert message 2")
     setVisible(true);
     resetAutoInactivityTimeout();
   }, timeForInactivityInSecond * 1000);
@@ -165,21 +175,24 @@ const resetInactivityTimeout = () => {
 
 const resetAutoInactivityTimeout = () => {
   clearTimeout(timerId2.current);
+  clearTimeout(timerId.current);
   timerId2.current = setTimeout(() => {
       goBack();
-
   }, timeForAutoInactivityInSecond * 1000);
 
   return () => {
+    clearTimeout(timerId.current);
     clearTimeout(timerId2.current);
   };
 };
 
   const goBack = () => {
     setVisible(false);
+    //clear timerID
     clearTimeout(timerId.current);
-      clearTimeout(timerId2.current);
-      navigation.navigate('Home');
+    clearTimeout(timerId2.current);
+    navigation.push('Home');
+
   }
 
 // idle screen part end
@@ -219,7 +232,7 @@ const resetAutoInactivityTimeout = () => {
         ) : (
           ''
         )}
-        <Button title="Back to Home" onPress={() => navigation.navigate("Home")} buttonStyle={{
+        <Button title="Back to Home" onPress={() => goBack()} buttonStyle={{
           marginTop: 10,
           backgroundColor: ColorSet.textColorRed,
         }}/>

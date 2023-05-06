@@ -33,24 +33,24 @@ const Setting = ({navigation}) => {
       icon: require('../../../assets/images/pos-terminal.png'),
       screen: Screens.terminalSetting,
     },
-    // {
-    //   id: 2,
-    //   title: 'Printer Settings',
-    //   icon: require('../../../assets/images/printer.png'),
-    //   screen: Screens.printerSetting,
-    // },
-    // {
-    //   id: 3,
-    //   title: 'Payment Settings',
-    //   icon: require('../../../assets/images/pos-terminal.png'),
-    //   screen: Screens.terminalSetting,
-    // },
-    // {
-    //   id: 4,
-    //   title: 'Profile Settings',
-    //   icon: require('../../../assets/images/settings.png'),
-    //   screen: Screens.profileSetting,
-    // },
+    {
+      id: 2,
+      title: 'Printer Settings',
+      icon: require('../../../assets/images/printer.png'),
+      screen: Screens.printerSetting,
+    },
+    {
+      id: 3,
+      title: 'Payment Settings',
+      icon: require('../../../assets/images/pos-terminal.png'),
+      screen: Screens.terminalSetting,
+    },
+    {
+      id: 4,
+      title: 'Profile Settings',
+      icon: require('../../../assets/images/settings.png'),
+      screen: Screens.profileSetting,
+    },
     {
       id: 5,
       title: 'Change Pin',

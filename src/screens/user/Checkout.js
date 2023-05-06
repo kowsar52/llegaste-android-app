@@ -14,10 +14,12 @@ import {
   CommonError,
 } from '@stripe/stripe-terminal-react-native';
 import NavBar from '../../components/default/NavBar';
+import { useDispatch } from 'react-redux';
+import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 
 export default function Checkout({navigation,route}) {
  
-
+  const dispatch = useDispatch();
   const {amount} = route.params;
   const [logMessage, setLogMessage] = useState('Prepearing');
   const [logType, setLogType] = useState('Success');
@@ -51,11 +53,13 @@ export default function Checkout({navigation,route}) {
 
   useEffect(() => {
     async function getUser(){
+      dispatch(setIsLoading(true))
       const resStripe = await stripeSetting();
       if (resStripe && connectedReader) {
         setTerminalSetting(resStripe);
         setStatus('Reader Connected');
         _createPaymentIntent(resStripe);
+        dispatch(setIsLoading(false))
       } else {
         setStatus('Location searcing...');
       }
@@ -193,7 +197,7 @@ export default function Checkout({navigation,route}) {
     if (resp.success == false && resp.status == 401) {
       navigation.navigate('Login');
     } else {
-      addLogs('Payment Successfully. Order completed successfully', 'Success');
+      addLogs('Payment Completed Successfully.', 'Success');
 
       navigation.navigate('CheckoutSuccess', {
         message: 'Payment completed successfully',
@@ -203,52 +207,95 @@ export default function Checkout({navigation,route}) {
     }
   };
 
+  //sum total
+  const sumTotal = () => {
+    let total = 0;
+    total = parseFloat(amount) + (parseFloat(amount) * (terminal_setting.tax_percentage / 100)) + (parseFloat(amount) * (terminal_setting.service_fee_percentage / 100))
+    return total.toFixed(2);
+  }
+
+  if(terminal_setting){
+    return (
+      <View style={styles.container}>
+        {/* mavbar start  */}
+        <NavBar navigation={navigation} title="Payment" />
+        {/* mavbar end  */}
+        <View style={[appStyle.container_center]}>
+    
   
-  return (
-    <View style={styles.container}>
-      {/* mavbar start  */}
-      <NavBar navigation={navigation} title="Payment" />
-      {/* mavbar end  */}
-      <View style={[appStyle.container_center]}>
-       <Text style={styles.amount}>${parseFloat(amount).toFixed(2)}</Text>
-
-        <Image
-         style={{
-            width: 200,
-            height: 200,
-            resizeMode: 'contain',
-         }}
-          source={{
-            uri: 'https://media2.giphy.com/media/TDyxBGZcViZnoye8iN/giphy.gif',
-          }}
+          <Image
+           style={{
+              width: 200,
+              height: 200,
+              resizeMode: 'contain',
+           }}
+            source={{
+              uri: 'https://media2.giphy.com/media/TDyxBGZcViZnoye8iN/giphy.gif',
+            }}
+          />
+              {/* payment details table  */}
+              <View style={styles.paymentDetails}>
+            {/* <Text style={styles.paymentDetails.title}>Payment details</Text> */}
+            <View style={[appStyle.row,appStyle.p5,appStyle.justify_between]}>
+              <Text style={[appStyle.title]}>Amount</Text>
+              <Text style={[appStyle.title]}>
+                ${parseFloat(amount).toFixed(2)}
+              </Text>
+            </View>
+            <View style={[appStyle.row,appStyle.p5,appStyle.justify_between]}>
+              <Text style={[appStyle.title]}>TAX ({terminal_setting.tax_percentage}%)</Text>
+              <Text style={[appStyle.title]}>
+                ${(parseFloat(amount) * (terminal_setting.tax_percentage / 100)).toFixed(2)}
+              </Text>
+            </View>
+            <View style={[appStyle.row,appStyle.p5,appStyle.justify_between]}>
+              <Text style={[appStyle.title]}>Service Fee ({terminal_setting.service_fee_percentage}%)</Text>
+              <Text style={[appStyle.title]}>
+                ${(parseFloat(amount) * (terminal_setting.service_fee_percentage / 100)).toFixed(2)}
+              </Text>
+            </View>
+            <View style={[appStyle.row,appStyle.p5, appStyle.justify_between,{
+              borderTopWidth: 1,
+              borderTopColor: '#ccc',
+            }]}>
+              <Text style={[appStyle.title]}>Total Amount</Text>
+              <Text style={[appStyle.title]}>
+                ${sumTotal()}
+              </Text>
+            </View>
+          </View>
+          {/* payment details table end  */}
+         
+          <Text style={[styles.subTitle,Size.normal]}>
+            Please swap your card and complete the payment.
+          </Text>
+  
+        <TextTicker
+          style={
+            logType == 'Failed' ? styles.failed : styles.success
+          }
+          duration={10000}
+          loop
+          bounce
+          repeatSpacer={10}
+          onScrollStart={true}
+          marqueeDelay={100}>
+          {logMessage} -------&nbsp;{logMessage} -------&nbsp;
+        </TextTicker>
+  
+        <Button
+          title="Go Back"
+          onPress={() => navigation.goBack()}
         />
-      
-       
-        <Text style={[styles.subTitle,Size.normal]}>
-          Please swap your card and complete the payment.
-        </Text>
-
-      <TextTicker
-        style={
-          logType == 'Failed' ? styles.failed : styles.success
-        }
-        duration={10000}
-        loop
-        bounce
-        repeatSpacer={10}
-        onScrollStart={true}
-        marqueeDelay={100}>
-        {logMessage} -------&nbsp;{logMessage} -------&nbsp;
-      </TextTicker>
-
-      <Button
-        title="Go Back"
-        onPress={() => navigation.goBack()}
-      />
-
+  
+        </View>
       </View>
-    </View>
-  )
+    )
+  }else{
+    return null;
+  }
+  
+  
 }
 
 const styles = StyleSheet.create({
@@ -291,5 +338,16 @@ const styles = StyleSheet.create({
     color: ColorSet.textColorDark,
     textAlign: 'center',
     margin: 10,
+  },
+  paymentDetails: {
+    width: '100%',
+    padding: 15,
+    title : {
+      fontSize: 20,
+      textAlign: 'center',
+      padding: 10,
+      fontFamily: FamilySet.bold,
+      color: ColorSet.textColorDark,
+    }
   }
 })

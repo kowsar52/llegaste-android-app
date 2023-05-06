@@ -1,5 +1,5 @@
 import { View, Text,StyleSheet, Pressable, Dimensions, Alert} from 'react-native'
-import React,{useState,useEffect, useRef} from 'react'
+import React,{useState,useEffect} from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import {FamilySet,ColorSet} from '../../styles';
 import Button from '../../components/default/Button';
@@ -11,23 +11,45 @@ import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 const screenHeight = Dimensions.get('window').height;
 import { useDispatch,useSelector } from 'react-redux';
 import { Screens } from '../../constants';
-import NumericPad from 'react-native-numeric-pad';
-import { TextInputMask, TextMask } from 'react-native-masked-text';
 
 export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
-  const numpadRef = useRef(null)
+  const {connectedReader, initialize} = useStripeTerminal();
   const [isEnabledManualCheckout,setIsEnabledManualCheckout] = useState(false)
   const dispatch = useDispatch();
 
+  const handlePress = (key) => {
+   
+    switch (key) {
+      case 'backspace':
+        if(amount == 0){
+          setAmount(0);
+        }else{
+          setAmount(amount.slice(0, -1));
+        }
+        break;
+      case 'clean':
+        setAmount(0);
+        break;
+      default:
+        setAmount(`${amount}${key}`);
+      break;
+    }
+  };
 
 
   useEffect(() => {
-   
+    setAmount(0)
     async function getUser(){
      dispatch(setIsLoading(true))
       const userData = await getUserData();
       if(userData){
+        const {reader} = await initialize();
+        if(reader){
+          ShowToast('Reader Connected');
+        }else{
+          navigation.navigate('SetupTerminal');
+        }
         dispatch(setIsLoading(false))
       }else{
         dispatch(setIsLoading(false))
@@ -44,6 +66,7 @@ export default function Home({navigation}) {
         setIsEnabledManualCheckout(data)
     }
     getOldData()
+
   }, []);
 
   const goNext = () => {
@@ -51,8 +74,7 @@ export default function Home({navigation}) {
       ShowToast('Please enter amount');
       return;
     }
-    console.log('amount',amount)
-    navigation.push("Checkout",{
+    navigation.navigate("Checkout",{
       amount: amount
     })
   }
@@ -73,42 +95,10 @@ export default function Home({navigation}) {
       </View>
       {/* mavbar end  */}
       <View style={styles.body}>
-      <TextMask
-        type={'money'}
-        options={{
-            precision: 2,
-            separator: '.',
-            delimiter: ',',
-            unit: '$',
-            suffixUnit: '',
-            allowDecimal: false,
-        }}
-        value={amount}
-        style={styles.amount}
-        />
+       <Text style={styles.amount}>${parseFloat(amount)}</Text>
       </View>
       <View style={styles.numberBar}>
-   
-      <NumericPad
-        ref={numpadRef}
-        numLength={8}
-        buttonSize={55}
-        activeOpacity={0.1}
-        onValueChange={value => {
-            console.log('value',value)
-            if(value != ''){
-                setAmount(value)
-            }else{
-                setAmount(0)
-            }
-            
-        }}
-        allowDecimal={true}
-        buttonTextStyle={{fontSize: 20, color: '#fff'}}
-        rightBottomButton={<Icon name={'ios-backspace-outline'} size={20} color={'#fff'}/>}
-        onRightBottomButtonPress={() => {numpadRef.current.clear()}
-        }
-      />
+          <NumberPad onPress={handlePress} amount={amount} />
           {isEnabledManualCheckout ? <View style={{
             flex: 1,
             flexDirection: 'row',
@@ -124,7 +114,9 @@ export default function Home({navigation}) {
               amount: amount
             })} disabled={true}  buttonStyle={styles.buttonStyle}/>
           </View> : <Button title="Checkout" icon="arrow-forward-outline"  onPress={() => goNext()} disabled={true}  buttonStyle={styles.buttonStyleFull}/>}
-
+          
+   
+      
         </View>
     </View>
   )

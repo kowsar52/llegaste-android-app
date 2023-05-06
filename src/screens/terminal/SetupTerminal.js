@@ -80,47 +80,12 @@ export default function SetupTerminal({route, navigation}) {
       }
       setDiscoveringLoading(false);
     },
-    onDidStartInstallingUpdate: update => {
-      // navigation.navigate('UpdateReaderScreen', {
-      //   update,
-      //   reader: connectingReader,
-      //   onDidUpdate: () => {
-      //     setTimeout(() => {
-      //       if (navigation.canGoBack()) {
-      //         navigation.goBack();
-      //       }
-      //     }, 500);
-      //   },
-      // });
-    },
     onDidReportAvailableUpdate: update => {
       Alert.alert('New update is available', update.deviceSoftwareVersion);
     },
   });
 
-  const handleGoBack = useCallback(
-    async action => {
-      await cancelDiscovering();
-      if (navigation.canGoBack()) {
-        navigation.goBack();
-      }
-    },
-    [cancelDiscovering, navigation],
-  );
 
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     headerBackTitle: 'Cancel',
-  //   });
-
-  //   navigation.addListener('beforeRemove', e => {
-  //     if (!discoveringLoading) {
-  //       return;
-  //     }
-  //     e.preventDefault();
-  //     handleGoBack(e.data.action);
-  //   });
-  // }, [navigation, cancelDiscovering, discoveringLoading, handleGoBack]);
 
   const handleDiscoverReaders = useCallback(async (resStripe) => {
    let terminal_setting = resStripe;
@@ -143,7 +108,6 @@ export default function SetupTerminal({route, navigation}) {
     if (discoverReadersError) {
       const {code, message} = discoverReadersError;
       ShowToast(`${message}`);
-      handleGoBack();
     }
   }, [navigation, terminal_setting]);
 

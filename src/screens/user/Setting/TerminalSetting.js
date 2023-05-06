@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import {appStyle, ColorSet, FamilySet} from '../../../styles';
 import Button from '../../../components/default/Button';
+import Input from '../../../components/default/Input';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {StackActions} from '@react-navigation/native';
@@ -32,6 +33,8 @@ import {getData, removeData, storeData} from '../../../utils/Storage';
 import {Keys} from '../../../constants';
 import { useStripeTerminal} from '@stripe/stripe-terminal-react-native';
 import NavBar from '../../../components/default/NavBar';
+import { TextInputMask } from 'react-native-masked-text';
+import PercentageInput from '../../../components/default/PercentageInput';
 
 const TerminalSetting = ({navigation}) => {
   const [settings, setSettings] = useState([]);
@@ -89,8 +92,6 @@ const TerminalSetting = ({navigation}) => {
   };
 
 
-
-  //updateSetting
   const updateSetting = async data => {
     dispatch(setIsLoading(true));
     const response = await updateStripeSetting(data);
@@ -98,6 +99,7 @@ const TerminalSetting = ({navigation}) => {
       dispatch(setIsLoading(false));
     }
   };
+  
   //pinCheck
   const pinCheck = async () => {
     setPinCheckModalVisible(true);
@@ -115,8 +117,14 @@ const TerminalSetting = ({navigation}) => {
       setPinCheckModalVisible(false);
       setAdminPin('');
       updateSetting(settings);
-      storeData('isEnabledManualCheckout', true)
-      setIsEnabledManualCheckout(true);
+      if(settings?.enable_manual_checkout == true){
+        storeData('isEnabledManualCheckout', true)
+        setIsEnabledManualCheckout(true);
+      }else{
+        storeData('isEnabledManualCheckout', false)
+        setIsEnabledManualCheckout(false);
+      }
+     
       dispatch(setIsLoading(false));
     } else {
       dispatch(setIsLoading(false));
@@ -125,202 +133,188 @@ const TerminalSetting = ({navigation}) => {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      <NavBar navigation={navigation} title="Terminal Setting" logoutBtn={true}/>
-    {/* body start  */}
-    <ScrollView style={styles.body}>
 
-      <View style={styles.setting}>
-        <Text style={styles.settingLabel}>Enable Screensaver</Text>
-        <Switch
-          value={enableScreensaver ? true : false}
-          onValueChange={(value) => {
-            setEnableScreensaver(value)
-            storeData('enableScreensaver', value)
-          }}
-          trackColor={{true: ColorSet.theme}}
-          thumbColor={enableScreensaver ? ColorSet.theme : '#f4f3f4'}
-        />
-      </View>
-      <View style={styles.setting}>
-        <Text style={styles.settingLabel}>Enable Terminal</Text>
-        <Switch
-          value={settings?.enable_terminal ? true : false}
-          onValueChange={() => {
-            setSettings({
-              ...settings,
-              enable_terminal: !settings?.enable_terminal,
-            });
-            updateSetting({
-              ...settings,
-              enable_terminal: !settings?.enable_terminal,
-            });
-          }}
-          trackColor={{true: ColorSet.theme}}
-          thumbColor={settings?.enable_terminal ? ColorSet.theme : '#f4f3f4'}
-        />
-      </View>
-
-      <View style={styles.setting}>
-        <Text style={styles.settingLabel}>Enable Manual Checkout</Text>
-        <Switch
-          value={settings?.enable_manual_checkout ? true : false}
-          onValueChange={() => {
-            setSettings({
-              ...settings,
-              enable_manual_checkout: !settings?.enable_manual_checkout,
-            });
-            pinCheck({
-              ...settings,
-              enable_manual_checkout: !settings?.enable_manual_checkout,
-            });
-          }}
-          trackColor={{true: ColorSet.theme}}
-          thumbColor={
-            settings?.enable_manual_checkout ? ColorSet.theme : '#f4f3f4'
-          }
-        />
-      </View>
-      <View style={styles.setting}>
-        <Text style={styles.settingLabel}>Enable Tips</Text>
-        <Switch
-          value={settings?.enable_tips ? true : false}
-          onValueChange={() => {
-            setSettings({...settings, enable_tips: !settings?.enable_tips});
-            updateSetting({...settings, enable_tips: !settings?.enable_tips});
-          }}
-          trackColor={{true: ColorSet.theme}}
-          thumbColor={settings?.enable_tips ? ColorSet.theme : '#f4f3f4'}
-        />
-      </View>
-      <TouchableOpacity
-        style={settings?.enable_tips ? styles.settingItem : {display: 'none'}}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Tipping Percentage 1</Text>
-        <Text style={styles.settingValue}>{settings?.tips_percentage_1}%</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={settings?.enable_tips ? styles.settingItem : {display: 'none'}}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Tipping Percentage 2</Text>
-        <Text style={styles.settingValue}>{settings?.tips_percentage_2}%</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={settings?.enable_tips ? styles.settingItem : {display: 'none'}}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Tipping Percentage 3</Text>
-        <Text style={styles.settingValue}>{settings?.tips_percentage_3}%</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.settingItem}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Default charge description</Text>
-        <Text style={styles.settingValue}>{settings?.descriptor}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.settingItem}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Tax rate</Text>
-        <Text style={styles.settingValue}>{settings?.tax_percentage}%</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.settingItem}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Service fee</Text>
-        <Text style={styles.settingValue}>
-          {settings?.service_fee_percentage}%
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.settingItem}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.settingLabel}>Currency</Text>
-        <Text style={styles.settingValue}>{settings?.currency}</Text>
-      </TouchableOpacity>
-
-      {/* tipping percetage modal start */}
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Tipping Percentage</Text>
-            <TextInput
-              style={styles.tipInput}
-              placeholder="Enter a percentage"
-              keyboardType="numeric"
-              onChangeText={handleTipChange}
-              value={String(tipPercentage)}
-            />
-            <View style={styles.modalAction}>
-              <TouchableOpacity
-                style={styles.saveButton}
-                onPress={handleSaveTip}>
-                <Text style={styles.saveButtonText}>Save</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.cancelButton}
-                onPress={() => setModalVisible(false)}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+  if(settings.length === 0){
+    return null
+  }else{
+    return (
+      <View style={styles.container}>
+        <NavBar navigation={navigation} title="Terminal Setting" logoutBtn={true}/>
+      {/* body start  */}
+      <ScrollView style={styles.body}>
+  
+        <View style={styles.setting}>
+          <Text style={styles.settingLabel}>Enable Screensaver</Text>
+          <Switch
+            value={enableScreensaver ? true : false}
+            onValueChange={(value) => {
+              setEnableScreensaver(value)
+              storeData('enableScreensaver', value)
+            }}
+            trackColor={{true: ColorSet.theme}}
+            thumbColor={enableScreensaver ? ColorSet.theme : '#f4f3f4'}
+          />
         </View>
-      </Modal>
-      {/* tipping percetage modal end */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={pinCheckModalVisible}
-        statusBarTranslucent={true}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Enter Pin</Text>
-            <TextInput
-              style={styles.tipInput}
-              placeholder="Enter pin"
-              onChangeText={text => setAdminPin(text)}
-              value={admin_pin}
-            />
-            <View style={styles.modalAction}>
-              <TouchableOpacity
-                style={styles.saveButton}
-                onPress={handleConfirmPin}>
-                <Text style={styles.saveButtonText}>Confirm</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.cancelButton}
-                onPress={() => setPinCheckModalVisible(false)}>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+        <View style={styles.setting}>
+          <Text style={styles.settingLabel}>Enable Terminal</Text>
+          <Switch
+            value={settings?.enable_terminal ? true : false}
+            onValueChange={() => {
+              setSettings({
+                ...settings,
+                enable_terminal: !settings?.enable_terminal,
+              });
+            }}
+            trackColor={{true: ColorSet.theme}}
+            thumbColor={settings?.enable_terminal ? ColorSet.theme : '#f4f3f4'}
+          />
         </View>
-      </Modal>
-
-      <View style={styles.logoutContainer}>
-        {connectedReader ? (
-            <Button title={`Disconnect ${connectedReader?.label || connectedReader?.serialNumber}`} onPress={() => handleDisconnectReader(connectedReader.id)} buttonStyle={{
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}/>
-        ): (
-            <Button title="Connect Terminal" onPress={() => navigation.navigate(Screens.setupTerminal)} buttonStyle={{
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}/>
-        )}
+  
+        <View style={styles.setting}>
+          <Text style={styles.settingLabel}>Enable Manual Checkout</Text>
+          <Switch
+            value={settings?.enable_manual_checkout ? true : false}
+            onValueChange={() => {
+              setSettings({
+                ...settings,
+                enable_manual_checkout: !settings?.enable_manual_checkout,
+              });
+            }}
+            trackColor={{true: ColorSet.theme}}
+            thumbColor={
+              settings?.enable_manual_checkout ? ColorSet.theme : '#f4f3f4'
+            }
+          />
+        </View>
+        <View style={styles.setting}>
+          <Text style={styles.settingLabel}>Enable Tips</Text>
+          <Switch
+            value={settings?.enable_tips ? true : false}
+            onValueChange={() => {
+              setSettings({...settings, enable_tips: !settings?.enable_tips});
+            }}
+            trackColor={{true: ColorSet.theme}}
+            thumbColor={settings?.enable_tips ? ColorSet.theme : '#f4f3f4'}
+          />
+        </View>
+        <View
+          style={settings?.enable_tips ? styles.settingItem : {display: 'none'}}
+        >
+          <Text style={styles.settingLabel}>Tips Percentage 1</Text>
+          <PercentageInput value={settings?.tips_percentage_1} postfix={true} onChangeText={(text) => {
+            setSettings({...settings, tips_percentage_1: text});
+          }}/>
+        </View>
+        <View
+          style={settings?.enable_tips ? styles.settingItem : {display: 'none'}}
+        >
+          <Text style={styles.settingLabel}>Tips Percentage 2</Text>
+          <PercentageInput value={settings?.tips_percentage_2} postfix={true} onChangeText={(text) => {
+            setSettings({...settings, tips_percentage_2: text});
+          }}/>
+        </View>
+        <View
+          style={settings?.enable_tips ? styles.settingItem : {display: 'none'}}
+        >
+          <Text style={styles.settingLabel}>Tips Percentage 3</Text>
+          <PercentageInput value={settings?.tips_percentage_3} postfix={true} onChangeText={(text) => {
+            setSettings({...settings, tips_percentage_3: text});
+          }}/>
+        </View>
+        
+        <View >
+          <Text style={[styles.settingLabel, appStyle.mb10]}>Default charge description</Text>
+          <Input  keyboardType='default' value={settings?.descriptor}
+          onChangeText={text => {
+            setSettings({...settings, descriptor: text});
+          }} style={styles.settingValue} placeholder="Enter description"
+           />
+        </View>
+  
+  
+        <View style={styles.settingItem} >
+          <Text style={styles.settingLabel}>Tax Percentage </Text>
+          <PercentageInput value={settings?.tax_percentage} postfix={true} onChangeText={(text) => {
+            setSettings({...settings, tax_percentage: text});
+          }}/>
+        </View>
+        <View style={styles.settingItem} >
+          <Text style={styles.settingLabel}>Service fee</Text>
+          <PercentageInput value={settings?.service_fee_percentage} postfix={true} onChangeText={(text) => {
+            setSettings({...settings, service_fee_percentage: text});
+          }}/>
+        </View>
+        <View style={styles.settingItem} >
+          <Text style={styles.settingLabel}>Currency</Text>
+          <PercentageInput value={settings?.currency} keyboardType='default' onChangeText={(text) => {
+            setSettings({...settings, currency: text});
+          }}/>
+        </View>
+          
+        <View style={{
+          marginBottom: 30,
+        }}>
+          <Button title="Save" onPress={() => pinCheck()} buttonStyle={{
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+              }}/>
+        </View>
+  
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={pinCheckModalVisible}
+          statusBarTranslucent={true}>
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Enter Pin</Text>
+              <TextInput
+                keyboardType='numeric'
+                style={styles.tipInput}
+                placeholder="Enter pin"
+                onChangeText={text => setAdminPin(text)}
+                value={admin_pin}
+              />
+              <View style={styles.modalAction}>
+              <TouchableOpacity
+                  style={styles.cancelButton}
+                  onPress={() => setPinCheckModalVisible(false)}>
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.saveButton}
+                  onPress={handleConfirmPin}>
+                  <Text style={styles.saveButtonText}>Confirm</Text>
+                </TouchableOpacity>
        
-        </View>
-
-    </ScrollView>
-    {/* body end  */}
-    </View>
-  );
+              </View>
+            </View>
+          </View>
+        </Modal>
+  
+        {/* <View style={styles.logoutContainer}>
+          {connectedReader ? (
+              <Button title={`Disconnect ${connectedReader?.label || connectedReader?.serialNumber}`} onPress={() => handleDisconnectReader(connectedReader.id)} buttonStyle={{
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+              }}/>
+          ): (
+              <Button title="Connect Terminal" onPress={() => navigation.navigate(Screens.setupTerminal)} buttonStyle={{
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+              }}/>
+          )}
+         
+          </View> */}
+  
+      </ScrollView>
+      {/* body end  */}
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({

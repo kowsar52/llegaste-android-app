@@ -55,8 +55,7 @@ const PinSetting = ({navigation}) => {
       </View>
       {/* mavbar end  */}
 
-      <View>
- 
+
        <View>
         <View>
             <Text style={appStyle.label}>Current Pin</Text>
@@ -76,17 +75,14 @@ const PinSetting = ({navigation}) => {
                 setConfirmPin(text)
             }}/>
         </View>
+        <View>
+        <Button title="Save Pin" icon="arrow-forward-outline" onPress={() => handleSubmit()} buttonStyle={[styles.submitButton, appStyle.mt10]} />
         </View>
-        
       </View>
- 
+        
+    
 
      
-
-      <View style={styles.logoutContainer}>
-      <Button title="Save Pin" icon="arrow-forward-outline" onPress={() => handleSubmit()} buttonStyle={styles.submitButton} />
-    
-      </View>
     </View>
   );
 };

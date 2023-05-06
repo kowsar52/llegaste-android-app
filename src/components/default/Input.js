@@ -8,6 +8,7 @@ const Input = props => {
   const {
     keyboardType,
     onChangeText,
+    onKeyPress,
     value,
     placeholder,
     inputStyle,
@@ -39,6 +40,7 @@ const Input = props => {
       onFocus={onFocusHandler}
       onBlur={onBlurHandler}
       onChangeText={onChangeText}
+      onKeyPress={onKeyPress}
       value={value}
       keyboardType={keyboardType}
       style={[
