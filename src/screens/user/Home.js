@@ -21,6 +21,24 @@ export default function Home({navigation}) {
   const dispatch = useDispatch();
 
 
+  const handlePress = (key) => {
+   
+    switch (key) {
+      case 'backspace':
+        if(amount == 0){
+          setAmount(0);
+        }else{
+          setAmount(amount.slice(0, -1));
+        }
+        break;
+      case 'clean':
+        setAmount(0);
+        break;
+      default:
+        setAmount(`${amount}${key}`);
+      break;
+    }
+  };
 
   useEffect(() => {
    
@@ -82,9 +100,16 @@ export default function Home({navigation}) {
             unit: '$',
             suffixUnit: '',
             allowDecimal: false,
+            zeroCents: true,
         }}
         value={amount}
         style={styles.amount}
+        checkText={(previous, next) => {
+            console.log('previous',previous)
+            console.log('next',next)
+            return true;
+        }
+        }
         />
       </View>
       <View style={styles.numberBar}>
@@ -109,6 +134,10 @@ export default function Home({navigation}) {
         onRightBottomButtonPress={() => {numpadRef.current.clear()}
         }
       />
+
+            {/* <NumberPad onPress={handlePress} amount={amount} /> */}
+       
+
           {isEnabledManualCheckout ? <View style={{
             flex: 1,
             flexDirection: 'row',
