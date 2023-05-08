@@ -199,11 +199,7 @@ export default function SetupTerminal({route, navigation}) {
 
 
 
-      <Button
-        onPress={() => logoutHandler()}
-        buttonStyle={styles.bottomButton}
-        title="Logout"
-      />
+ 
     </ScrollView>
   );
 }

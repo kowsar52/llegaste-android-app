@@ -14,11 +14,13 @@ import { Screens } from '../../constants';
 import NumericPad from 'react-native-numeric-pad';
 import { TextInputMask, TextMask } from 'react-native-masked-text';
 
+
 export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
   const numpadRef = useRef(null)
   const [isEnabledManualCheckout,setIsEnabledManualCheckout] = useState(false)
   const dispatch = useDispatch();
+  const {connectedReader, connectInternetReader, initialize} = useStripeTerminal();
 
 
   const handlePress = (key) => {
@@ -46,7 +48,19 @@ export default function Home({navigation}) {
      dispatch(setIsLoading(true))
       const userData = await getUserData();
       if(userData){
+        console.log('connectedReader',connectedReader)
+        if(!connectedReader){
+          ShowToast("Please connect your reader first!")
+          navigation.navigate("SetupTerminal")
+          dispatch(setIsLoading(false))
+          return
+        }
         dispatch(setIsLoading(false))
+        // const {reader} = await initialize();
+        // if(!reader){
+        //   navigation.navigate('SetupTerminal');
+        // }
+       
       }else{
         dispatch(setIsLoading(false))
         //go to login screen
@@ -91,7 +105,7 @@ export default function Home({navigation}) {
       </View>
       {/* mavbar end  */}
       <View style={styles.body}>
-      <TextMask
+      <TextInputMask
         type={'money'}
         options={{
             precision: 2,
@@ -99,17 +113,13 @@ export default function Home({navigation}) {
             delimiter: ',',
             unit: '$',
             suffixUnit: '',
-            allowDecimal: false,
-            zeroCents: true,
+            allowDecimal: false
         }}
         value={amount}
         style={styles.amount}
-        checkText={(previous, next) => {
-            console.log('previous',previous)
-            console.log('next',next)
-            return true;
-        }
-        }
+        onChangeText={(text) => {
+          setAmount(text)
+        }}
         />
       </View>
       <View style={styles.numberBar}>
