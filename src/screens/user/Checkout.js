@@ -111,7 +111,7 @@ export default function Checkout({navigation,route}) {
       paymentIntentError = response.error;
     } else {
       const response = await createPaymentIntent({
-        amount: Number(amount) * 100,
+        amount: Number(sumTotal()) * 100,
         currency: currency,
         paymentMethodTypes: paymentMethods,
         setupFutureUsage: enableInterac ? undefined : 'off_session',
@@ -184,7 +184,7 @@ export default function Checkout({navigation,route}) {
     );
 
     const resp = await capturePaymentIntent({
-      total_amount: amount,
+      total_amount: sumTotal(),
       payment_intent_id: paymentIntentId,
     });
 
@@ -201,7 +201,10 @@ export default function Checkout({navigation,route}) {
 
       navigation.navigate('CheckoutSuccess', {
         message: 'Payment completed successfully',
-        total_amount: amount,
+        total_amount: sumTotal(),
+        amount: amount,
+        tax : (parseFloat(amount) * (terminal_setting.tax_percentage / 100)),
+        service_fee : (parseFloat(amount) * (terminal_setting.service_fee_percentage / 100)),
         txn_id : resp.txn_id
       });
     }

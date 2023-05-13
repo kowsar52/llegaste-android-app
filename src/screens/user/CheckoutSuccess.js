@@ -66,7 +66,6 @@ export default function SuccessScreen({route, navigation}) {
                   textTemplate += `<C> +34434534543 </C>\n`;
                   textTemplate += `Date : ${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}\n`;
                   textTemplate += `Trx ID - #${txn_id}\n`;
-                  textTemplate += `Payment Status - PAID\n`;
                   textTemplate += `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`;
                   Printer.printText(textTemplate, {
                     beep: false,

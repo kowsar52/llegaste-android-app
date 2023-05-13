@@ -20,24 +20,7 @@ export default function Home({navigation}) {
   const numpadRef = useRef(null)
   const [isEnabledManualCheckout,setIsEnabledManualCheckout] = useState(false)
 
-  const handlePress = (key) => {
-   
-    switch (key) {
-      case 'backspace':
-        if(amount == 0){
-          setAmount(0);
-        }else{
-          setAmount(amount.slice(0, -1));
-        }
-        break;
-      case 'clean':
-        setAmount(0);
-        break;
-      default:
-        setAmount(`${amount}${key}`);
-      break;
-    }
-  };
+
 
   useEffect(() => {
     const getOldData = async () => {
@@ -59,6 +42,12 @@ export default function Home({navigation}) {
     })
   }
 
+    const formatMoney = (value) => {
+      if (value === '') return '0.00';  // Set '0.00' as default value
+      let integerPart = value.slice(0, -2) || '0';  // All characters except last two
+      let decimalPart = value.slice(-2);  // Last two characters as decimal
+      return integerPart + '.' + decimalPart;
+    };
 
 
   return (
@@ -75,7 +64,7 @@ export default function Home({navigation}) {
       </View>
       {/* mavbar end  */}
       <View style={styles.body}>
-      <TextInputMask
+      <TextMask
         type={'money'}
         options={{
             precision: 2,
@@ -88,6 +77,7 @@ export default function Home({navigation}) {
         value={amount}
         style={styles.amount}
         onChangeText={(text) => {
+          console.log('text',text)
           setAmount(text)
         }}
         />
@@ -100,19 +90,21 @@ export default function Home({navigation}) {
         buttonSize={55}
         activeOpacity={0.1}
         onValueChange={value => {
-            console.log('value',value)
-            if(value != ''){
-                setAmount(value)
+            const res = formatMoney(value)
+            console.log('value',res)
+  
+            if(res != ''){
+                setAmount(res)
             }else{
                 setAmount(0)
             }
             
         }}
-        allowDecimal={true}
+        allowDecimal={false}
         buttonTextStyle={{fontSize: 20, color: '#fff'}}
         rightBottomButton={<Icon name={'ios-backspace-outline'} size={20} color={'#fff'}/>}
-        onRightBottomButtonPress={() => {numpadRef.current.clear()}
-        }
+        onRightBottomButtonPress={() => {numpadRef.current.clear()}}
+        leftBottomButton={<Icon name={'ios-backspace-outline'} size={20} color={'#fff'}/>}
       />
 
             {/* <NumberPad onPress={handlePress} amount={amount} /> */}
