@@ -24,7 +24,9 @@ export const AuthSlice = createSlice({
         },
         login: (state, action) => {
             state.user = action.payload;
+            state.token = action.payload.token;
             saveUserData(action.payload);
+            storeData(Keys.token, action.payload.token);
         },
         setWelcomeCheck: (state, action) => {
             state.welcomeCheck = action.payload;

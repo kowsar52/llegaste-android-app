@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface LiegasteTests : XCTestCase
+@interface llegasteTests : XCTestCase
 
 @end
 
-@implementation LiegasteTests
+@implementation llegasteTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

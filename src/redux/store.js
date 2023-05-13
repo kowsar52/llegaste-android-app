@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-    AuthServices,
     StripeServices,
     UserServices,
     LoadingSlice
@@ -8,7 +7,6 @@ import {
 
 export default configureStore({
     reducer: {
-        auth: AuthServices,
         stripe: StripeServices,
         user: UserServices,
         loading: LoadingSlice

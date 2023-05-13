@@ -19,9 +19,6 @@ export default function Home({navigation}) {
   const [amount, setAmount] = useState(0);
   const numpadRef = useRef(null)
   const [isEnabledManualCheckout,setIsEnabledManualCheckout] = useState(false)
-  const dispatch = useDispatch();
-  const {connectedReader, connectInternetReader, initialize} = useStripeTerminal();
-
 
   const handlePress = (key) => {
    
@@ -43,33 +40,6 @@ export default function Home({navigation}) {
   };
 
   useEffect(() => {
-   
-    async function getUser(){
-     dispatch(setIsLoading(true))
-      const userData = await getUserData();
-      if(userData){
-        console.log('connectedReader',connectedReader)
-        if(!connectedReader){
-          ShowToast("Please connect your reader first!")
-          navigation.navigate("SetupTerminal")
-          dispatch(setIsLoading(false))
-          return
-        }
-        dispatch(setIsLoading(false))
-        // const {reader} = await initialize();
-        // if(!reader){
-        //   navigation.navigate('SetupTerminal');
-        // }
-       
-      }else{
-        dispatch(setIsLoading(false))
-        //go to login screen
-        navigation.navigate('Login');
-      }
-      
-    }
-    getUser();
-
     const getOldData = async () => {
         const data = await getData('isEnabledManualCheckout')
         console.log('isEnabledManualCheckout',data)

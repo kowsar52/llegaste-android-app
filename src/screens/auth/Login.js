@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react-native';
-import React, { useState,useEffect } from 'react';
+import React, { useState,useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity,Image } from 'react-native';
 import Button from '../../components/default/Button';
 import Input from '../../components/default/Input';
@@ -7,15 +7,16 @@ import {ColorSet, appStyle} from '../../styles'
 import { StackActions } from '@react-navigation/native';
 import { useDispatch,useSelector } from 'react-redux';
 import { loginUser } from '../../networking/authServices/AuthAPIServices';
-import {login} from '../../redux/reducers/authSlice/AuthServices'
+// import {login} from '../../redux/reducers/authSlice/AuthServices'
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
+import { AuthContext } from '../../context/auth-context';
+
 
 export default function Login({navigation}) {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const authCTX = useContext(AuthContext);
 
 
 const handleLogin =  async () => {
@@ -27,8 +28,9 @@ const handleLogin =  async () => {
   const response = await loginUser(data);
   dispatch(setIsLoading(false))
   if(response.success){
-    dispatch(login(response.data))
-    navigation.dispatch(StackActions.replace('Home'));
+    authCTX.onLogin(response.data.token)
+    //navigate
+    
   }
 
 }

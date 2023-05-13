@@ -18,7 +18,6 @@ import {useDispatch} from 'react-redux';
 import {StackActions} from '@react-navigation/native';
 import {Screens} from '../../../constants';
 import {setIsLoading} from '../../../redux/reducers/loadingSlice/LoadingSlice';
-import {setUserType} from '../../../redux/reducers/authSlice/AuthServices';
 import {setUserData} from '../../../redux/reducers/userSlice/UserServices';
 import {logoutUser} from '../../../networking/authServices/AuthAPIServices';
 import {removeData} from '../../../utils/Storage';

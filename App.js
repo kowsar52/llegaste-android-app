@@ -1,6 +1,6 @@
 import { StatusBar,StyleSheet,Platform, LogBox } from 'react-native'
 import React,{useState,useEffect,useCallback} from 'react'
-import AppNavigator from './src/navigation/AppNavigator'
+import { AppNavigator } from './src/navigation/AppNavigator'
 import Loader from './src/components/default/Loader'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 LogBox.ignoreLogs([
@@ -17,6 +17,7 @@ import {
     useStripeTerminal,
     requestNeededAndroidPermissions,
   } from '@stripe/stripe-terminal-react-native';
+import AuthContextProvider from './src/context/auth-context'
 
 const App = ({navigator}) => {
     const [hasPerms, setHasPerms] = useState(false);
@@ -78,11 +79,13 @@ const App = ({navigator}) => {
 
       
     return (
-    <SafeAreaProvider style={styles.container}>
-        <StatusBar hidden />
-        <AppNavigator />
-        <Loader/>
-    </SafeAreaProvider>
+        <AuthContextProvider>
+            <SafeAreaProvider style={styles.container}>
+                <StatusBar hidden />
+                    <AppNavigator />
+                <Loader/>
+            </SafeAreaProvider>
+        </AuthContextProvider>
     )
 }
 

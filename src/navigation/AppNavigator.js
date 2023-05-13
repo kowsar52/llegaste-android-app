@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
@@ -22,36 +22,52 @@ import {
 
 import {Screens} from '../constants';
 import {AuthNavigator} from './AuthNavigation/AuthNavigator';
+import  { AuthContext } from "../context/auth-context";
 
 
-const SplashStack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
-
-const AppStack = createNativeStackNavigator();
-
-const AppNavigator = () => {
+ const AuthStack = () => {
     return (
-      <NavigationContainer>
-        <AppStack.Navigator screenOptions={{ headerShown: false }}>
-            <AppStack.Screen name={Screens.splash} component={Home} />
-            <AppStack.Screen name={Screens.pin} component={Pin} />
-            <AppStack.Screen name={Screens.login} component={Login} />
-            <AppStack.Screen name={Screens.forgetPassword} component={ForgetPassword} />
-            <AppStack.Screen name={Screens.resetPassword} component={ResetPassword} />
-            <AppStack.Screen name={Screens.home} component={Home} />
-            <AppStack.Screen name={Screens.setting} component={Setting} />
-            <AppStack.Screen name={Screens.terminalSetting} component={TerminalSetting} />
-            <AppStack.Screen name={Screens.printerSetting} component={PrinterSetting} />
-            <AppStack.Screen name={Screens.profileSetting} component={ProfileSetting} />
-            <AppStack.Screen name={Screens.pinSetting} component={PinSetting} />
-            <AppStack.Screen name={Screens.profile} component={Profile} />
-            <AppStack.Screen name={Screens.checkout} component={Checkout} />
-            <AppStack.Screen name={Screens.manualCheckout} component={ManualCheckout} />
-            <AppStack.Screen name="CheckoutSuccess" component={CheckoutSuccess} />
-            <AppStack.Screen name={Screens.setupTerminal} component={SetupTerminal} />
-        </AppStack.Navigator>
-    </NavigationContainer>
-    );
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name={Screens.splash} component={Splash} />
+            <Stack.Screen name={Screens.login} component={Login} />
+            <Stack.Screen name={Screens.forgetPassword} component={ForgetPassword} />
+            <Stack.Screen name={Screens.resetPassword} component={ResetPassword} />
+        </Stack.Navigator>
+    )
 }
 
-export default AppNavigator;
+ const AppStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name={Screens.setupTerminal} component={SetupTerminal} />
+            <Stack.Screen name={Screens.splash} component={Splash} />
+            <Stack.Screen name={Screens.home} component={Home} />
+            <Stack.Screen name={Screens.setting} component={Setting} />
+            <Stack.Screen name={Screens.terminalSetting} component={TerminalSetting} />
+            <Stack.Screen name={Screens.printerSetting} component={PrinterSetting} />
+            <Stack.Screen name={Screens.profileSetting} component={ProfileSetting} />
+            <Stack.Screen name={Screens.pinSetting} component={PinSetting} />
+            <Stack.Screen name={Screens.profile} component={Profile} />
+            <Stack.Screen name={Screens.checkout} component={Checkout} />
+            <Stack.Screen name={Screens.manualCheckout} component={ManualCheckout} />
+            <Stack.Screen name="CheckoutSuccess" component={CheckoutSuccess} />
+          
+        </Stack.Navigator>
+    )
+}
+
+
+
+
+export const AppNavigator = () => {
+    const authCTX = useContext(AuthContext);
+    console.log('authCTX',authCTX)
+    return (
+        <NavigationContainer>
+          {!authCTX.isAuthenticated && <AuthStack/>}
+        {authCTX.isAuthenticated && <AppStack/>}
+        </NavigationContainer>
+    )
+}

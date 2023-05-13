@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet,Pressable, Alert} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { ColorSet, FamilySet } from '../../styles';
 import { removeData } from '../../utils/Storage';
@@ -10,10 +10,12 @@ import {setUserType,setUserPrinter} from '../../redux/reducers/authSlice/AuthSer
 import {setUserData} from '../../redux/reducers/userSlice/UserServices';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 import { logoutUser } from '../../networking/authServices/AuthAPIServices';
+import { AuthContext } from '../../context/auth-context';
 
 
 export default function NavBar({navigation, title,customStyle, logoutBtn, cancelDiscovering = false}) {
   const dispatch = useDispatch();
+  const authCTX = useContext(AuthContext)
   //logoutHandler
   const logoutHandler = () => {
     Alert.alert('Logout', 'Are you sure you want to logout?', [
@@ -24,15 +26,10 @@ export default function NavBar({navigation, title,customStyle, logoutBtn, cancel
       {
         text: 'Yes',
         onPress: async () => {
-          dispatch(setIsLoading(true));
+          // dispatch(setIsLoading(true));
           const response = await logoutUser();
-          console.log('response', response);
           if (response) {
-            await removeData(Keys.user);
-            dispatch(setUserData(null));
-            dispatch(setUserType(null));
-            dispatch(setIsLoading(false));
-            navigation.navigate('Login');
+            authCTX.onLogout()
           }
         },
       },

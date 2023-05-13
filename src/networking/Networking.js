@@ -1,13 +1,15 @@
-import {Method} from '../constants';
-import {getUserData} from '../utils/Storage';
+import { useContext } from 'react';
+import {Keys, Method} from '../constants';
+import { AuthContext } from '../context/auth-context';
+import { getData } from '../utils/Storage';
 
 export const callPostApiWithToken = async (url, data) => {
-  const userData = await getUserData();
+  const token = await getData(Keys.token)
   const response = await fetch(url, {
     method: Method.post,
     headers: {
       Accept: 'application/json',
-      Authorization: `Bearer ${userData.token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -17,12 +19,12 @@ export const callPostApiWithToken = async (url, data) => {
 };
 
 export const callDeleteApiWithToken = async (url, data) => {
-  const userData = await getUserData();
+  const token = await getData(Keys.token)
   const response = await fetch(url, {
     method: Method.delete,
     headers: {
       Accept: 'application/json',
-      Authorization: `Bearer ${userData.token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -32,12 +34,12 @@ export const callDeleteApiWithToken = async (url, data) => {
 };
 
 export const callPostApiWithTokenMultipart = async (url, data) => {
-  const userData = await getUserData();
+   const token = await getData(Keys.token)
   const response = await fetch(url, {
     method: Method.post,
     headers: {
       Accept: 'multipart/form-data',
-      Authorization: `Bearer ${userData.token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },
     body: data,
@@ -47,12 +49,12 @@ export const callPostApiWithTokenMultipart = async (url, data) => {
 };
 
 export const callGetApiWithToken = async url => {
-  const userData = await getUserData();
+   const token = await getData(Keys.token)
   const response = await fetch(url, {
     method: Method.get,
     headers: {
       Accept: 'application/json',
-      Authorization: `Bearer ${userData.token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: null,

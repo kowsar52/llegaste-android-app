@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
-
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
@@ -95,9 +94,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.liegaste"
+    namespace "com.llegaste"
     defaultConfig {
-        applicationId "com.liegaste"
+        applicationId "com.llegaste"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -151,11 +150,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.work:work-runtime:2.7.1'
-    implementation 'com.facebook.fresco:animated-gif:2.6.0'
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-    implementation project(':react-native-vector-icons')
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 

@@ -1,24 +1,21 @@
 import { View, StyleSheet, Image,Text } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import Lottie from 'lottie-react-native';
 import Button from '../../components/default/Button';
 import { ColorSet } from '../../styles';
 import {Screens} from '../../constants'
 import {getUserData} from '../../utils/Storage';
+import { AuthContext } from '../../context/auth-context';
 
 export default function Splash({ navigation }) {
- const handleNext = async () => {
-    const user = await getUserData();
-    if(user){
-      // navigation.navigate(Screens.checkoutSuccess,{
-      //   message : "Payment Successful",
-      //   txn_id : '223232323'
-      // })
-      navigation.navigate('Home')
-    }else{
-      navigation.navigate(Screens.login)
+  const authCTX = useContext(AuthContext);
+  const handleNext = async () => {
+      if(authCTX.isAuthenticated){
+        navigation.navigate(Screens.setupTerminal)
+      }else{
+        navigation.navigate(Screens.login)
+      }
     }
-  }
 
   return (
     <View style={styles.container}>

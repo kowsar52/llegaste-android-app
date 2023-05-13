@@ -7,7 +7,6 @@ import {ColorSet, appStyle} from '../../styles'
 import { StackActions } from '@react-navigation/native';
 import { useDispatch,useSelector } from 'react-redux';
 import { loginUser } from '../../networking/authServices/AuthAPIServices';
-import {login} from '../../redux/reducers/authSlice/AuthServices'
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 
 export default function ForgetPassword({navigation}) {
@@ -26,7 +25,7 @@ const handleSubmit =  async () => {
   const response = await loginUser(data);
   dispatch(setIsLoading(false))
   if(response.success){
-    dispatch(login(response.data))
+    // dispatch(login(response.data))
     navigation.dispatch(StackActions.replace('OtpVerify'));
   }
 

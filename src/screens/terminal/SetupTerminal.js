@@ -60,9 +60,17 @@ export default function SetupTerminal({route, navigation}) {
         handleDiscoverReaders(resStripe);
       }
     }
-    getUser();
 
-  }, [handleDiscoverReaders, simulateReaderUpdate,setTerminalSetting,cancelDiscovering]);
+    if(connectedReader){
+      navigation.navigate(Screens.home);
+    }else{
+      // disconnectReader();
+      getUser();
+    }
+
+  }, [setTerminalSetting,simulateReaderUpdate,handleDiscoverReaders,connectedReader,disconnectReader]);
+
+
 
   const {
     cancelDiscovering,
@@ -70,19 +78,18 @@ export default function SetupTerminal({route, navigation}) {
     connectBluetoothReader,
     discoveredReaders,
     connectInternetReader,
+    connectedReader,
+    disconnectReader,
     simulateReaderUpdate,
   } = useStripeTerminal({
     onFinishDiscoveringReaders: finishError => {
       if (finishError) {
         ShowToast(`${finishError.code}, ${finishError.message}`)
       } else {
-        ShowToast('Reader connected successfully');
+        ShowToast('Reader discovered successfully');
       }
       setDiscoveringLoading(false);
-    },
-    onDidReportAvailableUpdate: update => {
-      Alert.alert('New update is available', update.deviceSoftwareVersion);
-    },
+    }
   });
 
 

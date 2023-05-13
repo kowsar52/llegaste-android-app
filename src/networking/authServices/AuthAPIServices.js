@@ -27,10 +27,10 @@ export const logoutUser = async () => {
             URL.logout,
             null,
           );
-      
           ShowToast(result.success === true ? result.message : `${result.message}`);
             return result;
     }catch(error){
+        console.log("error",error)
         ShowToast(error.message)
     }
 }
