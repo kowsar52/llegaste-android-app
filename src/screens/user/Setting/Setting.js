@@ -99,7 +99,7 @@ const Setting = ({navigation}) => {
     <View style={styles.container}>
       {/* mavbar start  */}
       <View style={styles.navbar}>
-        <Pressable style={styles.leftIcon} onPress={() => navigation.navigate("Home")}>
+        <Pressable style={styles.leftIcon} onPress={() => navigation.push("Home")}>
           <Icon name="arrow-back" size={20} color="#333" />
         </Pressable>
         <Text style={styles.navTitle}>Settings</Text>

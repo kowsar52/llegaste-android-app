@@ -91,7 +91,7 @@ export default function Checkout({navigation,route}) {
     let paymentIntentError = StripeError | undefined;
     if (device_type === 'internet') {
       const resp = await createPaymentIntentApi({
-        total_amount: amount,
+        total_amount: sumTotal() ,
         payment_method_types: paymentMethods,
       });
       console.log('resp create payment intent', resp);

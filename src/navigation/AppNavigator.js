@@ -41,8 +41,8 @@ const Stack = createNativeStackNavigator();
  const AppStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={Screens.setupTerminal} component={SetupTerminal} />
             <Stack.Screen name={Screens.splash} component={Splash} />
+            <Stack.Screen name={Screens.setupTerminal} component={SetupTerminal} />
             <Stack.Screen name={Screens.home} component={Home} />
             <Stack.Screen name={Screens.setting} component={Setting} />
             <Stack.Screen name={Screens.terminalSetting} component={TerminalSetting} />

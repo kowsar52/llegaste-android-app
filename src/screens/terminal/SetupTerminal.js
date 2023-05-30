@@ -1,63 +1,57 @@
 import {
-  useStripeTerminal,
-  Location,
-  Reader,
-} from '@stripe/stripe-terminal-react-native';
-import React, {useEffect, useContext, useState, useCallback} from 'react';
-import {StackActions} from '@react-navigation/native';
-import {
   StyleSheet,
   Text,
-  ScrollView,
-  Alert,
-  Modal,
   View,
-  TouchableWithoutFeedback,
-  Platform,
+  Switch,
+  TouchableOpacity,
+  Modal,
+  TextInput,
+  Pressable,
+  Alert,
+  StatusBar,
+  ActivityIndicator,
+  ScrollView,
 } from 'react-native';
-import ListItem from '../../components/default/ListItem';
-import List from '../../components/default/List';
-import {Picker} from '@react-native-picker/picker';
-import Button from '../../components/default/Button';
-import {useSelector, useDispatch} from 'react-redux';
-import { getUserData, removeData } from '../../utils/Storage';
-import { logoutUser,stripeSetting } from '../../networking/authServices/AuthAPIServices';
-import {setUserData} from '../../redux/reducers/userSlice/UserServices';
-import { Keys,Screens } from '../../constants';
-import { ShowToast } from '../../utils/ShowToast';
+import React, { useEffect, useState,useCallback } from 'react'
+import { getData } from '../../utils/Storage'
 import { ColorSet } from '../../styles';
+import { FamilySet } from '../../styles';
+import Button from '../../components/default/Button';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useDispatch} from 'react-redux';
+import {StackActions} from '@react-navigation/native';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
+import { Keys } from '../../constants';
+import {
+  useStripeTerminal,
+} from '@stripe/stripe-terminal-react-native';
+import { ShowToast } from '../../utils/ShowToast';
+import List from '../../components/default/List';
+import ListItem from '../../components/default/ListItem';
 import NavBar from '../../components/default/NavBar';
+import { stripeSetting } from '../../networking/authServices/AuthAPIServices';
 
-const SIMULATED_UPDATE_PLANS = [
-  'random',
-  'available',
-  'none',
-  'required',
-  'lowBattery',
-];
-
-export default function SetupTerminal({route, navigation}) {
+export default function SetupTerminal({navigation}) {
   const [discoveringLoading, setDiscoveringLoading] = useState(true);
   const [connectingReader, setConnectingReader] = useState();
-  const [showPicker, setShowPicker] = useState(false);
-  const [selectedUpdatePlan, setSelectedUpdatePlan] = useState('none');
-
-  const [discoveryMethod, setDiscoveryMethod] = useState('bluetoothScan');
-  const [simulated, setSimulated] = useState(false);
-
-  const [selectedLocation, setSelectedLocation] = useState();
-
+  const [connectedKiosk, setConnectedKiosk] = useState('');
+  const [cconnectedTerminal, setConnectedReader] = useState(null);
+  const {initialize: initStripe} = useStripeTerminal();
   const dispatch = useDispatch();
   const [terminal_setting, setTerminalSetting] = useState();
 
+
   useEffect(() => {
     async function getUser(){
+      try {
       const resStripe = await stripeSetting();
       if(resStripe){
         setTerminalSetting(resStripe);
         simulateReaderUpdate('none');
         handleDiscoverReaders(resStripe);
+      }
+      } catch (error) {
+        console.log('error2',error)
       }
     }
 
@@ -68,57 +62,97 @@ export default function SetupTerminal({route, navigation}) {
       getUser();
     }
 
-  }, [setTerminalSetting,simulateReaderUpdate,handleDiscoverReaders,connectedReader,disconnectReader]);
+  }, [handleDiscoverReaders, simulateReaderUpdate]);
 
-
-
+  
+  //disconvering
   const {
     cancelDiscovering,
     discoverReaders,
     connectBluetoothReader,
     discoveredReaders,
     connectInternetReader,
-    connectedReader,
-    disconnectReader,
     simulateReaderUpdate,
+    connectedReader
   } = useStripeTerminal({
-    onFinishDiscoveringReaders: finishError => {
-      if (finishError) {
-        ShowToast(`${finishError.code}, ${finishError.message}`)
-      } else {
-        ShowToast('Reader discovered successfully');
-      }
+    onFinishDiscoveringReaders: (error, discoveredReaders) => {
       setDiscoveringLoading(false);
-    }
+      if (error) {
+        ShowToast('Error', error.message);
+        return;
+      }
+      if (discoveredReaders.length === 0) {
+        ShowToast('No readers found', 'Please make sure your reader is powered on and in range');
+        return;
+      }
+      if (discoveredReaders.length === 1) {
+        // connectReader(discoveredReaders[0]);
+        console.log('discoveredReaders',discoveredReaders)
+        return;
+      }
+    },
+    onDidStartInstallingUpdate: update => {
+    },
+    onDidReportAvailableUpdate: update => {
+     ShowToast('New update is available', update.deviceSoftwareVersion);
+    },
   });
 
+  const handleGoBack = useCallback(
+    async action => {
+      await cancelDiscovering();
+      if (navigation.canGoBack()) {
+        navigation.dispatch(action);
+      }
+    },
+    [cancelDiscovering, navigation],
+  );
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerBackTitle: 'Cancel',
+    });
 
-  const handleDiscoverReaders = useCallback(async (resStripe) => {
-   let terminal_setting = resStripe;
-   console.log(terminal_setting)
+    navigation.addListener('beforeRemove', e => {
+      if (!discoveringLoading) {
+        return;
+      }
+      e.preventDefault();
+      // handleGoBack(e.data.action);
+    });
+  }, [navigation, cancelDiscovering, discoveringLoading, handleGoBack]);
+
+  const handleDiscoverReaders = useCallback(async (terminal_setting) => {
+    //disconnect old reader
+   
+
     setDiscoveringLoading(true);
     // List of discovered readers will be available within useStripeTerminal hook
+    console.log('connectedterminal_setting 22',terminal_setting)
+   
     let device_type = terminal_setting.device_type;
 
     let isSimulated = false;
     if (terminal_setting.mode == 'sandbox') {
       isSimulated = true;
     }
-   
+    console.log('simulated', isSimulated);
+    console.log(device_type);
     const {error: discoverReadersError} = await discoverReaders({
       discoveryMethod: device_type,
       simulated: isSimulated,
-      locationId: terminal_setting.location_id,
+      locationId: terminal_setting.terminal_location_id,
     });
 
     if (discoverReadersError) {
       const {code, message} = discoverReadersError;
-      ShowToast(`${message}`);
+
+      ShowToast(message);
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      }
     }
-  }, [navigation, terminal_setting]);
-
-
+  }, [navigation, discoverReaders]);
 
   const isBTReader = reader =>
     ['stripeM2', 'chipper2X', 'chipper1X', 'wisePad3'].includes(
@@ -129,7 +163,6 @@ export default function SetupTerminal({route, navigation}) {
     if (reader?.simulated) {
       return `SimulatorID - ${reader.deviceType}`;
     }
-
     return `${reader?.label || reader?.serialNumber} - ${reader.deviceType}`;
   };
 
@@ -147,7 +180,7 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       setConnectingReader(undefined);
       Alert.alert(error.code, error.message);
-    } 
+    }
   };
 
   const handleConnectBluetoothReader = async reader => {
@@ -161,14 +194,14 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       console.log('connectBluetoothReader error:', error);
     } else {
-      navigation.navigate(Screens.home);
-      console.log('Reader connected successfully', connectedReader);
+     ShowToast('Reader connected successfully');
     }
     return {error};
   };
 
   const handleConnectInternetReader = async reader => {
     setConnectingReader(reader);
+
     const {reader: connectedReader, error} = await connectInternetReader({
       reader,
     });
@@ -176,42 +209,127 @@ export default function SetupTerminal({route, navigation}) {
     if (error) {
       console.log('connectInternetReader error:', error);
     } else {
-      navigation.navigate(Screens.home);
-      console.log('Reader connected successfully', connectedReader);
+      setConnectedReader(connectedReader);
+      ShowToast('Reader connected successfully');
+      navigation.navigate('Home')
     }
     return {error};
   };
 
 
 
-  return (
-    <ScrollView
-      className="relative"
-      testID="discovery-readers-screen"
-      contentContainerStyle={styles.container}>
-      <NavBar title="Discovery Readers" navigation={navigation} logoutBtn={true}/>
-      <List
-        title="NEARBY READERS"
-        loading={discoveringLoading}
-        description={connectingReader ? 'Connecting...' : undefined}>
-        {discoveredReaders.map(reader => (
-          <ListItem
-            key={reader.serialNumber}
-            onPress={() => handleConnectReader(reader)}
-            title={getReaderDisplayName(reader)}
-            disabled={!isBTReader(reader) && reader.status === 'offline'}
-          />
-        ))}
-      </List>
 
 
+    return (
+      <View style={styles.container}>
+        {/* mavbar start  */}
+        <NavBar title="Discovery Readers" navigation={navigation} logoutBtn={true}/>
+        {/* mavbar end  */}
+      {/* body start  */}
+      <View style={styles.body}>
+  
+        <ScrollView
+        testID="discovery-readers-screen">
+      
+        <List
+          title={`Select Terminal`}
+          loading={discoveringLoading}
+          description={connectingReader ? 'Connecting...' : undefined}>
+          {discoveredReaders.map(reader => (
+            <ListItem
+              key={reader.serialNumber}
+              onPress={() => handleConnectReader(reader)}
+              title={getReaderDisplayName(reader)}
+              disabled={!isBTReader(reader) && reader.status === 'offline'}
+            />
+          ))}
+        </List>
+{/* 
+        <Text style={appStyle.label}>Enable Tips</Text>
+          <Input placeholder="Tips percentage %"/> */}
 
- 
-    </ScrollView>
-  );
-}
+      </ScrollView>
+  
+  
+      </View>
+      {/* body end  */}
+      </View>
+    );
+  }
+
+
 
 const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    backgroundColor: ColorSet.white,
+  },
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    maxHeight: 80,
+    borderBottomWidth: 1,
+    borderBottomColor: ColorSet.bgLight,
+    padding: 15,
+    position: 'absolute',
+    zIndex: 99,
+    backgroundColor: ColorSet.white,
+    width: '100%',
+  },
+  leftIcon: {
+    width: 20,
+  },
+  navTitle: {
+    fontSize: 22,
+    fontFamily: FamilySet.bold,
+    color: ColorSet.textColorDark,
+  },
+  container: {
+    flex: 1
+  },
+ 
+  setting: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  settingLabel: {
+    fontSize: 18,
+    color: ColorSet.textColorDark,
+    fontFamily: 'TTCommons-Medium',
+  },
+  saveButton: {
+    marginTop: 30,
+  },
+  logoutContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 20,
+  },
+  logoutButton: {
+    backgroundColor: ColorSet.redDeleteColor,
+    borderRadius: 25,
+    paddingVertical: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  settingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 50,
+  },
+  settingLabel: {
+    fontSize: 18,
+    color: ColorSet.textColorDark,
+    fontFamily: FamilySet.medium,
+  },
+  settingValue: {
+    fontSize: 18,
+    color: ColorSet.textColorDark,
+    fontFamily: FamilySet.medium,
+  },
   container: {
     backgroundColor: '#F5F5F5',
     height: '100%',
@@ -280,30 +398,4 @@ const styles = StyleSheet.create({
     color: '#000',
     marginVertical: 16,
   },
-  bottomButton:{
-    position: 'absolute',
-    bottom: 20,
-    width: '96%',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    backgroundColor: ColorSet.canclerRedButton,
-  },
-
 });
-
-function mapToPlanDisplayName(plan) {
-  switch (plan) {
-    case 'random':
-      return 'Random';
-    case 'available':
-      return 'Update Available';
-    case 'none':
-      return 'No Update';
-    case 'required':
-      return 'Update required';
-    case 'lowBattery':
-      return 'Update required; reader has low battery';
-    default:
-      return '';
-  }
-}

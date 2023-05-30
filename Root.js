@@ -28,7 +28,7 @@ function Root() {
     <StripeTerminalProvider
       logLevel="verbose"
       tokenProvider={fetchTokenProvider}>
-      <App />
+        {fetchTokenProvider && <App />}
     </StripeTerminalProvider>
   );
 }
