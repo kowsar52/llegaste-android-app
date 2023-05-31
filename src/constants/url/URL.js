@@ -1,8 +1,7 @@
-const productionUrl = 'https://llegaste.clevpro.com/public/api/';
-// const developementUrl = 'https://api.https://llegaste.tech/api/';
+const productionUrl = 'https://llegaste.tech/api/';
 
 export const BaseUrl = productionUrl;
-export const ImageUrl = 'https://api.https://llegaste.tech/';
+export const ImageUrl = 'https://llegaste.tech/';
 
 export const URL = {
     login: `${BaseUrl}login`,
