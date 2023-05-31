@@ -57,6 +57,7 @@ export default function Checkout({navigation,route}) {
       const resStripe = await stripeSetting();
       if (resStripe && connectedReader) {
         console.log('resStripe',resStripe)
+        console.log('connectedReader',connectedReader)
         setTerminalSetting(resStripe);
         setStatus('Reader Connected');
         _createPaymentIntent(resStripe);
@@ -67,7 +68,7 @@ export default function Checkout({navigation,route}) {
     }
     getUser();
 
-  }, [setTerminalSetting,connectedReader]);
+  }, []);
 
   //make payment with connected reader
   const _createPaymentIntent = async (resStripe) => {
@@ -92,7 +93,7 @@ export default function Checkout({navigation,route}) {
     let paymentIntentError = StripeError | undefined;
     if (device_type === 'internet') {
       const resp = await createPaymentIntentApi({
-        total_amount: sumTotal() ,
+        total_amount: sumTotal(authUserCity ) ,
         payment_method_types: paymentMethods,
       });
       console.log('resp create payment intent', resp);
@@ -132,10 +133,10 @@ export default function Checkout({navigation,route}) {
     }
     addLogs('Please wait and complete your payment.', 'Success');
 
-    return await _collectPaymentMethod(paymentIntent.id);
+    return await _collectPaymentMethod(paymentIntent.id,resStripe);
   };
 
-  const _collectPaymentMethod = async paymentIntentId => {
+  const _collectPaymentMethod = async (paymentIntentId, resStripe) => {
     addLogs('Please wait and complete your payment.', 'Success');
     const {paymentIntent, error} = await collectPaymentMethod({
       paymentIntentId: paymentIntentId,
@@ -146,12 +147,12 @@ export default function Checkout({navigation,route}) {
       addLogs('Connection failed, please contact with us.', 'Failed');
     } else if (paymentIntent) {
       addLogs('Please wait for payment.', 'Success');
-      await _processPayment(paymentIntentId);
+      await _processPayment(paymentIntentId, resStripe);
     }
   };
 
 
-  const _processPayment = async paymentIntentId => {
+  const _processPayment = async (paymentIntentId, resStripe) => {
     addLogs('POS device connecting, please be patient.', 'Success');
 
     const {paymentIntent, error} = await processPayment(paymentIntentId);
@@ -175,17 +176,17 @@ export default function Checkout({navigation,route}) {
       return;
     }
 
-    _capturePayment(paymentIntentId);
+    _capturePayment(paymentIntentId,resStripe);
   };
 
-  const _capturePayment = async paymentIntentId => {
+  const _capturePayment = async (paymentIntentId,resStripe) => {
     addLogs(
       'POS Device connected. Please swap your card and complete the payment.',
       'Success',
     );
 
     const resp = await capturePaymentIntent({
-      total_amount: sumTotal(),
+      total_amount: sumTotal(resStripe),
       payment_intent_id: paymentIntentId,
     });
 
@@ -202,21 +203,30 @@ export default function Checkout({navigation,route}) {
 
       navigation.navigate('CheckoutSuccess', {
         message: 'Payment completed successfully',
-        total_amount: sumTotal(),
+        total_amount: sumTotal(resStripe),
         amount: amount,
-        tax : (parseFloat(amount) * (terminal_setting.tax_percentage / 100)),
-        service_fee : (parseFloat(amount) * (terminal_setting.service_fee_percentage / 100)),
+        tax : (parseFloat(amount) * (resStripe.tax_percentage / 100)),
+        service_fee : (parseFloat(amount) * (resStripe.service_fee_percentage / 100)),
         txn_id : resp.txn_id
       });
     }
   };
 
   //sum total
-  const sumTotal = () => {
+
+  const sumTotal = (t_setting = null ) => {
+    if(t_setting == null){
+      t_setting = terminal_setting
+    }
+
     let total = 0;
-    total = parseFloat(amount) + (parseFloat(amount) * (terminal_setting.tax_percentage / 100)) + (parseFloat(amount) * (terminal_setting.service_fee_percentage / 100))
+    total = parseFloat(amount) + (parseFloat(amount) * (t_setting?.tax_percentage / 100)) + (parseFloat(amount) * (t_setting?.service_fee_percentage / 100))
+    console.log('sum',total)
+    console.log('t_setting',t_setting)
+    console.log('amount',amount)
     return total.toFixed(2);
   }
+  
 
   if(terminal_setting){
     return (

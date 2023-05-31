@@ -6,12 +6,21 @@ import { ColorSet } from '../../styles';
 import {Screens} from '../../constants'
 import {getUserData} from '../../utils/Storage';
 import { AuthContext } from '../../context/auth-context';
+import { useStripeTerminal } from '@stripe/stripe-terminal-react-native';
+import { ShowToast } from '../../utils/ShowToast';
 
 export default function Splash({ navigation }) {
   const authCTX = useContext(AuthContext);
+  const {connectedReader, initialize} = useStripeTerminal();
   const handleNext = async () => {
       if(authCTX.isAuthenticated){
-        navigation.navigate(Screens.setupTerminal)
+        if(!connectedReader){
+          ShowToast("Please connect your reader first!")
+          navigation.navigate(Screens.setupTerminal)
+          return
+        }
+
+        navigation.navigate(Screens.home)
       }else{
         navigation.navigate(Screens.login)
       }

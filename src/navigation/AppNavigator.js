@@ -30,8 +30,8 @@ const Stack = createNativeStackNavigator();
  const AuthStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name={Screens.splash} component={Splash} />
             <Stack.Screen name={Screens.login} component={Login} />
+            <Stack.Screen name={Screens.splash} component={Splash} />
             <Stack.Screen name={Screens.forgetPassword} component={ForgetPassword} />
             <Stack.Screen name={Screens.resetPassword} component={ResetPassword} />
         </Stack.Navigator>
@@ -67,7 +67,7 @@ export const AppNavigator = () => {
     return (
         <NavigationContainer>
           {!authCTX.isAuthenticated && <AuthStack/>}
-        {authCTX.isAuthenticated && <AppStack/>}
+            {authCTX.isAuthenticated && <AppStack/>}
         </NavigationContainer>
     )
 }

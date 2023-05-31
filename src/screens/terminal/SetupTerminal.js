@@ -36,16 +36,21 @@ export default function SetupTerminal({navigation}) {
   const [connectingReader, setConnectingReader] = useState();
   const [connectedKiosk, setConnectedKiosk] = useState('');
   const [cconnectedTerminal, setConnectedReader] = useState(null);
-  const {initialize: initStripe} = useStripeTerminal();
+  const {connectedReader, initialize:initStripe} = useStripeTerminal();
   const dispatch = useDispatch();
   const [terminal_setting, setTerminalSetting] = useState();
 
-
+ 
   useEffect(() => {
     async function getUser(){
       try {
       const resStripe = await stripeSetting();
-      if(resStripe){
+      const {error, reader} = await initStripe(); 
+      if(reader){
+        navigation.navigate(Screens.home);
+        return;
+      }
+      else if(resStripe){
         setTerminalSetting(resStripe);
         simulateReaderUpdate('none');
         handleDiscoverReaders(resStripe);
@@ -57,6 +62,7 @@ export default function SetupTerminal({navigation}) {
 
     if(connectedReader){
       navigation.navigate(Screens.home);
+      return;
     }else{
       // disconnectReader();
       getUser();
@@ -64,34 +70,31 @@ export default function SetupTerminal({navigation}) {
 
   }, [handleDiscoverReaders, simulateReaderUpdate]);
 
+    //disconvering
+    const {
+      cancelDiscovering,
+      discoverReaders,
+      discoveredReaders,
+      connectInternetReader,
+      simulateReaderUpdate,
+    } = useStripeTerminal({
+      onFinishDiscoveringReaders: finishError => {
+        if (finishError) {
+          console.error(
+            'Discover readers error',
+            `${finishError.code}, ${finishError.message}`,
+          );
+        }
+        setDiscoveringLoading(false);
+      },
   
-  //disconvering
-  const {
-    cancelDiscovering,
-    discoverReaders,
-    connectBluetoothReader,
-    discoveredReaders,
-    connectInternetReader,
-    simulateReaderUpdate,
-    connectedReader
-  } = useStripeTerminal({
-    onFinishDiscoveringReaders: (error, discoveredReaders) => {
-      setDiscoveringLoading(false);
-      if (error) {
-        ShowToast('Error', error.message);
-        return;
-      }
-      // if (discoveredReaders.length === 0) {
-      //   ShowToast('No readers found', 'Please make sure your reader is powered on and in range');
-      //   return;
-      // }
-      // if (discoveredReaders.length === 1) {
-      //   // connectReader(discoveredReaders[0]);
-      //   console.log('discoveredReaders',discoveredReaders)
-      //   return;
-      // }
-    }
-  });
+      
+      onDidStartInstallingUpdate: update => {},
+      onDidReportAvailableUpdate: update => {
+        ShowToast('New update is available', update.deviceSoftwareVersion);
+      },
+    });
+
 
   useEffect(() => {
     if(discoveredReaders.length > 0){

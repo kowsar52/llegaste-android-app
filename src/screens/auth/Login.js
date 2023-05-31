@@ -10,6 +10,7 @@ import { loginUser } from '../../networking/authServices/AuthAPIServices';
 // import {login} from '../../redux/reducers/authSlice/AuthServices'
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
 import { AuthContext } from '../../context/auth-context';
+import { Screens } from '../../constants';
 
 
 export default function Login({navigation}) {
@@ -29,8 +30,6 @@ const handleLogin =  async () => {
   dispatch(setIsLoading(false))
   if(response.success){
     authCTX.onLogin(response.data.token)
-    //navigate
-    
   }
 
 }
