@@ -21,7 +21,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {StackActions} from '@react-navigation/native';
 import { setIsLoading } from '../../redux/reducers/loadingSlice/LoadingSlice';
-import { Keys } from '../../constants';
+import { Keys, Screens } from '../../constants';
 import {
   useStripeTerminal,
 } from '@stripe/stripe-terminal-react-native';
@@ -81,22 +81,25 @@ export default function SetupTerminal({navigation}) {
         ShowToast('Error', error.message);
         return;
       }
-      if (discoveredReaders.length === 0) {
-        ShowToast('No readers found', 'Please make sure your reader is powered on and in range');
-        return;
-      }
-      if (discoveredReaders.length === 1) {
-        // connectReader(discoveredReaders[0]);
-        console.log('discoveredReaders',discoveredReaders)
-        return;
-      }
-    },
-    onDidStartInstallingUpdate: update => {
-    },
-    onDidReportAvailableUpdate: update => {
-     ShowToast('New update is available', update.deviceSoftwareVersion);
-    },
+      // if (discoveredReaders.length === 0) {
+      //   ShowToast('No readers found', 'Please make sure your reader is powered on and in range');
+      //   return;
+      // }
+      // if (discoveredReaders.length === 1) {
+      //   // connectReader(discoveredReaders[0]);
+      //   console.log('discoveredReaders',discoveredReaders)
+      //   return;
+      // }
+    }
   });
+
+  useEffect(() => {
+    if(discoveredReaders.length > 0){
+          console.log('discoveredReaders[0]', discoveredReaders[0]);
+          handleConnectReader(discoveredReaders[0]);
+        }
+        ShowToast('Reader discovered successfully!');
+  }, [discoveredReaders]);
 
   const handleGoBack = useCallback(
     async action => {
