@@ -56,6 +56,7 @@ export default function Checkout({navigation,route}) {
       dispatch(setIsLoading(true))
       const resStripe = await stripeSetting();
       if (resStripe && connectedReader) {
+        console.log('resStripe',resStripe)
         setTerminalSetting(resStripe);
         setStatus('Reader Connected');
         _createPaymentIntent(resStripe);
