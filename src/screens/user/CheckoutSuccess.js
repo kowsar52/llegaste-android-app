@@ -69,10 +69,16 @@ export default function SuccessScreen({route, navigation}) {
                     cut: false,
                   });
                   let columnAlignment = [
-                    ColumnAlignment.LEFT,
+                    ColumnAlignment.RIGHT,
                     ColumnAlignment.RIGHT,
                   ];
                   let columnWidth = [30 -  8,  8];
+                  Printer.printColumnsText(
+                    ['Amount to charge',  `$${parseFloat(total_amount).toFixed(2)}`],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
                   Printer.printColumnsText(
                     ['Subtotal',  `$${parseFloat(sub_total_amount).toFixed(2)}`],
                     columnWidth,
@@ -98,7 +104,8 @@ export default function SuccessScreen({route, navigation}) {
                     [`${BOLD_OFF}`, '',''],
                   );
 
-                  let footerText = `CARD TYPE: VISA\n`;
+                  let footerText = `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}\n`;
+                   footerText += `CARD TYPE: VISA\n`;
                    footerText += `LAST 4 DIGIT: 4242\n`;
                    footerText += `TRAN - #${txn_id}\n`;
                    footerText += `DATE : ${new Date().toLocaleDateString()}\n`;
