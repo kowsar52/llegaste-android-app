@@ -63,7 +63,7 @@ export default function SuccessScreen({route, navigation}) {
                 
                   let textTemplate = `<C> LLegaste H,DD </C>\n`;
                   textTemplate += `<C> New York, USA </C>\n`;
-                  textTemplate += `<C> +34434534543 </C>\n`;
+                  textTemplate += `<C> +34434534543 </C>\n\n`;
                   Printer.printText(textTemplate, {
                     beep: false,
                     cut: false,
@@ -73,13 +73,19 @@ export default function SuccessScreen({route, navigation}) {
                     ColumnAlignment.RIGHT,
                   ];
                   let columnWidth = [30 -  8,  8];
-                
-                  Printer.printText("<C>AMOUNT TO CHARGE</C>\n${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}", {
+                  Printer.printColumnsText(
+                    ['AMOUNT TO CHARGE',  `$${parseFloat(total_amount).toFixed(2)}`],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
+                  
+                  Printer.printText('\n', {
                     beep: false,
                     cut: false,
                   });
                   Printer.printColumnsText(
-                    ['Subtotal',  `$${parseFloat(sub_total_amount).toFixed(2)}`],
+                    ['SUBTOTAL',  `$${parseFloat(sub_total_amount).toFixed(2)}`],
                     columnWidth,
                     columnAlignment,
                     [`${BOLD_OFF}`, '',''],
@@ -91,13 +97,13 @@ export default function SuccessScreen({route, navigation}) {
                     [`${BOLD_OFF}`, '',''],
                   );
                   Printer.printColumnsText(
-                    ['Service Fee', '$'+service_fee],
+                    ['SERVICE FEE', '$'+service_fee],
                     columnWidth,
                     columnAlignment,
                     [`${BOLD_OFF}`, '',''],
                   );
                   Printer.printColumnsText(
-                    ['Total',  `$${parseFloat(total_amount).toFixed(2)}`],
+                    ['TOTAL',  `$${parseFloat(total_amount).toFixed(2)}`],
                     columnWidth,
                     columnAlignment,
                     [`${BOLD_OFF}`, '',''],
