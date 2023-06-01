@@ -63,7 +63,7 @@ export default function SuccessScreen({route, navigation}) {
                 
                   let textTemplate = `<C> LLegaste H,DD </C>\n`;
                   textTemplate += `<C> New York, USA </C>\n`;
-                  textTemplate += `<C> +34434534543 </C>\n\n`;
+                  textTemplate += `<C> +34434534543 </C>\n`;
                   Printer.printText(textTemplate, {
                     beep: false,
                     cut: false,
@@ -80,7 +80,7 @@ export default function SuccessScreen({route, navigation}) {
                     [`${BOLD_OFF}`, '',''],
                   );
                   
-                  Printer.printText('\n', {
+                  Printer.printText(`${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`, {
                     beep: false,
                     cut: false,
                   });
