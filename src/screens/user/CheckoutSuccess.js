@@ -73,12 +73,11 @@ export default function SuccessScreen({route, navigation}) {
                     ColumnAlignment.RIGHT,
                   ];
                   let columnWidth = [30 -  8,  8];
-                  Printer.printColumnsText(
-                    ['Amount to charge',  `$${parseFloat(total_amount).toFixed(2)}`],
-                    columnWidth,
-                    columnAlignment,
-                    [`${BOLD_OFF}`, '',''],
-                  );
+                
+                  Printer.printText("<C>AMOUNT TO CHARGE</C>", {
+                    beep: false,
+                    cut: false,
+                  });
                   Printer.printColumnsText(
                     ['Subtotal',  `$${parseFloat(sub_total_amount).toFixed(2)}`],
                     columnWidth,
