@@ -28,7 +28,7 @@ export default function SuccessScreen({route, navigation}) {
 
    const dispatch = useDispatch();
   const [enable_auto_print, setEnableAutoPrint] = React.useState(0);
-  const {txn_id , total_amount} = route.params
+  const {txn_id , total_amount, sub_total_amount, tax, service_fee} = route.params
 
   const getCurrentPrinter = async () => {
    
@@ -63,10 +63,7 @@ export default function SuccessScreen({route, navigation}) {
                 
                   let textTemplate = `<C> LLegaste H,DD </C>\n`;
                   textTemplate += `<C> New York, USA </C>\n`;
-                  textTemplate += `<C> +34434534543 </C>\n`;
-                  textTemplate += `Date : ${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}\n`;
-                  textTemplate += `Trx ID - #${txn_id}\n`;
-                  textTemplate += `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`;
+                  textTemplate += `<C> +34434534543 </C>\n\n`;
                   Printer.printText(textTemplate, {
                     beep: false,
                     cut: false,
@@ -76,19 +73,41 @@ export default function SuccessScreen({route, navigation}) {
                     ColumnAlignment.RIGHT,
                   ];
                   let columnWidth = [30 -  8,  8];
+                  Printer.printColumnsText(
+                    ['Subtotal',  `$${parseFloat(sub_total_amount).toFixed(2)}`],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
+                  Printer.printColumnsText(
+                    ['TAX', '$'+tax],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
+                  Printer.printColumnsText(
+                    ['Service Fee', '$'+service_fee],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
+                  Printer.printColumnsText(
+                    ['Total',  `$${parseFloat(total_amount).toFixed(2)}`],
+                    columnWidth,
+                    columnAlignment,
+                    [`${BOLD_OFF}`, '',''],
+                  );
 
-                  Printer.printColumnsText(
-                    ['TAX', '$0.00'],
-                    columnWidth,
-                    columnAlignment,
-                    [`${BOLD_OFF}`, '',''],
-                  );
-                  Printer.printColumnsText(
-                    ['Subtotal',  `$${parseFloat(total_amount).toFixed(2)}`],
-                    columnWidth,
-                    columnAlignment,
-                    [`${BOLD_OFF}`, '',''],
-                  );
+                  let footerText = `CARD TYPE: VISA\n`;
+                   footerText += `LAST 4 DIGIT: 4242\n`;
+                   footerText += `TRAN - #${txn_id}\n`;
+                   footerText += `DATE : ${new Date().toLocaleDateString()}\n`;
+                   footerText += `TIME : ${new Date().toLocaleTimeString()}\n`;
+                   footerText += `${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}`;
+                  Printer.printText(footerText, {
+                    beep: false,
+                    cut: false,
+                  });
            
                 Printer.printBill(
                   "<C>How're we doing? Let us know at llegaste.tech</C>\n<C>Thank You!</C>\n",

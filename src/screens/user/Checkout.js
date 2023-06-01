@@ -204,7 +204,7 @@ export default function Checkout({navigation,route}) {
       navigation.navigate('CheckoutSuccess', {
         message: 'Payment completed successfully',
         total_amount: sumTotal(resStripe),
-        amount: amount,
+        sub_total_amount: amount,
         tax : (parseFloat(amount) * (resStripe.tax_percentage / 100)),
         service_fee : (parseFloat(amount) * (resStripe.service_fee_percentage / 100)),
         txn_id : resp.txn_id
