@@ -63,7 +63,7 @@ export default function SuccessScreen({route, navigation}) {
                 
                   let textTemplate = `<C> LLegaste H,DD </C>\n`;
                   textTemplate += `<C> New York, USA </C>\n`;
-                  textTemplate += `<C> +34434534543 </C>\n\n`;
+                  textTemplate += `<C> +34434534543 </C>\n`;
                   Printer.printText(textTemplate, {
                     beep: false,
                     cut: false,
@@ -74,7 +74,7 @@ export default function SuccessScreen({route, navigation}) {
                   ];
                   let columnWidth = [30 -  8,  8];
                 
-                  Printer.printText("<C>AMOUNT TO CHARGE</C>", {
+                  Printer.printText("<C>AMOUNT TO CHARGE</C>\n${CENTER}${COMMANDS.HORIZONTAL_LINE.HR2_58MM}${CENTER}", {
                     beep: false,
                     cut: false,
                   });
