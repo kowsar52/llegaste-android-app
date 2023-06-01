@@ -91,13 +91,13 @@ export default function SuccessScreen({route, navigation}) {
                     [`${BOLD_OFF}`, '',''],
                   );
                   Printer.printColumnsText(
-                    ['TAX', '$'+tax],
+                    ['TAX', '$'+parseFloat(tax).toFixed(2)],
                     columnWidth,
                     columnAlignment,
                     [`${BOLD_OFF}`, '',''],
                   );
                   Printer.printColumnsText(
-                    ['SERVICE FEE', '$'+service_fee],
+                    ['SERVICE FEE', '$'+parseFloat(service_fee).toFixed(2)],
                     columnWidth,
                     columnAlignment,
                     [`${BOLD_OFF}`, '',''],
